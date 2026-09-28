@@ -1,0 +1,119 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-08 15:26:17Z $
+% $Pfad: GitHub/MBIDA_Master_Thesis/report/Contents/en/Introduction.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\chapter{Introduction}
+\label{chap:introduction}
+
+\section{Background and Motivation}
+
+In modern business environments, forecasting problems rarely exist in isolation. Organisations routinely manage demand across structured hierarchies—where totals must equal the sum of their parts at every level of aggregation. In retail operations, total store sales must equal the sum across product categories, departments, and individual items. In industrial operations, total component demand must reconcile across technology classifications, unit types, and individual part numbers. These structures, known as hierarchical time series, present both a methodological challenge and a practical necessity for organisations that rely on coherent, actionable forecasts across multiple planning levels \cite{Hyndman:2018}.
+
+This research is motivated by real-world exposure to hierarchical forecasting challenges encountered during a data science internship in the aviation maintenance, repair and overhaul (MRO) sector in Hamburg. In that operational context, demand forecasts were required across a structured hierarchy spanning technology classifications, line replaceable units (LRUs), component disposition sets, and individual part numbers — a structure directly analogous to the hierarchical retail forecasting problem examined in this thesis. A key practical observation from that experience was that forecast accuracy requirements are not uniform across the hierarchy: accuracy for high-demand, business-critical components matters disproportionately more than accuracy for low-demand, peripheral items. This asymmetry between business importance and equal statistical treatment motivates the central investigation of this thesis.
+
+\section{The Business Problem}
+
+Traditional hierarchical forecasting adopts one of three broad strategies: bottom-up forecasting, which generates predictions at the most disaggregate level and aggregates upward; top-down forecasting, which predicts the aggregate total and distributes downward proportionally \cite{Hyndman:2018}; or optimal reconciliation, which combines base forecasts across all hierarchy levels to ensure coherence \cite{Wickramasuriya:2019}. Each approach addresses the coherence problem differently, yet all share a common characteristic — they are typically evaluated against uniform accuracy measures that treat all series equally.
+
+In practice, organisational forecasting priorities are rarely uniform. A small subset of high-volume series frequently accounts for the majority of business value, a pattern consistent with the Pareto principle \cite{Pareto:1896}. In retail environments, a small proportion of products may generate the majority of demand, while a large number of low-volume items contribute comparatively little. Whether the choice of reconciliation method or base forecasting model produces different outcomes across these volume segments is an open empirical question with direct implications for how practitioners approach hierarchical forecasting.
+
+
+
+Furthermore, series within a hierarchy often exhibit distinct statistical characteristics. High-volume, aggregate-level series tend to demonstrate stable, continuous demand patterns, while low-volume, bottom-level series frequently display intermittent demand with sparse observations \cite{Syntetos:2005}. Whether a single forecasting approach adequately serves both ends of this spectrum, or whether the choice of base model interacts with reconciliation method performance across hierarchy levels, is a further empirical question this thesis seeks to investigate.
+
+\section{Research Objectives}
+
+This thesis investigates how foundational hierarchical time series forecasting methods perform across business-relevant volume segments in a large-scale retail demand setting. Rather than seeking to identify a universally superior method, the study examines how different method combinations behave across hierarchy levels and volume percentiles, with the aim of informing practical forecasting decisions in business contexts.
+
+The primary research question is:
+
+\begin{quote}
+	\textit{How do foundational hierarchical forecasting methods perform across different business volume segments in retail demand forecasting, and what practical insights can be drawn for business forecasting decisions?}
+\end{quote}
+
+This is addressed through three sub-questions:
+
+\begin{enumerate}
+	\item \textbf{SQ1}: Do Bottom-Up, Top-Down and MinT reconciliation methods differ in forecast accuracy patterns across hierarchy levels?
+	\item \textbf{SQ2}: Does the choice of base forecasting model — HistoricAverage, ETS \cite{Hyndman:2008}, or Theta \cite{Assimakopoulos:2000} — affect reconciliation performance across the hierarchy?
+	\item \textbf{SQ3}: As the accuracy evaluation is widened from the highest-volume series outward to the full population, how does the gap between methods change, and what are the implications for business forecasting practice?
+\end{enumerate}
+
+Evaluation employs sMAPE as the primary metric, selected for its demonstrated rank stability on hierarchical retail data and its interpretability relative to scale-dependent alternatives \cite{Hewamalage:2021}. Volume-based business importance is addressed through a percentile evaluation framework rather than price-weighting, reflecting a deliberate focus on demand planning and logistics accuracy over revenue-weighted financial performance. This framework evaluates cumulative top-$p\%$ volume bands (e.g. the top 5\%, top 10\%, \ldots, up to the full population); since each band is nested inside the next, SQ3 is framed around how the accuracy gap changes as the band widens, rather than which single segment a difference "belongs to."
+
+\section{Methodological Approach}
+
+To address the research questions, this thesis implements and systematically compares hierarchical forecasting method combinations across three dimensions: base forecasting model, reconciliation method, and business volume segment.
+
+\textbf{Base Forecasting Models:}
+\begin{itemize}
+	\item \textbf{HistoricAverage}: A naive baseline producing the historical mean as the forecast, providing a reference point for all comparisons
+	\item \textbf{ETS}: A classical exponential smoothing method capturing level, trend, and seasonality \cite{Hyndman:2008}
+	\item \textbf{Theta}: A decomposition-based method with strong empirical performance on real-world demand data \cite{Assimakopoulos:2000}
+\end{itemize}
+
+\textbf{Reconciliation Methods:}
+\begin{itemize}
+	\item \textbf{Bottom-Up (BU)}: Forecasts are generated independently at the most granular level (item-store) and summed upwards through the hierarchy \cite{Orcutt:1968, Dunn:1976}. This preserves all low-level information but can accumulate high noise from sparse, intermittent series.
+	\item \textbf{Top-Down (TD)}: Forecasts are generated strictly at the highest level of aggregation (Total) and distributed downward using historical proportion averages \cite{Gross:1990}. While structurally stable, this method can introduce systematic bias at lower levels by ignoring localized trends \cite{Wickramasuriya:2019}.
+	\item \textbf{Minimum Trace (MinT)}: A mathematically optimal framework that adjusts forecasts across all levels of the hierarchy simultaneously to minimize forecast error variance \cite{Wickramasuriya:2019}. To handle the scale of the retail dataset (30,354 series), this study utilizes a computationally efficient scaling variant of the trace minimization framework \cite{Wickramasuriya:2019}.
+\end{itemize}
+
+The empirical evaluation utilises the M5 forecasting competition dataset \cite{Makridakis:2022}, comprising daily retail sales data from Walmart across three US states, ten stores, three product categories, and seven departments. Of the 3,049 products in the raw dataset, 3,024 have recorded sales prior to the train/test split and are retained for modelling, yielding 30,240 bottom-level item-store series in total. Daily data is aggregated to monthly frequency to align with operational planning horizons and to reduce noise in sparse bottom-level series.
+
+The data is structured as a six-level hierarchy, with an explicit total level introduced above the state level to ensure a single, well-defined root for top-down reconciliation, as shown in Figure~\ref{fig:hierarchyDiagram}.
+
+\begin{figure}[H]
+	\centering
+	\input{tikz/01Introduction/hierarchyDiagram}
+	\caption{The six-level hierarchy used in this thesis, with series counts at each level.}
+	\label{fig:hierarchyDiagram}
+\end{figure}
+
+This dataset exhibits the volume distribution and demand sparsity patterns characteristic of real-world business hierarchies, making it well-suited to investigating the research questions. Implementation leverages Python-based forecasting libraries including \texttt{statsforecast} \cite{Garza:2022} and \texttt{hierarchicalforecast} \cite{Olivares:2023}, with results explored through an interactive Streamlit dashboard built with Plotly visualisations.
+
+\section{Contribution and Significance}
+
+This research contributes to both academic understanding and business practice in hierarchical time series forecasting:
+
+\textbf{Academic Contribution}: The thesis provides empirical evidence on how foundational reconciliation methods behave across hierarchy levels and volume segments on a large-scale, publicly available dataset. By systematically varying both base model and reconciliation method, it characterises the interaction between these two dimensions of the hierarchical forecasting pipeline.
+
+\textbf{Practical Contribution}: The percentile-based evaluation framework allows forecast accuracy to be assessed where it matters most for business decisions — across defined volume segments rather than as a single aggregate statistic. This perspective is directly motivated by operational forecasting experience in the MRO aviation sector in Hamburg, and the findings provide empirical guidance for practitioners facing similar hierarchical forecasting challenges.
+
+\textbf{Methodological Contribution}: The study establishes a reusable evaluation methodology that combines standard hierarchical forecasting benchmarks with business-oriented volume segmentation, offering a transparent and stable alternative to price-weighted evaluation.
+
+\section{Thesis Structure}
+
+The remainder of this thesis is organised as follows:
+
+\textbf{Chapter~\ref{chap:domainKnowledge} — Domain Knowledge}: Provides the business and retail context of the study: how retail sales are organised in hierarchies, the Pareto concentration of sales volume and its use in ABC analysis, and the intermittent nature of item-level demand.
+
+\textbf{Chapter~\ref{chap:domainML} — Domain Machine Learning}: Reviews the statistical forecasting methods applied in this study, including HistoricAverage, ETS, Theta, and hierarchical reconciliation techniques.
+
+\textbf{Chapter~\ref{chap:domainKnowledgeTools} — Domain Knowledge – Tools}: Describes the Python forecasting ecosystem used in this study, including \texttt{statsforecast}, \texttt{hierarchicalforecast}, and supporting libraries.
+
+\textbf{Chapter~\ref{chap:methodology} — Methodology}: Details the experimental design following the Knowledge Discovery in Databases (KDD) process framework, covering dataset preparation (daily-to-monthly aggregation, dropping the partial first calendar month, fixing the item universe on training data only, and adding the Total root), hierarchy construction, and the evaluation framework, including the sMAPE metric and the volume-percentile evaluation framework used throughout Chapter~\ref{chap:evaluation}.
+
+\textbf{Chapter~\ref{chap:appDevelopment} — Application Development}: Documents the implementation and fitting of the three base forecasting models and their reconciliation, including the safeguard of clipping negative base forecasts to zero before reconciliation, which keeps the comparison between reconciliation methods fair.
+
+\textbf{Chapter~\ref{chap:devToDeployment} — Development to Deployment}: Discusses code organisation and reproducibility considerations, including how \texttt{Code/config.py} serves as the single source of truth for hierarchy levels, time windows, and reconciler naming, so that the pipeline and the Streamlit dashboard never silently drift apart.
+
+\textbf{Chapter~\ref{chap:appDeployment} — Application Deployment}: Presents the Streamlit dashboard built on the pipeline's four exported data contracts (hierarchy lookup, actuals, base predictions, reconciled predictions), including its cascading State \(\rightarrow\) Store \(\rightarrow\) Category \(\rightarrow\) Department \(\rightarrow\) Item dropdowns and automatic light/dark theme sensing.
+
+\textbf{Chapter~\ref{chap:evaluation} — Evaluation – Validation – Conclusion}: Analyses empirical results across hierarchy levels and volume percentiles, characterises the conditions under which different method combinations perform differently, and provides evidence-based recommendations for business forecasting practice.
+
+\textbf{Chapter~\ref{chap:appendix} — Appendix}: Contains the full sMAPE result tables for every base-model/reconciler combination and the complete code listings (both notebooks, \texttt{config.py}, the Streamlit dashboard, and the two requirements files).
+
+
+% Bibliography will be included in the main document
+% Add to main .tex file: \bibliographystyle{apalike}
+% \bibliography{references}

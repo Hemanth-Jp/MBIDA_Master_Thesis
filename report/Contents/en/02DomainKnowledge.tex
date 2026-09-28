@@ -1,0 +1,58 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-18 $
+% $Pfad: GitHub/MBIDA_Thesis/report/Contents/General/en/02DomainKnowledge.tex $
+% $Version: 3 $
+%
+% $Project: MBIDA Thesis $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Domain Knowledge}
+\label{chap:domainKnowledge}
+
+This chapter introduces the retail and business context relevant to this thesis: the hierarchical structure through which retail sales are organised, the concentration of sales volume across products, and the intermittent nature of item-level demand. These characteristics motivate the methodological decisions detailed in Chapter~\ref{chap:methodology}.
+
+\section{Retail Hierarchies and Structured Aggregation}
+\label{sec:retailHierarchies}
+
+Retail organisations rarely plan around a single, undifferentiated demand number. Sales are tracked and reported at several nested levels simultaneously -- a national or company-wide total, individual regions, individual stores within those regions, and individual products within each store -- with product-level detail commonly further grouped into categories and departments for merchandising and planning purposes. This structure exists because different decisions are made at different levels: a category manager plans assortment and promotions at the category or department level, a regional manager allocates inventory across stores within a region, and executive planning reasons about company-wide totals \cite{Chopra:2015}. None of these levels is meaningful in isolation from the others.
+
+This division of planning responsibility across levels is not incidental to how retailers happen to organise their reporting; it reflects a genuine difference in what each level of the business can act on. A category manager cannot meaningfully act on a single store's daily sales fluctuation, and a regional inventory planner cannot act on a company-wide total without first breaking it back down into the individual stores that actually hold stock. Multi-echelon inventory and distribution planning is built around exactly this observation: decisions about where to hold stock, how much safety stock to carry at each echelon, and how frequently to replenish are all made at a specific level of the hierarchy, using a forecast appropriate to that level \cite{Silver:1998}. A forecasting approach that ignores this structure -- treating every series as an independent, unrelated problem -- is consequently a poor match for how the business itself is actually run.
+
+A forecast produced at any one of these levels is only useful to the business if it remains consistent with forecasts produced at every other level: the sum of all store-level forecasts within a region should equal that region's own forecast, and so on up the structure. This requirement is what the hierarchical forecasting literature refers to as \emph{coherence}, and it is what distinguishes a genuinely hierarchical forecasting problem -- where the levels are structurally linked -- from a collection of unrelated, independently forecast time series \cite{Hyndman:2018}. Reconciling forecasts across such a structure is a well-established problem in the hierarchical forecasting literature, and is the central methodological concern of this thesis (see Chapter~\ref{chap:domainML}).
+
+Retail hierarchies of this kind are typically \emph{simple trees}: every store belongs to exactly one region, every item belongs to exactly one department, and so on, with no node belonging to more than one parent. This is in contrast to \emph{grouped} or \emph{cross-product} hierarchies, where a series might be classified along more than one dimension at once (for example, a product organised simultaneously by region and by brand, where neither dimension is subordinate to the other) \cite{Hyndman:2018}. The distinction matters beyond terminology: a simple tree has a single, unambiguous summing matrix that maps bottom-level series to every level above them, whereas a grouped hierarchy generally requires a different aggregation treatment to express the same coherence requirement. The dataset used in this thesis follows the simple-tree pattern, which is discussed further, together with the specific hierarchy levels used, in Section~\ref{sec:hierarchyConstruction}.
+
+\section{The Pareto Principle in Sales Concentration}
+\label{sec:paretoPrinciple}
+
+A recurring observation across retail and inventory management is that a relatively small share of products accounts for a disproportionately large share of total sales volume, while the majority of the assortment -- often the long tail of slower-moving items -- contributes comparatively little individually. This pattern is commonly referred to as the \emph{Pareto principle}, after the original observation that a small fraction of a population often accounts for a large fraction of some outcome of interest \cite{Pareto:1896}.
+
+\subsection{ABC Analysis in Inventory Practice}
+\label{sec:abcAnalysis}
+
+This observation underpins a standard inventory management practice known as \emph{ABC analysis}, in which products are ranked by their contribution to sales or revenue and grouped into tiers -- conventionally labelled A, B, and C -- on that basis \cite{Silver:1998}. "A" items are the small number of high-contribution products that typically receive the tightest inventory control, the most frequent demand review, and the greatest forecasting attention; "C" items are the much larger number of low-contribution products managed with looser, less frequent oversight, often through simple reorder-point rules rather than a fitted forecasting model at all. "B" items occupy an intermediate tier, reviewed on a standard periodic cycle rather than the intensive or minimal treatment given to the other two.
+
+The underlying rationale is one of proportionate effort: forecasting or stocking errors on a handful of high-volume products carry far greater business consequences -- in lost sales, excess holding cost, or both -- than the same relative error on a slow-moving item, so analytical and managerial attention should scale with a series' business importance rather than being spread uniformly across the assortment \cite{Silver:1998}. This is a fundamentally different allocation of effort than treating every series in a catalogue as equally deserving of scrutiny, and it is the same logic, applied to forecast \emph{evaluation} rather than forecast \emph{production}, that motivates the volume-percentile evaluation framework used throughout this thesis.
+
+This concentration is not merely a theoretical concern -- it is clearly present in the dataset examined in this thesis, where a small number of item-store series account for a large share of total sales volume, while the majority of series individually contribute very little (the exact figures are presented in Section~\ref{sec:volumeFramework}). This observation motivates the volume-segmented evaluation approach used throughout this thesis, which assesses forecast accuracy separately across cumulative volume bands rather than relying solely on a single, uniformly weighted metric (Section~\ref{sec:evaluationFramework}).
+
+\section{Intermittent and Sparse Demand in Item-Level Retail Data}
+\label{sec:intermittentDemand}
+
+A second defining characteristic of item-level retail demand is its \emph{intermittency}: individual products, observed at the level of an individual store and an individual day, frequently record no sales at all on a given day, producing series with long stretches of zero-valued observations interrupted by occasional non-zero sales \cite{Syntetos:2005}. This behaviour is a normal feature of low-to-moderate-volume retail products rather than a data quality issue, and it becomes more pronounced the more granular the level of observation -- an item's daily sales at a single store are far sparser than that same item's sales summed across an entire region.
+
+Demand of this kind is not a single, uniform category. The forecasting literature typically distinguishes intermittent demand from the related but distinct patterns of \emph{erratic} demand (frequent sales, but highly variable in size) and \emph{lumpy} demand (both infrequent and highly variable in size when it does occur), with "smooth" demand -- frequent and stable -- as the baseline case classical methods were designed for \cite{Syntetos:2005}. Where a given series falls along these two axes, frequency and variability of size, has direct practical consequences: it determines which forecasting method is appropriate, and how much confidence can be placed in any resulting estimate of variability for safety-stock purposes.
+
+\subsection{Croston's Method and the Response to Intermittency}
+\label{sec:crostonMethodBackground}
+
+Intermittent demand is well known in the inventory management and forecasting literature as a distinct challenge: classical forecasting methods developed for smooth, continuous demand can perform poorly on series where most observations are zero. A method fitted directly to a raw intermittent series -- one that does not separate the two questions "how much, when it sells" and "how often does it sell" -- tends to produce forecasts that are biased and unstable in a way that does not show up as clearly on smoother series \cite{Croston:1972}.
+
+Croston's method, the specialised approach most commonly cited as the response to this problem, addresses it by decomposing the series into two separate quantities and smoothing each independently: the size of a sale when one occurs, and the interval between successive sales. Simple exponential smoothing is applied to each of these two derived series in turn, rather than to the original, mostly-zero series directly, and the forecast is then reconstructed as the ratio of the smoothed demand size to the smoothed inter-demand interval \cite{Croston:1972}. Numerous refinements to this basic scheme -- correcting known biases in the original formulation, or adapting the smoothing to specific demand regimes -- have since been proposed, but they share this same core idea of separating demand \emph{size} from demand \emph{timing} rather than forecasting the raw series as a single quantity.
+
+This decomposition is also why intermittent demand complicates safety-stock and replenishment planning more broadly, independently of which specific forecasting method is used: the variability that matters for setting a safety stock level is no longer a single number describing how much demand varies from period to period, but two separate sources of variability -- how much demand varies in size when it occurs, and how much the timing between occurrences varies -- that must be combined correctly to arrive at an appropriate stocking policy \cite{Silver:1998}.
+
+The dataset used in this thesis exhibits this pattern clearly at the item level, while aggregate levels of the hierarchy (such as state-wide totals) show almost no sparsity at all, since some purchase of some product is effectively guaranteed to occur somewhere across an entire region on any given day (the exact figures are presented in Section~\ref{sec:dataPreparation}). This contrast between item-level sparsity and aggregate-level stability is one of the primary reasons forecast accuracy, measured with the same metric, tends to look very different at different levels of a retail hierarchy -- a pattern that is examined empirically, and quantified directly, in Chapter~\ref{chap:evaluation}.

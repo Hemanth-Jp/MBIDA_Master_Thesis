@@ -1,0 +1,38 @@
+% Decision flow: which way of accessing the dashboard to choose.
+\begin{tikzpicture}[node distance=0.75cm and 1.2cm]
+
+  \node[man/terminal] (start) {Start};
+  \node[man/decision,below=of start,text width=3.0cm] (q1) {Do you only want to\\\emph{use} the dashboard?};
+
+  % --- cloud path (left) ---
+  \node[man/boxgreen,below left=1.0cm and 0.4cm of q1,text width=4.2cm] (c1)
+      {\textbf{A \; Cloud access}\\[2pt]Open the link in a browser};
+  \node[man/box,below=of c1,text width=4.2cm] (c2) {Wake the app if it is asleep\\\footnotesize(first visit after a quiet period)};
+  \node[man/box,below=of c2,text width=4.2cm] (c3) {Dashboard ready\\\footnotesize nothing to install};
+
+  % --- local path (right) ---
+  \node[man/boxorange,below right=1.0cm and 0.4cm of q1,text width=4.4cm] (l1)
+      {\textbf{B \; Local installation}\\[2pt]Install Python ($\geq$ 3.10) and Git};
+  \node[man/box,below=of l1,text width=4.4cm] (l2) {Clone the repository};
+  \node[man/box,below=of l2,text width=4.4cm] (l3) {Create a virtual environment\\and install the 5 packages};
+  \node[man/decision,below=of l3,text width=3.1cm] (l4) {Are the 4 result files\\present?};
+  \node[man/boxred,right=0.6cm of l4,text width=2.4cm] (l4b) {Chapter~7:\\regenerate them};
+  \node[man/box,below=of l4,text width=4.4cm] (l5) {\texttt{streamlit run \dots}\\\footnotesize opens \texttt{localhost:8501}};
+
+  \node[man/terminal,below=1.0cm of $(c3)!0.5!(l5)$] (end) {Continue with Chapter 3};
+
+  \draw[man/arrow] (start) -- (q1);
+  \draw[man/arrow] (q1.west) -| node[man/label,above,pos=0.25]{yes} (c1.north);
+  \draw[man/arrow] (q1.east) -| node[man/label,above,pos=0.25]{no -- offline use,\\ changes, examiner check} (l1.north);
+  \draw[man/arrow] (c1) -- (c2);
+  \draw[man/arrow] (c2) -- (c3);
+  \draw[man/arrow] (l1) -- (l2);
+  \draw[man/arrow] (l2) -- (l3);
+  \draw[man/arrow] (l3) -- (l4);
+  \draw[man/arrow] (l4) -- node[man/label,right]{yes} (l5);
+  \draw[man/arrow] (l4) -- node[man/label,above]{no} (l4b);
+  \draw[man/dashedarrow] (l4b) |- (l5.east);
+  \draw[man/arrow] (c3) |- (end.west);
+  \draw[man/arrow] (l5) |- (end.east);
+
+\end{tikzpicture}

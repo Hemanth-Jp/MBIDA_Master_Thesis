@@ -1,0 +1,14 @@
+\begin{tikzpicture}[
+    every node/.style={draw, rounded corners, align=center, minimum width=3.4cm, minimum height=1.2cm, font=\small},
+    >=stealth
+]
+    \node (config) at (0,0) {\texttt{Code/config.py}\\[2pt]\footnotesize hierarchy columns, time windows,\\ \footnotesize \texttt{SEASON\_LENGTH}, paths,\\ \footnotesize reconciler suffix strings};
+
+    \node (eda) at (-5.2,-3.4) {\texttt{01\_eda.ipynb}};
+    \node (pipeline) at (0,-3.4) {\texttt{02\_pipeline.ipynb}};
+    \node (app) at (5.2,-3.4) {\texttt{app/streamlit\_app.py}};
+
+    \draw[->, thick] (config.south) -- ++(0,-0.3) -| (eda.north);
+    \draw[->, thick] (config.south) -- (pipeline.north);
+    \draw[->, thick] (config.south) -- ++(0,-0.3) -| (app.north);
+\end{tikzpicture}

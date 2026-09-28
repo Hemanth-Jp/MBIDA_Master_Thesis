@@ -1,0 +1,64 @@
+% Requires: \usepackage{tikz}
+%           \usetikzlibrary{arrows.meta, calc, positioning}
+
+\begin{tikzpicture}[
+	stage/.style     = {rectangle, rounded corners=5pt, very thick, minimum width=5.6cm,
+		minimum height=1.05cm, align=center, font=\normalsize\ttfamily},
+	hf/.style        = {fill=blue!20, draw=blue!65!black},
+	sfstyle/.style   = {fill=green!22, draw=green!55!black},
+	ufstyle/.style   = {fill=orange!20, draw=orange!70!black},
+	detail/.style    = {align=center, font=\footnotesize, text width=8.5cm, text=black!85},
+	pkglabel/.style  = {font=\footnotesize\bfseries\sffamily, anchor=north west},
+	panelbg/.style   = {rectangle, rounded corners=8pt, draw=none, minimum width=9.6cm, minimum height=3.3cm},
+	arrow/.style     = {-{Latex[length=2.8mm]}, line width=1.4pt, black!75},
+	skiparrow/.style = {-{Latex[length=3mm]}, line width=1.3pt, purple!75!black, dashed},
+	edgelabel/.style = {font=\small, align=center, fill=white, inner sep=2.5pt, rounded corners=2pt}
+	]
+	
+	% ===================== Stage 1: aggregate() =====================
+	\begin{scope}[yshift=0cm]
+		\node[panelbg, fill=blue!7] (p1) at (0, 0) {};
+		\node[pkglabel, blue!65!black] at ([xshift=14pt, yshift=-10pt]p1.north west) {hierarchicalforecast};
+		\node[stage, hf] (agg) at (0, 0.25) {aggregate()};
+		\node[detail] (d1) at (0, -0.75) {Builds the hierarchy once from the bottom-level panel};
+	\end{scope}
+	
+	% ===================== Stage 2: StatsForecast =====================
+	\begin{scope}[yshift=-4.3cm]
+		\node[panelbg, fill=green!7] (p2) at (0, 0) {};
+		\node[pkglabel, green!50!black] at ([xshift=14pt, yshift=-10pt]p2.north west) {statsforecast};
+		\node[stage, sfstyle] (sf) at (0, 0.25) {StatsForecast};
+		\node[detail] (d2) at (0, -0.75) {Fits HistoricAverage, ETS, Theta across every series at once};
+	\end{scope}
+	
+	% ===================== Stage 3: HierarchicalReconciliation =====================
+	\begin{scope}[yshift=-8.6cm]
+		\node[panelbg, fill=blue!7] (p3) at (0, 0) {};
+		\node[pkglabel, blue!65!black] at ([xshift=14pt, yshift=-10pt]p3.north west) {hierarchicalforecast};
+		\node[stage, hf] (rec) at (0, 0.25) {HierarchicalReconciliation};
+		\node[detail] (d3) at (0, -0.75) {Applies Bottom-Up, MinTrace, Top-Down as sparse variants};
+	\end{scope}
+	
+	% ===================== Stage 4: evaluate() =====================
+	\begin{scope}[yshift=-12.9cm]
+		\node[panelbg, fill=orange!7] (p4) at (0, 0) {};
+		\node[pkglabel, orange!75!black] at ([xshift=14pt, yshift=-10pt]p4.north west) {utilsforecast};
+		\node[stage, ufstyle] (eval) at (0, 0.25) {evaluate()};
+		\node[detail] (d4) at (0, -0.75) {Computes sMAPE per series, averaged by hierarchy level};
+	\end{scope}
+	
+	% ===================== Main Flow: Shaded Card to Shaded Card =====================
+	\draw[arrow] (p1.south) -- (p2.north)
+	node[midway, edgelabel] {\texttt{Y\_df}};
+	
+	\draw[arrow] (p2.south) -- (p3.north)
+	node[midway, edgelabel] {base fcsts};
+	
+	\draw[arrow] (p3.south) -- (p4.north)
+	node[midway, edgelabel] {reconciled};
+	
+	% ===================== Skip Arrow (High Contrast & Clear Label) =====================
+	\draw[skiparrow] (p1.east) .. controls +(3.8, -0.5) and +(3.8, 0.5) .. (p3.east)
+	node[pos=0.5, right=4pt, font=\small\bfseries, text=purple!80!black, fill=white, inner sep=3pt, rounded corners=2pt] {\texttt{S\_df}, \texttt{tags}};
+	
+\end{tikzpicture}

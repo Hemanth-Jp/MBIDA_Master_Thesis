@@ -1,0 +1,43 @@
+\acswitchoff 
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces System overview: the grey part was done once for the thesis; the blue part is what this manual covers.}}{4}{figure.caption.6}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces The dashboard directly after opening, showing the grand total}}{4}{figure.caption.7}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Choosing between cloud access and local installation}}{7}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces The dashboard opened from Streamlit Community Cloud}}{8}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces The page shown when the app is asleep}}{9}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Successful installation of the five packages}}{11}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Terminal output after starting the dashboard locally}}{12}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces The local dashboard at \texttt {http://localhost:8501}}}{12}{figure.caption.17}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The eight steps of the first session}}{15}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces The grand total with the default settings}}{16}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Store \texttt {CA\_1} selected; category, department and item are still \texttt {(All)}}}{17}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces A single item, \texttt {FOODS\_3\_090} in store \texttt {CA\_1}}}{18}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces The same node with the base model \texttt {theta}}}{19}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces All three reconciliation methods compared for one node}}{20}{figure.caption.24}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Sketch of the user interface with numbered elements}}{23}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The real user interface for store \texttt {CA\_1} with base model \texttt {ets}}}{24}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Sidebar: hierarchy section (left) and forecast section (right)}}{25}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Anatomy of the forecast chart (illustrative data)}}{27}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces The chart toolbar}}{28}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces The same chart in light mode (left) and dark mode (right)}}{29}{figure.caption.34}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The six-level sales hierarchy with the example path used in this manual}}{31}{figure.caption.36}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces How the five dropdowns determine the node that is shown}}{33}{figure.caption.40}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces With \textsf {\textbf {State}} on \texttt {(All)}, all lower dropdowns are locked to \texttt {(All)}}}{34}{figure.caption.45}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Typing \texttt {090} in the \textsf {\textbf {Item}} dropdown}}{35}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Hover information (left) and the test period after zooming in (right)}}{37}{figure.caption.60}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Runtime layers of the dashboard}}{40}{figure.caption.63}%
+\contentsline {figure}{\numberline {6.2}{\ignorespaces The three time windows on a monthly scale}}{42}{figure.caption.66}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Maintenance and redeployment cycle}}{45}{figure.caption.71}%
+\contentsline {figure}{\numberline {7.2}{\ignorespaces The \textsf {\textbf {Manage app}} panel with logs and app menu}}{47}{figure.caption.74}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Finding the right section from the symptom}}{51}{figure.caption.76}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Error message when a result file is missing}}{54}{figure.caption.77}%
+\addvspace {10\p@ }
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

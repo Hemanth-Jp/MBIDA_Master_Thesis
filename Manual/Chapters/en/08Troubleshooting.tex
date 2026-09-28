@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/08Troubleshooting.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Troubleshooting}
+\label{chap:troubleshooting}
+
+This chapter is organised by what you see. Find the symptom in Figure~\ref{fig:troubleshootingTree} and go to the section it names. Each section states the symptom, the cause and the solution. Solutions marked \emph{(operator)} need access to the repository or the Streamlit Community Cloud workspace.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/08Troubleshooting/troubleshootingTree.tikz}}
+  \caption{Finding the right section from the symptom}
+  \label{fig:troubleshootingTree}
+\end{figure}
+
+% ------------------------------------------------------------------
+\section{The Page Does Not Load}
+\label{sec:tsPageGroup}
+
+\subsection{``This app has gone to sleep''}
+\label{sec:tsSleep}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] Instead of the dashboard, a page says the app has gone to sleep due to inactivity.
+  \item[Cause] Streamlit Community Cloud stops apps that have not been used for a while. This is normal behaviour of the free hosting.
+  \item[Solution] Click \UI{Yes, get this app back up!} and wait up to a minute (Section~\ref{sec:instWake}). If the app does not start within five minutes: \emph{(operator)} open the logs and reboot the app (Section~\ref{sec:mtCloud}).
+\end{description}
+
+\subsection{The Page Stays Blank or Shows ``Oh no''}
+\label{sec:tsBlank}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] The page remains white, keeps loading, or Streamlit shows ``Oh no. Error running app.''
+  \item[Cause] A slow or interrupted connection, a browser extension blocking scripts, or an error during the app's (re)start.
+  \item[Solution] Reload the page (\keys{F5}); try a private browser window, which disables most extensions; try another browser. If the error persists for all users: \emph{(operator)} check the logs -- a failed package installation after a change is the most frequent reason -- and roll back the last change if needed (Section~\ref{sec:mtBackup}).
+\end{description}
+
+\subsection{\texttt{streamlit: command not found}}
+\label{sec:tsCommand}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] Local start fails with \texttt{command not found} (macOS/Linux) or ``is not recognized as the name of a cmdlet'' (Windows).
+  \item[Cause] The virtual environment is not activated, or the packages were not installed into it.
+  \item[Solution] Activate the environment (the prompt must start with \texttt{(.venv)}), then install and start again:
+\begin{lstlisting}[style=shell]
+source .venv/bin/activate          # Windows: .venv\Scripts\Activate.ps1
+pip install -r Code/app/requirements.txt
+python -m streamlit run Code/app/streamlit_app.py
+\end{lstlisting}
+  On Windows, if activation is refused because of the execution policy, run once: \texttt{Set-ExecutionPolicy -Scope CurrentUser RemoteSigned}.
+\end{description}
+
+\subsection{\texttt{ModuleNotFoundError}}
+\label{sec:tsModule}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] The browser or terminal shows \texttt{ModuleNotFoundError: No module named '\dots'}.
+  \item[Cause and solution] Depends on the module name:
+  \begin{itemize}
+    \item \texttt{streamlit\_theme} -- the wrong package \texttt{streamlit-theme} was installed instead of \texttt{st-theme}. Fix: \texttt{pip uninstall streamlit-theme} and \texttt{pip install st-theme==1.2.3}.
+    \item \texttt{config} -- the file \texttt{Code/config.py} is missing or the app file was moved out of \texttt{Code/app/}. Fix: restore the original folder layout (\texttt{git status} shows what changed).
+    \item \texttt{pyarrow} or any other package -- the requirements were not installed completely. Fix: \texttt{pip install -r Code/app/requirements.txt}.
+  \end{itemize}
+\end{description}
+
+\subsection{Port 8501 Already in Use}
+\label{sec:tsPort}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] Streamlit reports that port 8501 is not available, or it starts on 8502 instead.
+  \item[Cause] Another Streamlit app -- often an earlier start of this dashboard -- is still running.
+  \item[Solution] Stop the other app with \keys{Ctrl+C} in its terminal, or start this one on another port:
+\begin{lstlisting}[style=shell]
+streamlit run Code/app/streamlit_app.py --server.port 8600
+\end{lstlisting}
+\end{description}
+
+% ------------------------------------------------------------------
+\section{Error and Warning Messages}
+\label{sec:tsMessageGroup}
+
+\subsection{``Couldn't find one of the required parquet files''}
+\label{sec:tsParquet}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] A red box with this text and the name of the missing file; no chart (Figure~\ref{fig:tsParquet}).
+  \item[Cause] One of the four result files is missing from \texttt{Code/artifacts/dashboard\_data/}, e.g.\ because it was deleted, not committed or not downloaded.
+  \item[Solution] \emph{(operator)} Restore the files from Git or regenerate them (Section~\ref{sec:mtRegenerate}).
+\end{description}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.85\linewidth]{Images/08Troubleshooting/ErrorMissingParquet.png}
+  \caption{Error message when a result file is missing}
+  \label{fig:tsParquet}
+\end{figure}
+
+\subsection{``No data found for \dots''}
+\label{sec:tsNoData}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] A yellow box instead of the chart, naming a node such as \VAL{Total/CA/CA\_1/\dots}.
+  \item[Cause] The dropdown list and the sales file do not match -- normally only possible if the result files come from different pipeline runs.
+  \item[Solution] Choose another node to continue. \emph{(operator)} Make sure all four files were written by the same pipeline run; restore them from Git or regenerate them together (Section~\ref{sec:mtRegenerate}).
+\end{description}
+
+\subsection{``No column found for \dots''}
+\label{sec:tsNoColumn}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] The node line ends with \texttt{No column found for: MinTrace (wls\_struct)} (or another method), and that method's line is missing.
+  \item[Cause] The technical name of the method in \texttt{Code/config.py} does not match the result files -- usually after the pipeline or the settings were changed.
+  \item[Solution] \emph{(operator)} Align the method names in \texttt{config.py} with the result files (Section~\ref{sec:mtConfig}), or undo the last change.
+\end{description}
+
+% ------------------------------------------------------------------
+\section{The Chart Looks Wrong}
+\label{sec:tsChartGroup}
+
+\subsection{No Reconciled Line}
+\label{sec:tsNoRecLine}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] Only the actual and the dotted base line are visible.
+  \item[Cause] The \UI{Reconciliation method(s)} box is empty, or the line was hidden by clicking its legend entry.
+  \item[Solution] Select at least one method in the box; click the greyed-out legend entry to show the line again.
+\end{description}
+
+\subsection{A Reconciled Line Hides Another Line}
+\label{sec:tsOverlap}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] Fewer lines are visible than the legend lists.
+  \item[Cause] Two forecasts are identical and lie exactly on top of each other -- for example Top-Down and the base forecast at the Total, or Bottom-Up and the base forecast at item level (Section~\ref{sec:fnRec}).
+  \item[Solution] None needed. Hide one line via the legend to check.
+\end{description}
+
+\subsection{Colours Hard to Read}
+\label{sec:tsTheme}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] Lines or labels have too little contrast, e.g.\ after switching between light and dark mode.
+  \item[Cause] The chart detects the theme when it is drawn; in rare cases the first drawing happens before the theme is known.
+  \item[Solution] Change any control once or reload the page (\keys{F5}); the chart is then drawn with the right colours. Choose \VAL{Light} in the page menu for printing.
+\end{description}
+
+\subsection{A Dropdown Offers Only ``(All)''}
+\label{sec:tsLocked}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] For example, \UI{Department} cannot be opened to any value.
+  \item[Cause] A dropdown above it is still on \VAL{(All)}. This is intended (Section~\ref{sec:fnNavigate}).
+  \item[Solution] Choose values in all dropdowns above it first, from top to bottom.
+\end{description}
+
+\subsection{Forecast Looks Flat, or Is Zero}
+\label{sec:tsFlat}
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Symptom] The forecast is a horizontal line, identical for all three base models, or lies at zero.
+  \item[Cause] \VAL{histavg} is flat by definition. For items that sell rarely, \VAL{ets} and \VAL{theta} fall back to \VAL{histavg}, and forecasts for items that hardly sell at all are close to zero (Section~\ref{sec:fnBase}).
+  \item[Solution] None needed; this is correct behaviour. Compare with the department or store above the item to see the models' differences.
+\end{description}
+
+% ------------------------------------------------------------------
+\section{General Procedure}
+\label{sec:tsGeneral}
+
+If none of the symptoms above matches, work through these steps in order:
+\begin{enumerate}
+  \item Reload the page (\keys{F5}); try a private window and a second browser.
+  \item Check whether the problem also occurs online \emph{and} locally. If only online: \emph{(operator)} check the logs and reboot (Section~\ref{sec:mtCloud}). If only locally: reset the local installation (Section~\ref{sec:mtLocalReset}).
+  \item Compare with the verification checklist (Section~\ref{sec:mtVerify}) to narrow down which function fails.
+  \item Report the problem as described in Section~\ref{sec:helpReport}.
+\end{enumerate}

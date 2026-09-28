@@ -1,0 +1,94 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/ThesisManual.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual: M5 Hierarchical Forecast Explorer $
+%
+% !TeX encoding = utf8
+% !TeX root = ThesisManual
+% !TeX TXS-program:bibliography = txs:///biber
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\documentclass[12pt,a4paper]{scrbook}
+
+% Language selection - comment out the language that is not wanted:
+%\def\isGerman{1}
+\def\isEnglish{1}
+
+\usepackage{float}
+\input{General/Packages}
+\input{General/Commands}
+\input{General/TikzDefs}
+\input{General/ManualStyles}   % manual-specific colours, boxes, TikZ styles, macros
+
+\input{General/acronyms}
+\input{General/Hyphenations}%
+
+\addbibresource{ManualLiterature.bib}
+
+\begin{document}
+
+
+\InputLanguage{Chapters/}{TitlePage}
+\newpage
+
+\pagenumbering{roman}
+
+\tableofcontents
+\cleardoublepage
+
+\addcontentsline{toc}{chapter}{\TRANS{Abbildungsverzeichnis}{List of figures}}
+\listoffigures
+\cleardoublepage
+
+\addcontentsline{toc}{chapter}{\TRANS{Tabellenverzeichnis}{List of tables}}
+\listoftables
+\cleardoublepage
+
+
+\chapter*{\TRANS{Abkürzungen}{Acronyms}}
+\addcontentsline{toc}{chapter}{\TRANS{Abkürzungen}{Acronyms}}
+\printacronyms[heading=none]
+
+\cleardoublepage
+
+\pagenumbering{arabic}
+
+% Chapter 1: Introduction and Main Function
+\InputLanguage{Chapters/}{01IntroductionAndMainFunction}
+
+% Chapter 2: Installation
+\InputLanguage{Chapters/}{02Installation}
+
+% Chapter 3: First Steps
+\InputLanguage{Chapters/}{03FirstSteps}
+
+% Chapter 4: User Interface (GUI sketch)
+\InputLanguage{Chapters/}{04UserInterface}
+
+% Chapter 5: Functions
+\InputLanguage{Chapters/}{05Functions}
+
+% Chapter 6: Specifications
+\InputLanguage{Chapters/}{06Specifications}
+
+% Chapter 7: Maintenance
+\InputLanguage{Chapters/}{07Maintenance}
+
+% Chapter 8: Troubleshooting
+\InputLanguage{Chapters/}{08Troubleshooting}
+
+% Chapter 9: Help
+\InputLanguage{Chapters/}{09Help}
+
+
+\cleardoublepage
+\addcontentsline{toc}{chapter}{\TRANS{Literaturverzeichnis}{Bibliography}}
+\printbibliography
+
+\end{document}

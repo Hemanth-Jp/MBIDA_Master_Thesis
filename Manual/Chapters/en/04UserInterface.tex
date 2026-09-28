@@ -1,0 +1,243 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/04UserInterface.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{User Interface}
+\label{chap:ui}
+
+The dashboard consists of a single page. There are no menus to open, no tabs and no pop-up windows: every control is visible at all times, and every change takes effect immediately. This chapter first presents a sketch of the complete screen and then describes its two parts, the sidebar and the chart.
+
+\section{Sketch of the User Interface}
+\label{sec:uiSketch}
+
+Figure~\ref{fig:uiWireframe} is a schematic sketch of the screen. The numbered elements are listed in Table~\ref{tab:uiCallouts}; the same numbers are used throughout the manual.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/04UserInterface/uiWireframe.tikz}}
+  \caption{Sketch of the user interface with numbered elements}
+  \label{fig:uiWireframe}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Elements of the user interface (numbers as in Figure~\ref{fig:uiWireframe})}
+\label{tab:uiCallouts}
+\small
+\begin{tabularx}{\linewidth}{@{}clX@{}}
+\toprule
+\textbf{No.} & \textbf{Element} & \textbf{Purpose} \\
+\midrule
+\Callout{1}  & Sidebar button        & Hides or shows the sidebar, giving the chart the full width \\
+\Callout{2}  & Hierarchy dropdowns   & Select the node: \UI{State}, \UI{Store}, \UI{Category}, \UI{Department}, \UI{Item} \\
+\Callout{3}  & \UI{Base model}       & Choose \VAL{histavg}, \VAL{ets} or \VAL{theta} for the dotted line \\
+\Callout{4}  & \UI{Reconciliation method(s)} & Choose one, several or no reconciled lines \\
+\Callout{5}  & Title and instructions & Name of the dashboard and a two-line usage hint \\
+\Callout{6}  & Node line              & The node currently shown and its level (1--6) \\
+\Callout{7}  & Legend                 & Names of all lines; click to hide or show a line \\
+\Callout{8}  & Time regions           & Shaded \UI{Train}, \UI{Test} and \UI{Live} periods \\
+\Callout{9}  & Plot area              & Actual sales, base forecast and reconciled forecast(s) \\
+\Callout{10} & Chart toolbar          & Save as image, zoom, pan, reset (appears on mouse-over) \\
+\Callout{11} & Page menu              & Streamlit's menu: theme, rerun, print \\
+\Callout{12} & Axes                   & Month (horizontal) and units sold (vertical) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Figure~\ref{fig:uiReal} shows the same screen as it appears in the browser.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/04UserInterface/FullScreen.png}
+  \caption{The real user interface for store \VAL{CA\_1} with base model \VAL{ets}}
+  \label{fig:uiReal}
+\end{figure}
+
+\section{Layout Principles}
+\label{sec:uiPrinciples}
+
+\begin{itemize}
+  \item \textbf{Controls left, result right.} Everything the user can change is in the sidebar; everything the dashboard shows is in the main area.
+  \item \textbf{Top to bottom equals coarse to fine.} The dropdowns follow the hierarchy from State down to Item, so the sidebar is read in the same order as the hierarchy.
+  \item \textbf{One chart, one node.} The chart always shows exactly one node. Comparing nodes is done by switching between them.
+  \item \textbf{Always consistent.} A dropdown only offers values that exist below the choices made above it, so an impossible combination cannot be selected.
+\end{itemize}
+
+\section{The Sidebar}
+\label{sec:uiSidebar}
+
+\subsection{Hierarchy Section}
+\label{sec:uiHierarchy}
+
+The upper part of the sidebar \Callout{2} holds one dropdown per hierarchy level (Figure~\ref{fig:uiSidebar}, left).
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.42\linewidth]{Images/04UserInterface/SidebarHierarchy.png}
+  \hfill
+  \Screenshot[0.42\linewidth]{Images/04UserInterface/SidebarForecast.png}
+  \caption{Sidebar: hierarchy section (left) and forecast section (right)}
+  \label{fig:uiSidebar}
+\end{figure}
+
+The five dropdowns are linked:
+
+\begin{table}[H]
+\centering
+\caption{Hierarchy dropdowns}
+\label{tab:uiDropdowns}
+\small
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+\textbf{Dropdown} & \textbf{Values} & \textbf{Available when} \\
+\midrule
+\UI{State}      & \VAL{(All)}, \VAL{CA}, \VAL{TX}, \VAL{WI} & always \\
+\UI{Store}      & \VAL{(All)} + stores of the chosen state, e.g.\ \VAL{CA\_1} to \VAL{CA\_4} & a state is chosen \\
+\UI{Category}   & \VAL{(All)}, \VAL{FOODS}, \VAL{HOBBIES}, \VAL{HOUSEHOLD} & a store is chosen \\
+\UI{Department} & \VAL{(All)} + departments of the category, e.g.\ \VAL{FOODS\_1} to \VAL{FOODS\_3} & a category is chosen \\
+\UI{Item}       & \VAL{(All)} + items of the department in that store & a department is chosen \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+As long as a dropdown is on \VAL{(All)}, all dropdowns below it offer only \VAL{(All)}. Each dropdown can be searched by typing (Section~\ref{sec:fnSearch}).
+
+\subsection{Forecast Section}
+\label{sec:uiForecast}
+
+The lower part of the sidebar holds the two forecast controls \Callout{3} and \Callout{4} (Figure~\ref{fig:uiSidebar}, right).
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[\UI{Base model} \Callout{3}] Three round buttons in one row. Exactly one is active; the default is \VAL{histavg}.
+  \item[\UI{Reconciliation method(s)} \Callout{4}] A multi-selection box. Selected methods appear as red tags with a $\times$ to remove them. Clicking into the box lists the remaining methods. The default is \VAL{MinTrace (wls\_struct)}. The box may also be left empty.
+\end{description}
+
+\subsection{Collapsing the Sidebar}
+
+On small screens the sidebar takes a lot of space. The double arrow \Callout{1} at its top right hides it; the chart then uses the full window width. A small arrow at the top left of the page brings the sidebar back. On phones the sidebar is hidden by default.
+
+\section{The Main Area}
+\label{sec:uiMain}
+
+\subsection{Title, Instructions and Node Line}
+
+Below the title \Callout{5}, a short grey text summarises how to use the dropdowns. The line directly above the chart, the \emph{node line} \Callout{6}, always states which node is shown:
+
+\begin{lstlisting}[style=plain]
+Selected node: Total/CA/CA_1  (level = 3)
+\end{lstlisting}
+
+The node name lists the path through the hierarchy, separated by slashes; the level counts from 1 (grand total) to 6 (single item). If a selected reconciliation method cannot be found in the result files, a warning is appended to this line (Section~\ref{sec:tsNoColumn}).
+
+\subsection{The Forecast Chart}
+\label{sec:uiChart}
+
+Figure~\ref{fig:chartAnatomy} explains how to read the plot area \Callout{9} with its time regions \Callout{8} and axes \Callout{12}. The data in the sketch is illustrative; the structure is exactly that of the real chart.
+
+\begin{figure}[H]
+  \centering
+  \input{tikz/04UserInterface/chartAnatomy.tikz}
+  \caption{Anatomy of the forecast chart (illustrative data)}
+  \label{fig:chartAnatomy}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Lines and regions of the chart (letters as in Figure~\ref{fig:chartAnatomy})}
+\label{tab:chartAnatomy}
+\small
+\begin{tabularx}{\linewidth}{@{}clX@{}}
+\toprule
+& \textbf{Element} & \textbf{Meaning} \\
+\midrule
+\Callout{A} & Actual (black, solid, dots) & Units really sold per month; drawn over train and test only \\
+\Callout{B} & Base (dotted)              & Forecast of the selected base model; test and live only \\
+\Callout{C} & Reconciled (solid, coloured) & One line per selected reconciliation method; test and live only \\
+\Callout{D} & Live region                & Forecasts without an actual line -- no real sales to compare with \\
+\Callout{E} & Yearly peak                & Seasonal December peak; a good forecast repeats it \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Line colours are assigned automatically in a fixed order; the legend \Callout{7} is always the reference for which colour belongs to which method. The legend reads, for example, \UI{Base: ets} and \UI{Reconciled: MinTrace (wls\_struct)}.
+
+\subsection{Chart Toolbar}
+\label{sec:uiToolbar}
+
+When the mouse is over the chart, a small toolbar \Callout{10} appears at its top right (Figure~\ref{fig:uiToolbar}). It is provided by the charting library Plotly \cite{Plotly:2026}.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.55\linewidth]{Images/04UserInterface/ChartToolbar.png}
+  \caption{The chart toolbar}
+  \label{fig:uiToolbar}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Chart toolbar buttons}
+\label{tab:uiToolbar}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Button} & \textbf{Function} \\
+\midrule
+Camera        & Download the current view of the chart as \ac{png} \\
+Magnifier     & Zoom mode: drag a rectangle to enlarge it (default mode) \\
+Cross arrows  & Pan mode: drag to move the visible range \\
+Plus / minus  & Zoom in / out around the centre \\
+Autoscale     & Fit all lines into the view \\
+House         & Reset the axes to the original view \\
+Expand (Streamlit) & Separate button next to the toolbar: show the chart in full screen \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Page Menu and Theme}
+\label{sec:uiMenu}
+
+The three dots \Callout{11} at the top right of the page open Streamlit's own menu \cite{Streamlit:2026}. For users, two entries matter:
+\begin{itemize}
+  \item \UI{Settings} -- choose \VAL{Light}, \VAL{Dark} or \VAL{Use system setting}. The chart adjusts its colours automatically (Figure~\ref{fig:uiThemes}).
+  \item \UI{Print} -- prints the page including the current chart.
+\end{itemize}
+On a local installation, a \UI{Deploy} button also appears next to the menu; it is not needed and can be ignored.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.49\linewidth]{Images/04UserInterface/ChartLight.png}
+  \hfill
+  \Screenshot[0.49\linewidth]{Images/04UserInterface/ChartDark.png}
+  \caption{The same chart in light mode (left) and dark mode (right)}
+  \label{fig:uiThemes}
+\end{figure}
+
+\section{Messages}
+\label{sec:uiMessages}
+
+The dashboard uses Streamlit's standard message boxes. In normal use none of them appears.
+
+\begin{table}[H]
+\centering
+\caption{Messages the dashboard can show}
+\label{tab:uiMessages}
+\small
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+\textbf{Type} & \textbf{Beginning of the text} & \textbf{See} \\
+\midrule
+Red error box    & \texttt{Couldn't find one of the required parquet files} & Section~\ref{sec:tsParquet} \\
+Yellow warning   & \texttt{No data found for '\dots'}                        & Section~\ref{sec:tsNoData} \\
+Node line suffix & \texttt{No column found for: \dots}                       & Section~\ref{sec:tsNoColumn} \\
+Running indicator & (animation, top right)                                   & normal while loading \\
+\bottomrule
+\end{tabularx}
+\end{table}

@@ -1,0 +1,37 @@
+% System overview from the user's point of view.
+% Grey = done once, before the dashboard is used (not covered by this manual).
+\begin{tikzpicture}
+  % --- offline part (already done) ---
+  \node[man/boxgrey,text width=2.6cm] (kaggle) at (0,1.1) {\textbf{M5 sales data}\\[1pt]\footnotesize Walmart, 2011--2016};
+  \node[man/boxgrey,text width=2.6cm] (pipe) at (0,-1.1) {\textbf{Forecasting pipeline}\\[1pt]\footnotesize run once, offline};
+
+  % --- repository ---
+  \node[man/box,text width=2.8cm] (repo) at (4.4,0)
+      {\textbf{GitHub repository}\\[2pt]\footnotesize dashboard program\\ + 4 result files};
+
+  % --- two ways to run it ---
+  \node[man/boxgreen,text width=3.0cm] (cloud) at (8.8,1.5)
+      {\textbf{Streamlit Community Cloud}\\[1pt]\footnotesize runs the dashboard online};
+  \node[man/boxorange,text width=3.0cm] (local) at (8.8,-1.5)
+      {\textbf{Your computer}\\[1pt]\footnotesize \texttt{streamlit run \dots}};
+
+  % --- user ---
+  \node[man/terminal,text width=2.2cm] (user) at (13.3,0)
+      {\textbf{Web browser}\\[1pt]\footnotesize you, the user};
+
+  % arrows
+  \draw[man/dashedarrow] (kaggle) -- (pipe);
+  \draw[man/dashedarrow] (pipe.east) -- node[man/label,below right,pos=0.3]{writes} (repo.south west);
+  \draw[man/arrow] (repo.north east) -- node[man/label,above left]{deploy} (cloud.west);
+  \draw[man/arrow] (repo.south east) -- node[man/label,below left]{clone} (local.west);
+  \draw[man/arrow] (cloud.east) -- node[man/label,above right]{public link} (user.north west);
+  \draw[man/arrow] (local.east) -- node[man/label,below right]{localhost:8501} (user.south west);
+
+  % groups
+  \begin{scope}[on background layer]
+    \node[man/group,fit=(kaggle)(pipe),inner sep=9pt] (g1) {};
+    \node[man/grouplabel,anchor=south west] at (g1.north west) {Done once (thesis)};
+    \node[man/group,draw=ManBlue,fit=(repo)(cloud)(local)(user),inner sep=10pt] (g2) {};
+    \node[man/grouplabel,text=ManBlue,anchor=south west] at (g2.north west) {Covered by this manual};
+  \end{scope}
+\end{tikzpicture}

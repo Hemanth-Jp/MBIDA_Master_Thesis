@@ -1,0 +1,577 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor:  Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-27 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Presentations/Literature/slides/literature.tex $
+% $Version: 2 $
+%
+% $Project: MBIDA_Master_Thesis $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% !TeX encoding = utf8
+% !TeX root = WalmartSalesForecastingLiterature.tex
+%
+%%%%%%
+
+\Mysection{Introduction}
+
+\STANDARD{}
+{
+
+	This literature review supports a master's thesis on hierarchical time series forecasting, evaluated on the M5 Walmart competition dataset. The thesis fits univariate base models across a six-level hierarchy (Total, State, Store, Category, Department, Item) and reconciles them into coherent forecasts using bottom-up, top-down and optimal (MinTrace) combination methods, implemented with the Nixtla \texttt{statsforecast} and \texttt{hierarchicalforecast} Python libraries.
+
+	The 31 references reviewed here are organized into six thematic strands: (1) foundational univariate forecasting methods, (2) hierarchical and temporal reconciliation techniques, (3) the M5 competition and its benchmarking properties, (4) the business and supply-chain context for demand forecasting, (5) methodological principles for reproducible data science, and (6) the Python software ecosystem used to implement the forecasting pipeline and the accompanying Streamlit dashboard.
+
+}
+
+\Mysection{Time Series Forecasting Foundations}
+
+\STANDARD{The Theta Model for Time Series Forecasting}
+{
+
+	\textbf{Authors:}
+	Vassilis Assimakopoulos and Konstantinos Nikolopoulos (2000)
+
+	\textbf{Description:}
+	Introduces the Theta model, a decomposition forecasting approach that modifies the local curvature of a time series via coefficient ``Theta lines''. The model decomposes the original series into separate lines capturing long-term trends and short-term behavior, which are extrapolated independently and recombined. While highly effective in empirical benchmarks like the M3 competition, its default parameterization relies on fixed curvature weights that may require adaptation for non-standard seasonal behaviors \autocite{Assimakopoulos:2000}.
+
+	\textbf{Keywords:}
+	Theta Model, Time Series Decomposition, Extrapolation, Curvature Modification, M3 Competition
+
+	\textbf{Relevance to Thesis:}
+	Serves as one of the three core univariate base forecasting models (\texttt{Theta}) fitted across all 30,354 series in the Walmart M5 hierarchy via \texttt{statsforecast} prior to reconciliation.
+
+}
+
+\STANDARD{Forecasting Intermittent Demand}
+{
+
+	\textbf{Authors:}
+	J. D. Croston (1972)
+
+	\textbf{Description:}
+	Proposes a specialized forecasting approach for intermittent demand patterns where periods of zero demand occur frequently. The method separately models non-zero demand size and inter-arrival times using exponential smoothing, preventing the systematic overestimation of inventory following non-zero transactions. However, it assumes constant mean arrival intervals, which can introduce bias during strong trend shifts \autocite{Croston:1972}.
+
+	\textbf{Keywords:}
+	Intermittent Demand, Demand Inter-Arrival Time, Exponential Smoothing, Stock Control, Inventory Replenishment
+
+	\textbf{Relevance to Thesis:}
+	Provides foundational methodology for managing sparse, zero-inflated demand patterns, directly informing how the thesis addresses low-volume item-level sales in the M5 Walmart hierarchy.
+
+}
+
+\STANDARD{State Space Approaches to Exponential Smoothing}
+{
+
+	\textbf{Authors:}
+	Rob J. Hyndman, Anne B. Koehler, J. Keith Ord, and Ralph D. Snyder (2008)
+
+	\textbf{Description:}
+	Establishes a comprehensive Innovations State Space framework (ETS) uniting exponential smoothing methods under single source of error models. It provides exact likelihood formulation, automated model selection via information criteria (AIC/AICc), and formal prediction intervals for additive and multiplicative trend and seasonal components. A known boundary condition is that multiplicative error models can exhibit instability when series values approach zero \autocite{Hyndman:2008}.
+
+	\textbf{Keywords:}
+	Exponential Smoothing, State Space Models, ETS Framework, Model Selection, Information Criteria
+
+	\textbf{Relevance to Thesis:}
+	Forms the theoretical foundation for \texttt{AutoETS}, one of the primary univariate base forecasting models fitted across the M5 hierarchy in \texttt{statsforecast}.
+
+}
+
+\STANDARD{Principles and Practice of Forecasting}
+{
+
+	\textbf{Authors:}
+	Rob J. Hyndman and George Athanasopoulos (2018)
+
+	\textbf{Description:}
+	Serves as a comprehensive reference textbook covering the full lifecycle of time series forecasting, including exploratory visual analysis, STL decomposition, exponential smoothing, ARIMA modeling, and hierarchical aggregation. It prioritizes practical workflows, out-of-sample cross-validation, and accuracy evaluation over deep matrix proofs for linear algebra reconciliation \autocite{Hyndman:2018}.
+
+	\textbf{Keywords:}
+	Time Series Forecasting, STL Decomposition, ARIMA, Cross-Validation, Hierarchical Aggregation
+
+	\textbf{Relevance to Thesis:}
+	Provides the foundational textbook framework for structuring the thesis's forecasting pipeline, time series evaluation metrics, and base model selection principles.
+
+}
+
+\STANDARD{Results and Implications of the M3 Competition}
+{
+
+	\textbf{Authors:}
+	Spyros Makridakis and Michele Hibon (2000)
+
+	\textbf{Description:}
+	Evaluates 24 time series forecasting methods across 3,003 empirical datasets in the milestone M3 Competition. Key findings demonstrated that complex statistical models do not systematically outperform simple techniques, and combining forecasts yields superior accuracy and reduced variance. The benchmark focused on non-hierarchical, univariate economic series without assessing cross-sectional aggregation tree structures \autocite{MakridakisHibon:2000}.
+
+	\textbf{Keywords:}
+	M3 Competition, Empirical Benchmarking, Forecast Combination, Model Complexity, Accuracy Evaluation
+
+	\textbf{Relevance to Thesis:}
+	Establishes the empirical tradition of M-competitions that motivated the M5 Walmart challenge and justifies comparing simple baseline models (\texttt{HistoricAverage}) against reconciled state-space forecasts.
+
+}
+
+\STANDARD{Categorization of Intermittent Demand Patterns}
+{
+
+	\textbf{Authors:}
+	Aris A. Syntetos, John E. Boylan, and John D. Croston (2005)
+
+	\textbf{Description:}
+	Proposes a formal categorization scheme for demand patterns based on average inter-demand interval (ADI) and the squared coefficient of variation of demand sizes (\(CV^2\)). It defines four distinct demand quadrant profiles: Smooth, Erratic, Lumpy, and Intermittent. Although static cutoff boundaries (e.g., ADI = 1.32) may require tuning for non-stationary series, the framework remains a standard diagnostic \autocite{Syntetos:2005}.
+
+	\textbf{Keywords:}
+	Demand Classification, Intermittent Demand, Average Inter-Demand Interval, Coefficient of Variation, Inventory Control
+
+	\textbf{Relevance to Thesis:}
+	Contextualizes the severe intermittent sparsity encountered at the bottom (Item-Store) level of the thesis's six-level hierarchy, where base models frequently produce zero or negative values requiring clipping.
+
+}
+
+\Mysection{Hierarchical \& Temporal Reconciliation}
+
+\STANDARD{Forecasting with Temporal Hierarchies}
+{
+
+	\textbf{Authors:}
+	George Athanasopoulos, Rob J. Hyndman, Nikolaos Kourentzes, and Fotios Petropoulos (2017)
+
+	\textbf{Description:}
+	Introduces temporal reconciliation, extending cross-sectional reconciliation concepts to time-aggregated frequencies (e.g., daily, weekly, monthly, annual). The framework applies optimal combination matrices to align forecasts across temporal aggregation levels, reducing noise and mitigating model uncertainty, though fitting separate models across multiple frequencies increases compute overhead \autocite{Athanasopoulos:2017}.
+
+	\textbf{Keywords:}
+	Temporal Hierarchies, Forecast Reconciliation, Multi-Frequency Forecasting, Temporal Aggregation, Optimal Combination
+
+	\textbf{Relevance to Thesis:}
+	Extends the theoretical understanding of reconciliation beyond the thesis's primary six-level cross-sectional structure to temporal aggregation dynamics.
+
+}
+
+\STANDARD{Aggregate vs. Subaggregate Models in Regional Forecasting}
+{
+
+	\textbf{Authors:}
+	D. M. Dunn, W. H. Williams, and T. L. Dechaine (1976)
+
+	\textbf{Description:}
+	Examines the empirical performance of aggregate versus subaggregate models in regional telephone demand forecasting. Demonstrates that modeling disaggregated local exchange series and summing them yields superior forecasting accuracy compared to directly modeling top-level aggregates, establishing early empirical support for bottom-up summation over unweighted disaggregation \autocite{Dunn:1976}.
+
+	\textbf{Keywords:}
+	Aggregate Forecasting, Subaggregate Models, Local Area Demand, Forecast Disaggregation, Summation
+
+	\textbf{Relevance to Thesis:}
+	Provides historical empirical support for the \texttt{BottomUp} reconciliation baseline evaluated across the thesis's six-level M5 hierarchy.
+
+}
+
+\STANDARD{Disaggregation Methods for Product Line Forecasting}
+{
+
+	\textbf{Authors:}
+	Charles W. Gross and Jeffrey E. Sohl (1990)
+
+	\textbf{Description:}
+	Reviews classical top-down disaggregation techniques for product line forecasting, focusing on historical proportion schemes that project aggregate forecasts down to lower-level series. While simple to compute, top-down proportions cannot capture lower-level dynamic trends or seasonal divergences between individual products \autocite{Gross:1990}.
+
+	\textbf{Keywords:}
+	Top-Down Forecasting, Disaggregation Methods, Product Line Forecasting, Historical Proportions, Aggregate Top-Level
+
+	\textbf{Relevance to Thesis:}
+	Directly supports the implementation of \texttt{TopDownSparse} configured with \texttt{method="proportion\_averages"} in the thesis pipeline.
+
+}
+
+\STANDARD{Optimal Combination Forecasts for Hierarchical Time Series}
+{
+
+	\textbf{Authors:}
+	Rob J. Hyndman, Roman A. Ahmed, George Athanasopoulos, and Han Lin Shang (2011)
+
+	\textbf{Description:}
+	Proposes the foundational generalized least squares (GLS) optimal combination framework for hierarchical time series reconciliation. It demonstrates that independently generated base forecasts across hierarchy levels are incoherent, constructing a linear regression mapping via a summation matrix \(S\) to project base forecasts into coherent reconciled forecasts. Full GLS covariance estimation can be computationally prohibitive for massive hierarchies without structural matrix approximations \autocite{Hyndman:2011}.
+
+	\textbf{Keywords:}
+	Hierarchical Time Series, Forecast Coherence, Generalized Least Squares, Optimal Reconciliation, Summation Matrix
+
+	\textbf{Relevance to Thesis:}
+	Provides the core mathematical theoretical foundation for coherent reconciliation that directly leads to the \texttt{MinTrace} structural weighting algorithms used in the thesis.
+
+}
+
+\STANDARD{HierarchicalForecast: Reference Framework in Python}
+{
+
+	\textbf{Authors:}
+	Kin G. Olivares, Federico Garza, David Luo, Cristian Chall\'u, Max Mergenthaler-Canseco, Souhaib Ben Taieb, Shanika L. Wickramasuriya, and Artur Dubrawski (2022/2023)
+
+	\textbf{Description:}
+	Introduces \texttt{HierarchicalForecast}, an open-source Python library designed for coherent hierarchical time series forecasting. The package implements statistical baselines (Bottom-Up, Top-Down, MinTrace) using sparse linear algebra with minimal dependencies (NumPy, Pandas, SciPy). It relies on companion packages (\texttt{statsforecast}) for base model estimation rather than fitting univariate models internally \autocite{Olivares:2023}.
+
+	\textbf{Keywords:}
+	HierarchicalForecast, Coherent Forecasting, Python Framework, Sparse Linear Algebra, MinTrace Reconciliation
+
+	\textbf{Relevance to Thesis:}
+	Functions as the primary software engine used in the thesis to execute \texttt{BottomUpSparse}, \texttt{MinTraceSparse} (\texttt{wls\_struct}), and \texttt{TopDownSparse} across 30,354 M5 series.
+
+}
+
+\STANDARD{Data Aggregation and Information Loss}
+{
+
+	\textbf{Authors:}
+	Guy H. Orcutt, Harold W. Watts, and John B. Edwards (1968)
+
+	\textbf{Description:}
+	Investigates the econometric effects of data aggregation across micro-entities, proving that aggregating individual micro-data series into macro-aggregates results in substantial information loss and parameter estimation bias. The study highlights why micro-level dynamics must be preserved even when aggregate totals are the primary decision target \autocite{Orcutt:1968}.
+
+	\textbf{Keywords:}
+	Data Aggregation, Information Loss, Micro-Data, Econometric Estimation, Macro-Aggregates
+
+	\textbf{Relevance to Thesis:}
+	Underpins the core motivation for multi-level hierarchical evaluation in the thesis, showing why top-level Walmart forecasts must be reconciled with granular item-store sales.
+
+}
+
+\STANDARD{Optimal Forecast Reconciliation via Trace Minimization (MinTrace)}
+{
+
+	\textbf{Authors:}
+	Shanika L. Wickramasuriya, George Athanasopoulos, and Rob J. Hyndman (2019)
+
+	\textbf{Description:}
+	Formulates the Minimum Trace (\texttt{MinTrace}) optimal forecast reconciliation framework by minimizing the total forecast error variance of coherent forecasts. It derives the closed-form reconciliation matrix that minimises the trace of the reconciled error covariance among all unbiased reconciliations, and proposes a feasible shrinkage estimator of that covariance (MinT-shrink), with OLS and WLS weightings as simpler special cases \autocite{Wickramasuriya:2019}. The structural scaling used in the thesis (\texttt{wls\_struct}) was introduced by \textcite{Athanasopoulos:2017}, and the non-negativity constraint (\texttt{nonnegative=True}) follows \textcite{Wickramasuriya:2020}.
+
+	\textbf{Keywords:}
+	MinTrace, Forecast Reconciliation, Trace Minimization, Structural Scaling, Unbiased Forecasts
+
+	\textbf{Relevance to Thesis:}
+	Supplies the theoretical framework behind \texttt{MinTrace}, evaluated in the thesis in its structurally scaled, non-negative variant (\texttt{wls\_struct}, \texttt{nonnegative=True}) as the optimal-combination reconciliation technique.
+
+}
+
+\Mysection{M5 Competition \& Benchmarking}
+
+\STANDARD{Evaluation Setup of the M5 Forecasting Competition}
+{
+
+	\textbf{Authors:}
+	Hansika Hewamalage, Pablo Montero-Manso, Christoph Bergmeir, and Rob J. Hyndman (2021)
+
+	\textbf{Description:}
+	Analyzes the evaluation setup and metric properties of the M5 competition. It highlights potential benchmarking vulnerabilities, such as rank instability and sensitivity to scaling factors (``magic numbers''), demonstrating how price-weighting allows a small subset of high-scale series to dominate overall error calculations \autocite{Hewamalage:2021}.
+
+	\textbf{Keywords:}
+	M5 Competition, Evaluation Metrics, Rank Instability, Benchmarking Vulnerabilities, WRMSSE Metric
+
+	\textbf{Relevance to Thesis:}
+	Guides the selection of robust, unweighted per-series evaluation metrics (\texttt{sMAPE}) averaged across hierarchy levels to avoid metric distortion in the M5 Walmart pipeline.
+
+}
+
+\STANDARD{M5 Accuracy Competition: Results and Conclusions}
+{
+
+	\textbf{Authors:}
+	Spyros Makridakis, Evangelos Spiliotis, and Vassilios Assimakopoulos (2022)
+
+	\textbf{Description:}
+	Synthesizes the results and organizational setup of the M5 Accuracy Competition involving 42,840 daily Walmart product sales time series across a 12-level hierarchy. Shows that machine learning models (specifically LightGBM) dominated top competition rankings due to exogenous features, while statistical bottom-up combinations served as strong, lightweight baselines \autocite{Makridakis:2022}.
+
+	\textbf{Keywords:}
+	M5 Competition, Walmart Dataset, Hierarchical Retail Forecasting, Machine Learning, LightGBM
+
+	\textbf{Relevance to Thesis:}
+	Provides the source dataset (M5 Walmart unit sales) evaluated in the thesis. The competition's own 12-level hierarchy includes grouped cross-product levels (e.g.\ State \(\times\) Category); the thesis instead builds its own single-path, six-level tree (\texttt{Total} \(\rightarrow\) \texttt{State} \(\rightarrow\) \texttt{Store} \(\rightarrow\) \texttt{Category} \(\rightarrow\) \texttt{Department} \(\rightarrow\) \texttt{Item}) from the same identifier columns.
+
+}
+
+\Mysection{Business \& Domain Context}
+
+\STANDARD{Supply Chain Management: Strategy, Planning, and Operation}
+{
+
+	\textbf{Authors:}
+	Sunil Chopra and Peter Meindl (2015)
+
+	\textbf{Description:}
+	Provides a comprehensive framework for supply chain drivers, demand planning, and inventory metrics. It details how demand forecast error impacts safety stock allocation, operational bullwhip effects, aggregate planning, and customer service fulfillment across retail supply chains, offering managerial decision models rather than specific programmatic algorithms \autocite{Chopra:2015}.
+
+	\textbf{Keywords:}
+	Supply Chain Management, Demand Planning, Safety Stock, Forecast Accuracy, Inventory Metrics
+
+	\textbf{Relevance to Thesis:}
+	Establishes the real-world business context, showing why coherent forecasts across total, retail store and item levels are vital for inventory planning.
+
+}
+
+\STANDARD{Cours d'\'economie politique (80/20 Volume Segmentation)}
+{
+
+	\textbf{Authors:}
+	Vilfredo Pareto (1896)
+
+	\textbf{Description:}
+	Classic foundational treatise in political economy introducing power-law distribution phenomena and income inequality distributions. Pareto himself did not state an 80/20 rule: the ``Pareto Principle'' (the vital few and the trivial many) was generalised and popularised by the quality-management pioneer Joseph M. Juran in the mid-20th century, and is now widely applied in modern industrial demand management to separate high-impact SKUs from long-tail inventory \autocite{Pareto:1896}.
+
+	\textbf{Keywords:}
+	Pareto Principle, Power-Law Distribution, Volume Disparity, Economic Theory, 80/20 Rule
+
+	\textbf{Relevance to Thesis:}
+	Justifies the volume-bucket segmentation analysis (\(5\%, 10\%, 20\%, 50\%, 80\%, 100\%\) volume buckets) used in Chapter 9 to evaluate forecast performance across high-volume vs. low-volume items.
+
+}
+
+\STANDARD{Inventory Management and Production Planning}
+{
+
+	\textbf{Authors:}
+	Edward A. Silver, David F. Pyke, and Rein Peterson (1998)
+
+	\textbf{Description:}
+	Standard reference text on quantitative inventory management, stock replenishment, and production scheduling. Integrates demand forecasting models with inventory decision rules, safety stock formulas, and intermittent SKU control strategies, providing the operational link between statistical error metrics and holding costs \autocite{Silver:1998}.
+
+	\textbf{Keywords:}
+	Inventory Management, Production Planning, Stock Replenishment, Safety Stock, Intermittent Demand
+
+	\textbf{Relevance to Thesis:}
+	Bridges demand forecasting accuracy directly with operational inventory management context for retail SKU planning in the M5 Walmart ecosystem.
+
+}
+
+\Mysection{Data Science \& Reproducibility Methodology}
+
+\STANDARD{Knowledge Discovery in Databases (KDD Process)}
+{
+
+	\textbf{Authors:}
+	Usama Fayyad, Gregory Piatetsky-Shapiro, and Padhraic Smyth (1996)
+
+	\textbf{Description:}
+	Defines the formal Knowledge Discovery in Databases (KDD) process framework. Outlines the multi-step iterative pipeline spanning data selection, preprocessing, cleaning, transformation, data mining algorithm execution, and pattern evaluation/interpretation, distinguishing overall data discovery from algorithm execution \autocite{Fayyad:1996}.
+
+	\textbf{Keywords:}
+	Knowledge Discovery, KDD Process, Data Mining, Data Preprocessing, Pattern Evaluation
+
+	\textbf{Relevance to Thesis:}
+	Provides the methodological lifecycle structuring the thesis's two-notebook pipeline (\texttt{01\_eda.ipynb} and \texttt{02\_pipeline.ipynb}).
+
+}
+
+\STANDARD{The Pragmatic Programmer: Software Craftsmanship}
+{
+
+	\textbf{Authors:}
+	Andrew Hunt and David Thomas (1999)
+
+	\textbf{Description:}
+	Sets out fundamental software engineering principles and best practices for pragmatic code development. Emphasizes DRY (Don't Repeat Yourself) design, ubiquitous automation, centralized configuration management, plain-text formats, and rigorous testing for sustainable codebases \autocite{Hunt:1999}.
+
+	\textbf{Keywords:}
+	Software Engineering, Pragmatic Programming, DRY Principle, Code Refactoring, Centralized Config
+
+	\textbf{Relevance to Thesis:}
+	Guides the software engineering conventions in \texttt{config.py}, parameter centralisation, and testing/validation protocols (Section 6.7) of the thesis pipeline.
+
+}
+
+\STANDARD{Design and Analysis of Experiments}
+{
+
+	\textbf{Authors:}
+	Douglas C. Montgomery (2004)
+
+	\textbf{Description:}
+	Comprehensive textbook on statistical experimental design, factorial designs, ANOVA, regression modeling, and hypothesis testing. Details guidelines for controlling experimental factors, blocking, and validating model assumptions across structured scientific trials \autocite{Montgomery:2004}.
+
+	\textbf{Keywords:}
+	Design of Experiments, Factorial Design, ANOVA, Hypothesis Testing, Statistical Validation
+
+	\textbf{Relevance to Thesis:}
+	Establishes the rigorous experimental design and validation methodology used to compare base models and reconciliation strategies across hierarchy levels.
+
+}
+
+\STANDARD{Ten Simple Rules for Reproducible Computational Research}
+{
+
+	\textbf{Authors:}
+	Geir Kjetil Sandve, Anton Nekrutenko, James Taylor, and Eivind Hovig (2013)
+
+	\textbf{Description:}
+	Formulates ten practical rules for ensuring computational reproducibility in scientific research. Rule highlights include tracking exact version dependencies, recording random seeds, archiving raw inputs, avoiding manual data tweaks, and linking text reports directly to automated scripts \autocite{Sandve:2013}.
+
+	\textbf{Keywords:}
+	Reproducible Research, Computational Pipelines, Dependency Management, Version Control, Open Science
+
+	\textbf{Relevance to Thesis:}
+	Direct methodological foundation for the thesis's strict reproducibility setup: top-to-bottom notebook execution, lossless Parquet caching of the raw inputs, version-pinned requirements files, and sanity check assertions.
+
+}
+
+\Mysection{Python Tooling \& Software Ecosystem}
+
+\STANDARD{Apache Arrow: Cross-Language In-Memory Data Platform}
+{
+
+	\textbf{Authors:}
+	Apache Software Foundation (2026)
+
+	\textbf{Description:}
+	Defines Apache Arrow as a high-performance cross-language development platform for in-memory columnar data. Enables zero-copy data sharing, rapid serialization, and optimized Parquet file reading and writing across data science languages, minimizing I/O bottlenecks \autocite{ApacheArrow:2026}.
+
+	\textbf{Keywords:}
+	Apache Arrow, PyArrow, Columnar Data, Parquet Serialization, Memory Efficiency
+
+	\textbf{Relevance to Thesis:}
+	Utilized via \texttt{PyArrow} for caching raw M5 CSVs into Parquet files and exporting final dashboard forecast tables (\texttt{actuals.parquet}, \texttt{rec\_with\_gt.parquet}).
+
+}
+
+\STANDARD{StatsForecast: High-Performance Statistical Forecasting}
+{
+
+	\textbf{Authors:}
+	Azul Garza, Max Mergenthaler Canseco, Cristian Chall\'u, and Kin G. Olivares (2022)
+
+	\textbf{Description:}
+	Introduces \texttt{StatsForecast}, a Python library providing ultra-fast, Numba-compiled implementations of statistical and econometric forecasting models. Enables parallel execution of AutoARIMA, AutoETS, Theta, and HistoricAverage across massive time series panels, focusing purely on univariate base model fitting \autocite{Garza:2022}.
+
+	\textbf{Keywords:}
+	StatsForecast, Numba Compilation, Parallel Fitting, AutoETS, Theta Model
+
+	\textbf{Relevance to Thesis:}
+	Provides the core base modeling library used to fit \texttt{HistoricAverage}, \texttt{AutoETS}, and \texttt{Theta} across all 30,354 series in the M5 hierarchy simultaneously.
+
+}
+
+\STANDARD{Array Programming with NumPy}
+{
+
+	\textbf{Authors:}
+	Charles R. Harris et al. (2020)
+
+	\textbf{Description:}
+	Documents NumPy, the fundamental array programming library for scientific computing in Python. Details multidimensional array memory representation, vectorized broadcasting operations, C-API integrations, and low-level linear algebra routines that underpin the scientific Python stack \autocite{Harris:2020}.
+
+	\textbf{Keywords:}
+	NumPy, Array Programming, Vectorization, Linear Algebra, Scientific Computing
+
+	\textbf{Relevance to Thesis:}
+	Supplies the underlying numerical array representation and linear algebra math for matrix operations across the entire forecasting pipeline.
+
+}
+
+\STANDARD{Matplotlib: 2D Scientific Graphics Environment}
+{
+
+	\textbf{Authors:}
+	John D. Hunter (2007)
+
+	\textbf{Description:}
+	Introduces Matplotlib, the foundational 2D plotting library for Python. Provides object-oriented visualization interfaces for rendering publication-quality static charts, diagnostic plots, and visual export formatting \autocite{Hunter:2007}.
+
+	\textbf{Keywords:}
+	Matplotlib, Scientific Visualization, 2D Graphics, Static Plotting, Data Exploration
+
+	\textbf{Relevance to Thesis:}
+	Used to generate and export static pipeline evaluation figures (such as \texttt{volumeReconciledChart.png}) in \texttt{02\_pipeline.ipynb}.
+
+}
+
+\STANDARD{Data Structures for Statistical Computing in Python (Pandas)}
+{
+
+	\textbf{Authors:}
+	Wes McKinney (2010)
+
+	\textbf{Description:}
+	This foundational paper introduces pandas data structures and design philosophy, establishing the framework for efficient data manipulation in Python. It describes the DataFrame and Series objects that have become essential for time series analysis and data preparation in forecasting workflows \autocite{McKinney:2010}.
+
+	\textbf{Keywords:}
+	Pandas, DataFrame, Labelled Data, Time Series Manipulation, Data Wrangling
+
+	\textbf{Relevance to Thesis:}
+	Forms the fundamental tabular data wrangling engine managing time series panels, hierarchy indices, and evaluation DataFrames across the thesis.
+
+}
+
+\STANDARD{Plotly Python Interactive Graphing Library}
+{
+
+	\textbf{Authors:}
+	Plotly Technologies Inc. (2026)
+
+	\textbf{Description:}
+	Documentation for Plotly's open-source Python graphing library, enabling the creation of interactive, browser-based data visualizations, time series zoom capabilities, dynamic hover tooltips, and custom chart themes \autocite{Plotly:2026}.
+
+	\textbf{Keywords:}
+	Plotly, Interactive Visualization, Web Graphics, Time Series Plots, Dashboard Visuals
+
+	\textbf{Relevance to Thesis:}
+	Powers interactive time series exploration in \texttt{plot\_series()} and the Streamlit web dashboard (Chapter 8) for inspecting reconciled forecasts.
+
+}
+
+\STANDARD{Streamlit Web Application Framework}
+{
+
+	\textbf{Authors:}
+	Streamlit Inc. (2026)
+
+	\textbf{Description:}
+	Official documentation for Streamlit, an open-source Python framework that turns data scripts into reactive, interactive web applications without frontend HTML/JavaScript code. Efficient execution requires explicit caching primitives (\texttt{st.cache\_data}) for heavy data frames \autocite{Streamlit:2026}.
+
+	\textbf{Keywords:}
+	Streamlit, Web Application, Interactive Dashboard, Reactive UI, Python Deployment
+
+	\textbf{Relevance to Thesis:}
+	Serves as the web application interface (Chapter 8) displaying the interactive M5 Walmart forecast dashboard deployed to Streamlit Cloud.
+
+}
+
+\STANDARD{st-theme: Streamlit Active Theme Detection Component}
+{
+
+	\textbf{Authors:}
+	gabrieltempass (2026)
+
+	\textbf{Description:}
+	Documentation for \texttt{st-theme}, a custom Streamlit component that detects and returns the active UI theme (Light mode vs. Dark mode) of a Streamlit web application, facilitating seamless UI visual syncing \autocite{StTheme:2026}.
+
+	\textbf{Keywords:}
+	st-theme, Streamlit Component, Active Theme, Dark Mode Detection, UI Styling
+
+	\textbf{Relevance to Thesis:}
+	Integrated into the Streamlit dashboard (Chapter 8) to automatically sync Plotly chart styling with the user's active Streamlit UI theme.
+
+}
+
+\STANDARD{utilsforecast: Forecasting Utility Helper Library}
+{
+
+	\textbf{Authors:}
+	Nixtla (2026)
+
+	\textbf{Description:}
+	Open-source utility library providing standardized forecasting evaluation metrics (including sMAPE), data validation checks, and series plotting helpers across Nixtla ecosystem packages \autocite{UtilsForecast:2026}.
+
+	\textbf{Keywords:}
+	utilsforecast, sMAPE Metric, Forecast Evaluation, Nixtla Utilities, Evaluation Helpers
+
+	\textbf{Relevance to Thesis:}
+	Supplies the official \texttt{smape} evaluation function and \texttt{plot\_series} visualization utility used throughout the thesis pipeline.
+
+}
+
+\Mysection{Summary and Conclusion}
+
+\STANDARD{}
+{
+
+	This review traces a clear line from classical statistical theory to the deployed thesis pipeline. The foundational forecasting literature (Theta, ETS, Croston, Hyndman \& Athanasopoulos) supplies the three univariate base models fitted per series via \texttt{statsforecast}. The reconciliation literature -- from the early aggregate/disaggregate studies through Hyndman's GLS combination framework to Wickramasuriya's MinTrace -- provides the mathematical justification for the \texttt{BottomUpSparse}, \texttt{MinTraceSparse}, and \texttt{TopDownSparse} methods compared in the thesis via \texttt{hierarchicalforecast}.
+
+	The M5 competition papers fix both the dataset and the evaluation caveats that shaped the choice of an unweighted, per-level \texttt{sMAPE} metric. The business and domain references connect that accuracy to concrete supply-chain decisions -- safety stock, inventory planning, and the Pareto-driven volume-bucket segmentation used in Chapter 9. The methodology references (KDD, factorial design, reproducibility rules, pragmatic engineering) shaped the two-notebook, config-driven pipeline design, while the software ecosystem citations document the concrete Python stack -- pandas, NumPy, Matplotlib, PyArrow, StatsForecast, HierarchicalForecast, utilsforecast, Plotly, and Streamlit -- that turns the theory into the deployed, interactive M5 forecast dashboard.
+
+}

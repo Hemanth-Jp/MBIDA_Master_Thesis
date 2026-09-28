@@ -1,0 +1,28 @@
+% Training / Test / Live time windows (schematic, not to scale)
+\begin{tikzpicture}[
+    node distance = 0cm,
+    seg/.style     = {rectangle, draw, thick, minimum height=1.1cm, align=center, font=\small},
+    datelabel/.style = {font=\scriptsize, align=center},
+    marker/.style  = {dashed, thick},
+    marklabel/.style = {font=\scriptsize, align=center, text width=2.6cm}
+]
+
+\node[seg, fill=gray!12, minimum width=4.2cm] (train) at (0,0)  {Training};
+\node[seg, fill=gray!28, minimum width=3.0cm, right=0cm of train] (test)  {Test};
+\node[seg, fill=gray!45, minimum width=3.0cm, right=0cm of test]  (live)  {Live};
+
+\node[datelabel, below=0.15cm of train.south west, anchor=north west] {2011-02};
+\node[datelabel, below=0.15cm of train.south east, anchor=north]      {2014-12};
+\node[datelabel, below=0.15cm of test.south east, anchor=north]       {2016-01};
+\node[datelabel, below=0.15cm of live.south east, anchor=north east]  {2016-07};
+
+\node[datelabel, above=0.1cm of train.north, font=\scriptsize\itshape, text width=3.8cm, align=center] {fitted once};
+\node[datelabel, above=0.1cm of test.north, font=\scriptsize\itshape, text width=2.8cm, align=center]  {12-month forecast, scored against known actuals};
+\node[datelabel, above=0.1cm of live.north, font=\scriptsize\itshape, text width=2.8cm, align=center]  {7-month forecast, dashboard only};
+
+% Marker for where real sales data actually ends, inside the Live segment
+\coordinate (realend) at ($(live.south west)!0.43!(live.south east)$);
+\draw[marker] (realend) -- ++(0,-1.3);
+\node[marklabel, below=1.35cm of realend, anchor=north, xshift=0.1cm] {real sales data ends: 2016-04-24};
+
+\end{tikzpicture}

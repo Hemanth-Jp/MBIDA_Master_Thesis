@@ -1,0 +1,166 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/General/ManualStyles.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+% Manual-specific definitions. Loaded AFTER General/TikzDefs.tex so that
+% pgfplots / tikz are already available. Nothing in the university template
+% files is changed - everything the manual adds lives here.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ------------------------------------------------------------------
+% Packages
+% ------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{fit,shadows,arrows.meta,decorations.pathreplacing}
+\pgfplotsset{compat=1.16}
+
+\captionsetup{font=small,labelfont=bf}
+
+% ------------------------------------------------------------------
+% Links used throughout the manual - change them here only
+% ------------------------------------------------------------------
+\newcommand{\AppURL}{https://m5-hierarchical-forecast-explorer.streamlit.app/}
+\newcommand{\RepoURL}{https://github.com/Hemanth-Jp/MBIDA_Master_Thesis}
+\newcommand{\AppName}{M5 Hierarchical Forecast Explorer}
+\newcommand{\AppLink}{\url{https://m5-hierarchical-forecast-explorer.streamlit.app/}}
+\newcommand{\RepoLink}{\url{https://github.com/Hemanth-Jp/MBIDA_Master_Thesis}}
+
+% ------------------------------------------------------------------
+% Colours
+%   App* colours mirror what the dashboard actually draws
+%   (streamlit_app.py: shaded phases, actual line) and Plotly's default
+%   colour sequence for the forecast traces.
+% ------------------------------------------------------------------
+\definecolor{AppActual}{HTML}{000000}
+\definecolor{AppBase}{HTML}{EF553B}      % Plotly colour 2 -> base forecast
+\definecolor{AppRecA}{HTML}{00CC96}      % Plotly colour 3 -> 1st reconciler
+\definecolor{AppRecB}{HTML}{AB63FA}      % Plotly colour 4 -> 2nd reconciler
+\definecolor{AppRecC}{HTML}{FFA15A}      % Plotly colour 5 -> 3rd reconciler
+\definecolor{AppTrain}{HTML}{F5F5F5}     % rgba(0,0,0,0.04) on white
+\definecolor{AppTest}{HTML}{FFF3DB}      % rgba(255,165,0,0.12) on white
+\definecolor{AppLive}{HTML}{E0F6EB}      % rgba(0,178,89,0.12) on white
+\definecolor{AppRed}{HTML}{FF4B4B}       % Streamlit primary red
+\definecolor{AppSidebar}{HTML}{F0F2F6}   % Streamlit sidebar grey
+\definecolor{AppText}{HTML}{262730}      % Streamlit text colour
+
+\definecolor{ManBlue}{HTML}{1F4E79}
+\definecolor{ManBlueLight}{HTML}{DCE8F4}
+\definecolor{ManGreen}{HTML}{2E7D32}
+\definecolor{ManGreenLight}{HTML}{E3F2E4}
+\definecolor{ManOrange}{HTML}{C75B00}
+\definecolor{ManOrangeLight}{HTML}{FDEBD8}
+\definecolor{ManRed}{HTML}{B3261E}
+\definecolor{ManRedLight}{HTML}{F9DEDC}
+\definecolor{ManGrey}{HTML}{6B6B6B}
+\definecolor{ManGreyLight}{HTML}{EEEEEE}
+
+% ------------------------------------------------------------------
+% Inline helpers
+% ------------------------------------------------------------------
+% A label exactly as it appears in the user interface
+\newcommand{\UI}[1]{\textsf{\textbf{#1}}}
+% A value a user picks or types in a control
+\newcommand{\VAL}[1]{\texttt{#1}}
+% Numbered callout matching the numbers in the GUI sketch
+\newcommand{\Callout}[1]{\tikz[baseline=(c.base)]\node[circle,fill=AppRed,text=white,
+  inner sep=0.8pt,minimum size=1.1em,font=\sffamily\scriptsize\bfseries](c){#1};}
+
+% Keyboard key, e.g. \keys{Ctrl+C}
+\newcommand{\keys}[1]{\tikz[baseline=(k.base)]\node[draw=ManGrey,fill=ManGreyLight,
+  rounded corners=1.5pt,inner sep=1.8pt,font=\ttfamily\footnotesize](k){#1};}
+
+% ------------------------------------------------------------------
+% Screenshots: compile even before the PNG exists.
+%   \Screenshot[width]{Images/Folder/File.png}
+% If the file is missing, a grey placeholder box with the file name is
+% drawn instead, so the document always builds.
+% ------------------------------------------------------------------
+\newcommand{\Screenshot}[2][\linewidth]{%
+  \IfFileExists{#2}{%
+    \fcolorbox{ManGrey!50}{white}{\includegraphics[width=\dimexpr#1-2\fboxsep-2\fboxrule\relax]{#2}}%
+  }{%
+    \begin{tikzpicture}
+      \node[draw=ManGrey,dashed,fill=ManGreyLight,minimum width=#1,minimum height=0.45*#1,
+            align=center,font=\sffamily\small,text=ManGrey]
+            {\textbf{Screenshot missing}\\[2pt]\detokenize{#2}};
+    \end{tikzpicture}%
+  }%
+}
+
+% ------------------------------------------------------------------
+% Hint boxes
+% ------------------------------------------------------------------
+\newtcolorbox{NoteBox}[1][Note]{enhanced,breakable,colback=ManBlueLight,colframe=ManBlue,
+  boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fonttitle=\sffamily\bfseries\small,title=#1,before skip=8pt,after skip=8pt}
+\newtcolorbox{TipBox}[1][Tip]{enhanced,breakable,colback=ManGreenLight,colframe=ManGreen,
+  boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fonttitle=\sffamily\bfseries\small,title=#1,before skip=8pt,after skip=8pt}
+\newtcolorbox{WarningBox}[1][Caution]{enhanced,breakable,colback=ManOrangeLight,colframe=ManOrange,
+  boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fonttitle=\sffamily\bfseries\small,title=#1,before skip=8pt,after skip=8pt}
+
+% Numbered practice task
+\newcounter{exercise}[chapter]
+\renewcommand{\theexercise}{\thechapter.\arabic{exercise}}
+\newtcolorbox{ExerciseBox}[1]{enhanced,breakable,colback=white,colframe=ManBlue,
+  boxrule=0.6pt,arc=2pt,left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fonttitle=\sffamily\bfseries\small,
+  title={\refstepcounter{exercise}Exercise \theexercise: #1},before skip=8pt,after skip=8pt}
+
+% ------------------------------------------------------------------
+% Listings: terminal commands
+% ------------------------------------------------------------------
+\lstdefinestyle{shell}{
+  language=bash,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{ManBlue}\bfseries,
+  commentstyle=\color{ManGrey}\itshape,
+  stringstyle=\color{ManGreen},
+  backgroundcolor=\color{ManGreyLight},
+  frame=single, rulecolor=\color{ManGrey!50},
+  xleftmargin=4pt, xrightmargin=4pt, framexleftmargin=4pt,
+  breaklines=true, showstringspaces=false, columns=fullflexible,
+  aboveskip=8pt, belowskip=8pt
+}
+\lstdefinestyle{plain}{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{ManGreyLight},
+  frame=single, rulecolor=\color{ManGrey!50},
+  xleftmargin=4pt, xrightmargin=4pt, framexleftmargin=4pt,
+  breaklines=true, showstringspaces=false, columns=fullflexible,
+  aboveskip=8pt, belowskip=8pt
+}
+
+% ------------------------------------------------------------------
+% Shared TikZ styles for all manual diagrams
+% ------------------------------------------------------------------
+\tikzset{
+  man/arrow/.style={-{Stealth[length=2.6mm]},thick,draw=ManGrey!80!black},
+  man/dashedarrow/.style={man/arrow,dashed},
+  man/box/.style={draw=ManBlue,fill=ManBlueLight,rounded corners=3pt,thick,
+    align=center,font=\sffamily\small,minimum height=1cm,inner sep=5pt},
+  man/boxgreen/.style={man/box,draw=ManGreen,fill=ManGreenLight},
+  man/boxorange/.style={man/box,draw=ManOrange,fill=ManOrangeLight},
+  man/boxred/.style={man/box,draw=ManRed,fill=ManRedLight},
+  man/boxgrey/.style={man/box,draw=ManGrey,fill=ManGreyLight,text=ManGrey!70!black},
+  man/decision/.style={diamond,aspect=2.2,draw=ManOrange,fill=ManOrangeLight,thick,
+    align=center,font=\sffamily\small,inner sep=1.5pt},
+  man/terminal/.style={rounded rectangle,draw=ManGreen,fill=ManGreenLight,thick,
+    align=center,font=\sffamily\small,minimum height=0.9cm,inner sep=6pt},
+  man/label/.style={font=\sffamily\footnotesize,text=ManGrey!70!black,align=center},
+  man/group/.style={draw=ManGrey!60,dashed,rounded corners=6pt,inner sep=10pt},
+  man/grouplabel/.style={font=\sffamily\footnotesize\bfseries,text=ManGrey,anchor=north west},
+  man/callout/.style={circle,fill=AppRed,text=white,inner sep=0.8pt,minimum size=1.3em,
+    font=\sffamily\scriptsize\bfseries},
+}

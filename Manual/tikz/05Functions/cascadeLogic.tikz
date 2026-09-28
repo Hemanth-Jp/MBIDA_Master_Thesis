@@ -1,0 +1,28 @@
+% How the five dropdowns are turned into the node that is plotted.
+% Reading stops at the first level left on "(All)".
+\begin{tikzpicture}[
+    q/.style={man/decision,text width=2.3cm,font=\sffamily\scriptsize},
+    r/.style={man/boxgreen,text width=4.6cm,font=\sffamily\scriptsize,minimum height=0.8cm,align=left},
+    node distance=0.55cm,
+  ]
+  \node[man/terminal,font=\sffamily\scriptsize] (s) {Read the sidebar from the top};
+  \node[q,below=of s] (q1) {State\\= (All)?};
+  \node[q,below=of q1] (q2) {Store\\= (All)?};
+  \node[q,below=of q2] (q3) {Category\\= (All)?};
+  \node[q,below=of q3] (q4) {Department\\= (All)?};
+  \node[q,below=of q4] (q5) {Item\\= (All)?};
+  \node[r,below=of q5,man/boxorange,text width=9.5cm,align=center] (r6) {\textbf{Level 6}\; one item in one store\\ \texttt{Total/CA/CA\_1/FOODS/FOODS\_3/FOODS\_3\_090}};
+
+  \node[r,right=1.2cm of q1] (r1) {\textbf{Level 1}\; grand total\; \texttt{Total}};
+  \node[r,right=1.2cm of q2] (r2) {\textbf{Level 2}\; one state\; \texttt{Total/CA}};
+  \node[r,right=1.2cm of q3] (r3) {\textbf{Level 3}\; one store\; \texttt{Total/CA/CA\_1}};
+  \node[r,right=1.2cm of q4] (r4) {\textbf{Level 4}\; one category in a store\\ \texttt{Total/CA/CA\_1/FOODS}};
+  \node[r,right=1.2cm of q5] (r5) {\textbf{Level 5}\; one department in a store\\ \texttt{Total/CA/CA\_1/FOODS/FOODS\_3}};
+
+  \draw[man/arrow] (s) -- (q1);
+  \foreach \a/\b in {q1/q2,q2/q3,q3/q4,q4/q5,q5/r6}
+     \draw[man/arrow] (\a) -- node[man/label,right]{no} (\b);
+  \foreach \i in {1,...,5}
+     \draw[man/arrow] (q\i) -- node[man/label,above]{yes} (r\i);
+
+\end{tikzpicture}

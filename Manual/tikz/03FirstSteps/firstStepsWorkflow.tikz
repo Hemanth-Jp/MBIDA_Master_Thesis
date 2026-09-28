@@ -1,0 +1,31 @@
+% The guided first session of Chapter 3 as a two-row "snake".
+\begin{tikzpicture}[
+    fsstep/.style={man/box,text width=2.55cm,minimum height=1.55cm},
+    num/.style={man/callout,anchor=center},
+  ]
+
+  \node[fsstep] (s1) at (0,0)     {Open the\\dashboard};
+  \node[fsstep] (s2) at (3.4,0)   {Read the\\\textbf{Total} chart};
+  \node[fsstep] (s3) at (6.8,0)   {Drill down:\\\VAL{CA} $\rightarrow$ \VAL{CA\_1}};
+  \node[fsstep] (s4) at (10.2,0)  {Continue to\\one \textbf{item}};
+
+  \node[fsstep,man/boxgreen] (s5) at (10.2,-2.6) {Switch the\\\textbf{base model}};
+  \node[fsstep,man/boxgreen] (s6) at (6.8,-2.6)  {Add a second\\\textbf{reconciler}};
+  \node[fsstep,man/boxgreen] (s7) at (3.4,-2.6)  {Zoom, hover,\\save as PNG};
+  \node[fsstep,man/boxorange] (s8) at (0,-2.6)   {Reset to\\\textbf{Total}};
+
+  \foreach \i in {1,...,8}
+     \node[num] at (s\i.north west) {\i};
+
+  \draw[man/arrow] (s1) -- (s2);
+  \draw[man/arrow] (s2) -- (s3);
+  \draw[man/arrow] (s3) -- (s4);
+  \draw[man/arrow] (s4) -- (s5);
+  \draw[man/arrow] (s5) -- (s6);
+  \draw[man/arrow] (s6) -- (s7);
+  \draw[man/arrow] (s7) -- (s8);
+
+  \node[man/label,above=0.35cm of $(s1.north)!0.5!(s4.north)$] {\textbf{Navigate} the hierarchy (Sections~\ref{sec:fsOpen}--\ref{sec:fsItem})};
+  \node[man/label,below=0.35cm of $(s8.south)!0.5!(s5.south)$] {\textbf{Compare} forecasts and \textbf{explore} the chart (Sections~\ref{sec:fsModel}--\ref{sec:fsReset})};
+
+\end{tikzpicture}

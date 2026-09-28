@@ -1,0 +1,41 @@
+% Runtime layers: what runs where when the dashboard is used.
+\begin{tikzpicture}[
+    layer/.style={draw=ManBlue,fill=ManBlueLight,rounded corners=3pt,thick,
+                  minimum width=13.4cm,minimum height=1.25cm,anchor=north west},
+    pkg/.style={draw=ManBlue!70,fill=white,rounded corners=2pt,font=\ttfamily\scriptsize,
+                minimum height=0.55cm,inner sep=3pt},
+    file/.style={draw=ManOrange,fill=ManOrangeLight,rounded corners=2pt,font=\ttfamily\scriptsize,
+                minimum height=0.55cm,inner sep=3pt},
+    tag/.style={anchor=north west,font=\sffamily\small\bfseries,text=ManBlue},
+  ]
+
+  % layer 1: browser
+  \node[layer,fill=ManGreenLight,draw=ManGreen] (L1) at (0,0) {};
+  \node[tag,text=ManGreen] at ($(L1.north west)+(0.15,-0.1)$) {Client -- web browser};
+  \node[man/label,anchor=west] at ($(L1.west)+(0.2,-0.2)$)
+     {Chrome, Firefox, Edge or Safari \,$\cdot$\, JavaScript enabled \,$\cdot$\, $\geq$ 1280 px wide recommended};
+
+  % layer 2: server
+  \node[layer,minimum height=2.3cm] (L2) at (0,-1.75) {};
+  \node[tag] at ($(L2.north west)+(0.15,-0.1)$) {Server -- Streamlit Community Cloud \emph{or} your computer};
+  \node[pkg,anchor=west] (py) at ($(L2.north west)+(0.25,-0.95)$) {Python $\geq$ 3.10};
+  \node[pkg,right=0.25cm of py] (st) {streamlit 1.61.1};
+  \node[pkg,right=0.25cm of st] (pl) {plotly 6.9.0};
+  \node[pkg,right=0.25cm of pl] (pd) {pandas 2.3.3};
+  \node[pkg,right=0.25cm of pd] (pa) {pyarrow 24.0.0};
+  \node[pkg,anchor=west] (th) at ($(L2.north west)+(0.25,-1.7)$) {st-theme 1.2.3};
+  \node[pkg,right=0.25cm of th,fill=ManBlueLight!40] (app) {Code/app/streamlit\_app.py};
+  \node[pkg,right=0.25cm of app,fill=ManBlueLight!40] (cfg) {Code/config.py};
+
+  % layer 3: data
+  \node[layer,fill=ManOrangeLight!50,draw=ManOrange,minimum height=1.6cm] (L3) at (0,-4.55) {};
+  \node[tag,text=ManOrange] at ($(L3.north west)+(0.15,-0.1)$) {Data -- \texttt{Code/artifacts/dashboard\_data/} (read-only)};
+  \node[file,anchor=west] (f1) at ($(L3.north west)+(0.25,-1.0)$) {hierarchy.parquet};
+  \node[file,right=0.25cm of f1] (f2) {actuals.parquet};
+  \node[file,right=0.25cm of f2] (f3) {pred\_with\_gt.parquet};
+  \node[file,right=0.25cm of f3] (f4) {rec\_with\_gt.parquet};
+
+  % connections between layers
+  \draw[{Stealth}-{Stealth},thick,ManGrey] ($(L1.south)+(-3,0)$) -- node[man/label,right]{\ac{https} (web page, chart data)} ($(L2.north)+(-3,0)$);
+  \draw[-{Stealth},thick,ManGrey] ($(L3.north)+(3,0)$) -- node[man/label,right]{read once per session, then cached} ($(L2.south)+(3,0)$);
+\end{tikzpicture}

@@ -1,0 +1,22 @@
+% Hierarchy structure diagram: Total -> State -> Store -> Category -> Department -> Item
+\begin{tikzpicture}[
+	node distance=0.5cm,
+	level/.style={
+		rectangle, rounded corners, fill=HSELhellblau!30, draw=HSELblau, thick,
+		minimum width=8.5cm, minimum height=1cm, align=center, font=\small
+	},
+	arrow/.style={->, thick, HSELblau}
+	]
+	\node[level] (total) {\textbf{Total} \\ 1 series};
+	\node[level, below=of total] (state) {\textbf{State} \\ 3 series (CA, TX, WI)};
+	\node[level, below=of state] (store) {\textbf{Store} \\ 10 series};
+	\node[level, below=of store] (cat) {\textbf{Category} \\ 30 series};
+	\node[level, below=of cat] (dept) {\textbf{Department} \\ 70 series};
+	\node[level, below=of dept, fill=green!20, draw=green!60] (item) {\textbf{Item} \\ 30{,}240 bottom-level series};
+	
+	\draw[arrow] (total) -- (state);
+	\draw[arrow] (state) -- (store);
+	\draw[arrow] (store) -- (cat);
+	\draw[arrow] (cat) -- (dept);
+	\draw[arrow] (dept) -- (item);
+\end{tikzpicture}

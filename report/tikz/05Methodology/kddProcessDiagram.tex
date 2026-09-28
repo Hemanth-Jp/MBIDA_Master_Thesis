@@ -1,0 +1,65 @@
+% Required in preamble:
+% \usepackage{tikz}
+% \usetikzlibrary{arrows.meta}
+
+\begin{tikzpicture}[
+	stage/.style     = {rectangle, rounded corners=7pt, line width=1.8pt, minimum width=7.2cm,
+		minimum height=1.35cm, align=center, font=\Large\sffamily\bfseries},
+	c1/.style        = {fill=blue!18,   draw=blue!70!black},
+	c2/.style        = {fill=teal!20,   draw=teal!70!black},
+	c3/.style        = {fill=green!20,  draw=green!60!black},
+	c4/.style        = {fill=purple!18, draw=purple!70!black},
+	c5/.style        = {fill=orange!20, draw=orange!75!black},
+	detail/.style    = {align=center, font=\normalsize, text width=10.8cm, text=black!90},
+	pkglabel/.style  = {font=\large\bfseries\sffamily, anchor=north west},
+	panelbg/.style   = {rectangle, rounded corners=12pt, draw=none, minimum width=12.2cm, minimum height=3.6cm},
+	arrow/.style     = {-{Latex[length=4.5mm, width=3mm]}, line width=2.0pt, black!80}
+	]
+	
+	% Stage 1: Selection
+	\begin{scope}[yshift=0cm]
+		\node[panelbg, fill=blue!8] (p1) at (0, 0) {};
+		\node[pkglabel, blue!75!black] at ([xshift=18pt, yshift=-12pt]p1.north west) {Stage 1: Input};
+		\node[stage, c1] (s1) at (0, 0.25) {Selection};
+		\node[detail] (d1) at (0, -0.95) {Raw M5 sales and calendar files; hierarchy columns identified};
+	\end{scope}
+	
+	% Stage 2: Preprocessing
+	\begin{scope}[yshift=-4.9cm]
+		\node[panelbg, fill=teal!8] (p2) at (0, 0) {};
+		\node[pkglabel, teal!75!black] at ([xshift=18pt, yshift=-12pt]p2.north west) {Stage 2: Preparation};
+		\node[stage, c2] (s2) at (0, 0.25) {Preprocessing};
+		\node[detail] (d2) at (0, -0.95) {Daily $\rightarrow$ monthly aggregation; partial first month dropped; item universe fixed on training data};
+	\end{scope}
+	
+	% Stage 3: Transformation
+	\begin{scope}[yshift=-9.8cm]
+		\node[panelbg, fill=green!8] (p3) at (0, 0) {};
+		\node[pkglabel, green!65!black] at ([xshift=18pt, yshift=-12pt]p3.north west) {Stage 3: Feature Engineering};
+		\node[stage, c3] (s3) at (0, 0.25) {Transformation};
+		\node[detail] (d3) at (0, -0.95) {Full item--store--month grid built; hierarchy aggregated with an explicit Total root};
+	\end{scope}
+	
+	% Stage 4: Data Mining
+	\begin{scope}[yshift=-14.7cm]
+		\node[panelbg, fill=purple!8] (p4) at (0, 0) {};
+		\node[pkglabel, purple!75!black] at ([xshift=18pt, yshift=-12pt]p4.north west) {Stage 4: Modeling};
+		\node[stage, c4] (s4) at (0, 0.25) {Data Mining};
+		\node[detail] (d4) at (0, -0.95) {HistoricAverage, ETS, Theta fitted; Bottom-Up, MinTrace, Top-Down reconciliation applied};
+	\end{scope}
+	
+	% Stage 5: Interpretation / Evaluation
+	\begin{scope}[yshift=-19.6cm]
+		\node[panelbg, fill=orange!8] (p5) at (0, 0) {};
+		\node[pkglabel, orange!80!black] at ([xshift=18pt, yshift=-12pt]p5.north west) {Stage 5: Assessment};
+		\node[stage, c5] (s5) at (0, 0.25) {Interpretation / Evaluation};
+		\node[detail] (d5) at (0, -0.95) {sMAPE by hierarchy level and by volume segment; results interpreted against SQ1--SQ3};
+	\end{scope}
+	
+	% Connectors
+	\draw[arrow] (p1.south) -- (p2.north);
+	\draw[arrow] (p2.south) -- (p3.north);
+	\draw[arrow] (p3.south) -- (p4.north);
+	\draw[arrow] (p4.south) -- (p5.north);
+	
+\end{tikzpicture}

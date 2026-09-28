@@ -1,0 +1,215 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/02Installation.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Installation}
+\label{chap:install}
+
+There are two ways to use the dashboard (Figure~\ref{fig:installPaths}). \textbf{Cloud access} (Section~\ref{sec:instCloud}) needs nothing but a web browser and is the right choice for almost every user. \textbf{Local installation} (Section~\ref{sec:instLocal}) runs the same dashboard on your own computer; it is needed only to work offline, to check the installation independently of the cloud, or to prepare changes (Chapter~\ref{chap:maintenance}).
+
+\begin{figure}[H]
+  \centering
+  \resizebox{0.95\linewidth}{!}{\input{tikz/02Installation/installationPaths.tikz}}
+  \caption{Choosing between cloud access and local installation}
+  \label{fig:installPaths}
+\end{figure}
+
+\section{Option A: Cloud Access (Recommended)}
+\label{sec:instCloud}
+
+\subsection{Requirements}
+
+\begin{itemize}
+  \item A current version of Chrome, Firefox, Edge or Safari with JavaScript enabled.
+  \item An internet connection.
+  \item No account, no login, no installation.
+\end{itemize}
+
+\subsection{Opening the Dashboard}
+
+\begin{enumerate}
+  \item Open the browser and enter the address\\[2pt]
+        \AppLink
+  \item Wait until the chart appears (usually 2--5 seconds, Figure~\ref{fig:cloudLanding}). While the result files are being loaded, Streamlit shows a small running indicator.
+  \item Bookmark the page for later use.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.9\linewidth]{Images/02Installation/CloudLanding.png}
+  \caption{The dashboard opened from Streamlit Community Cloud}
+  \label{fig:cloudLanding}
+\end{figure}
+
+\subsection{Waking the App Up}
+\label{sec:instWake}
+
+Streamlit Community Cloud puts apps to sleep when nobody has used them for a while \cite{StreamlitCloud:2026}. The first visitor after such a quiet period sees the page in Figure~\ref{fig:cloudSleeping} instead of the dashboard.
+
+\begin{enumerate}
+  \item Click the button \UI{Yes, get this app back up!}.
+  \item Wait 30--60 seconds while the app starts. The page reloads by itself.
+  \item The dashboard appears as usual. It stays awake for all users as long as it is being used.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.8\linewidth]{Images/02Installation/CloudSleeping.png}
+  \caption{The page shown when the app is asleep}
+  \label{fig:cloudSleeping}
+\end{figure}
+
+\begin{NoteBox}
+Waking the app up does not change anything. The data and forecasts are the same as before; only the program is started again.
+\end{NoteBox}
+
+\section{Option B: Local Installation}
+\label{sec:instLocal}
+
+\subsection{Requirements}
+\label{sec:instLocalReq}
+
+\begin{table}[H]
+\centering
+\caption{Requirements for a local installation}
+\label{tab:localReq}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Item} & \textbf{Requirement} \\
+\midrule
+Operating system & Windows 10/11, macOS 12 or newer, or a current Linux distribution \\
+Python & Version 3.10 or newer (the dashboard uses language features introduced in 3.10) \\
+Git & Any current version, to download the repository \\
+Memory & 2\,GB of free \ac{ram} (the four result files are loaded completely) \\
+Disk space & about 500\,MB for the repository and the Python packages \\
+Network & Only for the installation; the dashboard itself runs offline \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Check the Python and Git versions in a terminal (Terminal on macOS/Linux, PowerShell on Windows):
+
+\begin{lstlisting}[style=shell]
+python3 --version     # Windows: python --version
+git --version
+\end{lstlisting}
+
+\subsection{Step 1 -- Download the Repository}
+
+\begin{lstlisting}[style=shell]
+git clone https://github.com/Hemanth-Jp/MBIDA_Master_Thesis.git
+cd MBIDA_Master_Thesis
+\end{lstlisting}
+
+All following commands are run from this folder, the \emph{repository root}.
+
+\begin{WarningBox}[Stay in the repository root]
+Always start the dashboard from the repository root, not from inside \texttt{Code/app/}. Only then does Streamlit pick up the dashboard's settings file \texttt{.streamlit/config.toml}, which lives in the root folder -- exactly as on Streamlit Community Cloud.
+\end{WarningBox}
+
+\subsection{Step 2 -- Create a Virtual Environment}
+
+A virtual environment keeps the dashboard's packages separate from everything else on the computer.
+
+\begin{lstlisting}[style=shell]
+python3 -m venv .venv
+
+# activate it - macOS / Linux:
+source .venv/bin/activate
+# activate it - Windows (PowerShell):
+.venv\Scripts\Activate.ps1
+\end{lstlisting}
+
+After activation, the prompt starts with \texttt{(.venv)}. If you prefer conda, the equivalent is \texttt{conda create -n m5\_dashboard python=3.10} followed by \texttt{conda activate m5\_dashboard}.
+
+\subsection{Step 3 -- Install the Packages}
+
+The dashboard needs only five packages. Their exact versions are listed in \\
+ \texttt{Code/app/requirements.txt} 
+ -- the same file Streamlit Community Cloud installs from (Section~\ref{sec:specSoftware}).
+
+\begin{lstlisting}[style=shell]
+pip install -r Code/app/requirements.txt
+\end{lstlisting}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.9\linewidth]{Images/02Installation/LocalPipInstall.png}
+  \caption{Successful installation of the five packages}
+  \label{fig:localPipInstall}
+\end{figure}
+
+\begin{WarningBox}[Package name]
+The package that lets the chart follow the light/dark theme is called \texttt{st-theme}. A different package with the similar name \texttt{streamlit-theme} exists and does \emph{not} work. Always install from the requirements file instead of typing package names by hand.
+\end{WarningBox}
+
+\subsection{Step 4 -- Check the Result Files}
+
+The dashboard only displays results; it needs the four result files in \\
+ \texttt{Code/artifacts/dashboard\_data/}. They are part of the repository and are downloaded with it:
+
+\begin{lstlisting}[style=shell]
+ls Code/artifacts/dashboard_data     # Windows: dir Code\artifacts\dashboard_data
+\end{lstlisting}
+
+The listing must show \texttt{actuals.parquet}, \texttt{hierarchy.parquet}, \texttt{pred\_with\_gt.parquet} and \texttt{rec\_with\_gt.parquet}. If one of them is missing, regenerate them once as described in Section~\ref{sec:mtRegenerate}.
+
+\subsection{Step 5 -- Start the Dashboard}
+
+\begin{lstlisting}[style=shell]
+streamlit run Code/app/streamlit_app.py
+\end{lstlisting}
+
+Streamlit prints the local address and opens it in the default browser (Figures~\ref{fig:localTerminal} and~\ref{fig:localBrowser}). On the very first start, Streamlit may ask for an e-mail address in the terminal; simply press \keys{Enter} to skip.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.85\linewidth]{Images/02Installation/LocalTerminalLaunch.png}
+  \caption{Terminal output after starting the dashboard locally}
+  \label{fig:localTerminal}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.9\linewidth]{Images/02Installation/LocalBrowser.png}
+  \caption{The local dashboard at \texttt{http://localhost:8501}}
+  \label{fig:localBrowser}
+\end{figure}
+
+To stop the dashboard, press \keys{Ctrl+C} in the terminal. To start it again later, open a terminal in the repository root, activate the environment (Step~2) and repeat Step~5.
+
+\section{Verifying the Installation}
+\label{sec:instVerify}
+
+The following check takes one minute and works for both options. If a step fails, go to the section named in the last column.
+
+\begin{table}[H]
+\centering
+\caption{Installation check}
+\label{tab:instCheck}
+\small
+\begin{tabularx}{\linewidth}{@{}clXl@{}}
+\toprule
+\textbf{\#} & \textbf{Action} & \textbf{Expected result} & \textbf{If not} \\
+\midrule
+1 & Open the dashboard & Title \UI{M5 Hierarchical Forecast Explorer}, no red error box & \ref{sec:tsParquet} \\
+2 & Look at the node line & \UI{Selected node: Total (level = 1)} & \ref{sec:tsGeneral} \\
+3 & Look at the chart & Black actual line, one dotted line, one solid line; three shaded regions & \ref{sec:tsNoRecLine} \\
+4 & Set \UI{State} to \VAL{TX} & Chart changes, node line shows \VAL{Total/TX} & \ref{sec:tsGeneral} \\
+5 & Set \UI{State} back to \VAL{(All)} & Grand total is shown again & -- \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{TipBox}
+The keyboard keys in this manual (\keys{Ctrl+C}, \keys{Enter}) are the Windows/Linux names. On macOS, \keys{Ctrl+C} in the terminal is the same key combination (Control, not Command).
+\end{TipBox}

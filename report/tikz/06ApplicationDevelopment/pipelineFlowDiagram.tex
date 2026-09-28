@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+    node distance = 8mm and 10mm,
+    box/.style = {rectangle, draw, thick, rounded corners, fill=blue!8,
+                  minimum height=9mm, minimum width=24mm, align=center, font=\small},
+    every path/.style = {->, thick}
+]
+
+% --- Row 1: raw data to grid ---
+\node[box] (load)      {Load};
+\node[box, right=of load]      (melt)      {Melt};
+\node[box, right=of melt]      (dropmonth) {Drop partial\\first month};
+\node[box, right=of dropmonth] (fixitems)  {Fix item\\universe};
+\node[box, right=of fixitems]  (buildgrid) {Build grid};
+
+% --- Row 2: grid to hierarchy (below row 1, aligned right-to-left) ---
+\node[box, below=of buildgrid] (label)      {Label\\train/test/live};
+\node[box, left=of label]      (hierarchy)  {Build\\hierarchy};
+\node[box, left=of hierarchy]  (fit)        {Fit base\\models};
+\node[box, left=of fit]        (clip)       {Clip negative\\forecasts};
+\node[box, left=of clip]       (reconcile)  {Reconcile};
+
+% --- Row 3: reconciliation to export (below row 2, aligned left-to-right) ---
+\node[box, below=of reconcile] (combine)   {Combine \&\\attach ground truth};
+\node[box, right=of combine]   (evaluate)  {Evaluate};
+\node[box, right=of evaluate]  (export)    {Export for\\dashboard};
+
+% --- Arrows within and between rows ---
+\draw (load) -- (melt);
+\draw (melt) -- (dropmonth);
+\draw (dropmonth) -- (fixitems);
+\draw (fixitems) -- (buildgrid);
+\draw (buildgrid) -- (label);
+
+\draw (label) -- (hierarchy);
+\draw (hierarchy) -- (fit);
+\draw (fit) -- (clip);
+\draw (clip) -- (reconcile);
+
+\draw (reconcile) -- (combine);
+\draw (combine) -- (evaluate);
+\draw (evaluate) -- (export);
+
+\end{tikzpicture}

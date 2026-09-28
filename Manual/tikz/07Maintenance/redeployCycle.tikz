@@ -1,0 +1,25 @@
+% Maintenance cycle for the dashboard (app only - the data is static).
+\begin{tikzpicture}[
+    st/.style={man/box,text width=3.0cm,minimum height=1.25cm,font=\sffamily\small},
+  ]
+  \def\R{3.6}
+  \node[st]                   (a) at (90:\R)  {\textbf{1} \; Change\\\footnotesize code, package pin, config};
+  \node[st]                   (b) at (18:\R)  {\textbf{2} \; Test locally\\\footnotesize\texttt{streamlit run}};
+  \node[st]                   (c) at (-54:\R) {\textbf{3} \; Commit \& push\\\footnotesize to \texttt{main}};
+  \node[st,man/boxgreen]      (d) at (-126:\R){\textbf{4} \; Cloud rebuilds\\\footnotesize automatically};
+  \node[st]                   (e) at (162:\R) {\textbf{5} \; Verify online\\\footnotesize checklist, Sec.~\ref{sec:mtVerify}};
+
+  \draw[man/arrow] (a) to[bend left=18] (b);
+  \draw[man/arrow] (b) to[bend left=18] (c);
+  \draw[man/arrow] (c) to[bend left=18] (d);
+  \draw[man/arrow] (d) to[bend left=18] (e);
+  \draw[man/arrow] (e) to[bend left=18] (a);
+
+  \node[man/terminal,text width=2.3cm,font=\sffamily\small] (mid) at (0,0) {Dashboard\\in service};
+
+  % exception branch: result files missing
+  \node[man/boxred,text width=3.4cm,font=\sffamily\small] (x) at (7.9,-0.2)
+     {\textbf{Only if the 4 result files are missing:}\\\footnotesize run the pipeline notebook once (Sec.~\ref{sec:mtRegenerate})};
+  \draw[man/dashedarrow] (b.east) to[out=0,in=90] (x.north);
+  \draw[man/dashedarrow] (x.south) to[out=-90,in=0] (c.east);
+\end{tikzpicture}

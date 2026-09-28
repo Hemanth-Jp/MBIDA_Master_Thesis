@@ -1,0 +1,218 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/07Maintenance.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Maintenance}
+\label{chap:maintenance}
+
+This chapter is written for the \emph{operator}: the person who owns the GitHub repository and the Streamlit Community Cloud app. Users of the dashboard do not need it.
+
+Because the data is static, maintenance is small. It consists of keeping the online app available, keeping the software working, and redeploying after a change. The forecasting pipeline is \emph{not} part of regular maintenance; it is only run again if the result files are lost (Section~\ref{sec:mtRegenerate}).
+
+\section{Maintenance Cycle}
+\label{sec:mtCycle}
+
+Every change to the dashboard -- a new package version, a corrected text, a changed setting -- follows the same cycle (Figure~\ref{fig:redeployCycle}). The online app is rebuilt automatically whenever the repository's main branch changes; there is no separate upload step.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{0.95\linewidth}{!}{\input{tikz/07Maintenance/redeployCycle.tikz}}
+  \caption{Maintenance and redeployment cycle}
+  \label{fig:redeployCycle}
+\end{figure}
+
+\begin{enumerate}
+  \item \textbf{Change} the file in a local copy of the repository.
+  \item \textbf{Test locally} with \texttt{streamlit run Code/app/streamlit\_app.py} (Section~\ref{sec:instLocal}) and do the verification in Section~\ref{sec:mtVerify}.
+  \item \textbf{Commit and push} to the main branch:
+\begin{lstlisting}[style=shell]
+git add <changed files>
+git commit -m "Short description of the change"
+git push
+\end{lstlisting}
+  \item \textbf{Wait for the rebuild.} Streamlit Community Cloud notices the push and restarts the app within a few minutes; if packages changed, it installs them again first.
+  \item \textbf{Verify online} with the same checklist.
+\end{enumerate}
+
+\section{Routine Tasks}
+\label{sec:mtRoutine}
+
+\begin{table}[H]
+\centering
+\caption{Routine maintenance tasks}
+\label{tab:mtRoutine}
+\small
+\begin{tabularx}{\linewidth}{@{}p{3.1cm}Xp{3.0cm}@{}}
+\toprule
+\textbf{When} & \textbf{Task} & \textbf{Reference} \\
+\midrule
+Before a presentation or an exam & Open the online app some minutes in advance so that it is awake; run the verification checklist & Sections~\ref{sec:instWake}, \ref{sec:mtVerify} \\
+Monthly & Open the app once; check the Streamlit Community Cloud workspace for warnings or e-mails & Section~\ref{sec:mtCloud} \\
+Every 6 months & Check whether the pinned package versions still install; update if needed & Section~\ref{sec:mtDeps} \\
+After every change & Complete maintenance cycle & Section~\ref{sec:mtCycle} \\
+If files are lost & Regenerate the result files & Section~\ref{sec:mtRegenerate} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Managing the Online App}
+\label{sec:mtCloud}
+
+The online app is managed in the Streamlit Community Cloud workspace at \url{https://share.streamlit.io}, after signing in with the GitHub account that owns the repository \cite{StreamlitCloud:2026}. The workspace lists the app with its status. The menu next to it, and the \UI{Manage app} button at the bottom right of the running app (visible only to the signed-in owner), offer:
+
+\begin{table}[H]
+\centering
+\caption{Actions in the Streamlit Community Cloud workspace}
+\label{tab:mtCloudActions}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Action} & \textbf{Use} \\
+\midrule
+Logs & Show the app's console output, e.g.\ package installation errors or Python error messages \\
+Reboot app & Restart the app without changing anything -- first aid for a hanging app \\
+Settings & Change the app's address and sharing settings \\
+Delete & Remove the app (the repository is not affected) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.85\linewidth]{Images/07Maintenance/CloudManageApp.png}
+  \caption{The \UI{Manage app} panel with logs and app menu}
+  \label{fig:mtCloudManage}
+\end{figure}
+
+The deployment itself is configured as follows. These values are set once when the app is created; they only need to be checked if the app is ever deployed anew.
+
+\begin{table}[H]
+\centering
+\caption{Deployment settings of the online app}
+\label{tab:mtDeploySettings}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Setting} & \textbf{Value} \\
+\midrule
+Repository & \texttt{Hemanth-Jp/MBIDA\_Master\_Thesis} \\
+Branch & \texttt{main} \\
+Main file path & \texttt{Code/app/streamlit\_app.py} \\
+App \ac{url} & \texttt{m5-hierarchical-forecast-explorer} \\
+Python version & 3.10 or newer (chosen under \UI{Advanced settings}) \\
+Package list & \texttt{Code/app/requirements.txt} (found automatically next to the main file) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{WarningBox}
+The Python version can only be chosen when the app is created. To change it, delete the app and deploy it again with the same settings and the same \ac{url}.
+\end{WarningBox}
+
+\section{Updating Packages}
+\label{sec:mtDeps}
+
+The five packages are pinned to exact versions in \texttt{Code/app/requirements.txt}. Pinning guarantees that the online app and every local installation behave identically. To update:
+
+\begin{enumerate}
+  \item In a local copy, change one version number at a time, e.g.\ \texttt{streamlit==1.61.1} to a newer release.
+  \item Reinstall: \texttt{pip install -r Code/app/requirements.txt}.
+  \item Start the app and run the verification checklist (Section~\ref{sec:mtVerify}), including light and dark mode.
+  \item If everything works, complete the maintenance cycle; otherwise return to the previous version number.
+\end{enumerate}
+
+\begin{WarningBox}
+Keep the package name \texttt{st-theme} exactly as written. The similarly named \texttt{streamlit-theme} is a different package, and the dashboard fails to start with it.
+\end{WarningBox}
+
+\section{Changing Settings}
+\label{sec:mtConfig}
+
+Names shown in the sidebar -- the list of base models and the reconciliation methods with their labels -- come from the settings file \texttt{Code/config.py}, which the dashboard shares with the forecasting pipeline. Two rules apply:
+\begin{itemize}
+  \item Visible \emph{labels} of reconciliation methods (for example \VAL{MinTrace (wls\_struct)}) may be renamed freely.
+  \item The technical \emph{names} behind them must match the column names in the result files exactly. If they do not, the dashboard reports ``No column found'' (Section~\ref{sec:tsNoColumn}). They only need to change if the pipeline itself changes.
+\end{itemize}
+
+The look of the Streamlit page (colours, fonts) is set in \texttt{.streamlit/config.toml} in the repository root.
+
+\section{Verification Checklist}
+\label{sec:mtVerify}
+
+Run this list after every change, locally before pushing and online after the rebuild.
+
+\begin{todolist}
+  \item The page loads without a red error box.
+  \item The node line shows \VAL{Total (level = 1)} at start.
+  \item The chart shows the actual line, a dotted base line and a solid \VAL{MinTrace} line, and the three shaded regions.
+  \item Drilling down to \VAL{CA} $\rightarrow$ \VAL{CA\_1} $\rightarrow$ \VAL{FOODS} $\rightarrow$ \VAL{FOODS\_3} $\rightarrow$ \VAL{FOODS\_3\_090} works; the level increases to 6.
+  \item Each of the three base models changes the dotted line.
+  \item All three reconciliation methods can be shown together; no ``No column found'' text appears.
+  \item Light and dark mode both give a readable chart.
+  \item The camera button saves a \ac{png}.
+\end{todolist}
+
+\section{Regenerating the Result Files}
+\label{sec:mtRegenerate}
+
+This is needed only if the four files in \texttt{Code/artifacts/dashboard\_data/} are missing or damaged, which the dashboard reports with a red error box (Section~\ref{sec:tsParquet}). First try to restore them from Git, which is much faster:
+
+\begin{lstlisting}[style=shell]
+git checkout -- Code/artifacts/dashboard_data/
+\end{lstlisting}
+
+If that is not possible, recreate them with the thesis pipeline. Because the complete daily data set is processed, this can take half an hour or more and needs a computer with plenty of memory (16\,GB of \ac{ram} recommended).
+
+\begin{enumerate}
+  \item Download \texttt{sales\_train\_validation.csv} and \texttt{calendar.csv} from the \ac{m5} competition page \cite{Kaggle:M5} into \texttt{Code/data/m5/} (see \texttt{Code/data/README.md}).
+  \item Install the pipeline packages in a separate environment:
+\begin{lstlisting}[style=shell]
+python3 -m venv .venv-pipeline
+source .venv-pipeline/bin/activate      # Windows: .venv-pipeline\Scripts\Activate.ps1
+pip install -r Code/requirements-pipeline.txt
+\end{lstlisting}
+  \item Open \texttt{Code/notebooks/02\_pipeline.ipynb} in Jupyter and run \emph{all cells from top to bottom} (\UI{Run} $\rightarrow$ \UI{Run All Cells}). The last cell writes the four files.
+  \item Check that they exist, then commit and push them (Section~\ref{sec:mtCycle}):
+\begin{lstlisting}[style=shell]
+ls Code/artifacts/dashboard_data
+git add Code/artifacts/dashboard_data
+git commit -m "Regenerate dashboard result files"
+git push
+\end{lstlisting}
+\end{enumerate}
+
+\begin{NoteBox}
+With unchanged input data and settings, the pipeline reproduces the same results. The online app only shows new files after they have been pushed -- running the pipeline locally alone does not change the online dashboard.
+\end{NoteBox}
+
+\section{Backup and Rollback}
+\label{sec:mtBackup}
+
+The Git history is the backup: every version of the program and of the result files is stored in the repository. To undo a change that broke the online app:
+
+\begin{lstlisting}[style=shell]
+git log --oneline            # find the faulty commit
+git revert <commit-id>       # create a commit that undoes it
+git push                     # the online app rebuilds with the old state
+\end{lstlisting}
+
+\section{Resetting a Local Installation}
+\label{sec:mtLocalReset}
+
+If a local installation behaves strangely, rebuilding the virtual environment is quick and safe; it does not touch the repository files:
+
+\begin{lstlisting}[style=shell]
+deactivate                    # if an environment is active
+rm -rf .venv                  # Windows: Remove-Item -Recurse -Force .venv
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r Code/app/requirements.txt
+\end{lstlisting}

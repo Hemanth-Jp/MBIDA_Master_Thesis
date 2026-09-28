@@ -1,0 +1,39 @@
+% Train / test / live time windows on a monthly axis (1 month = \u).
+\begin{tikzpicture}[font=\sffamily]
+  \def\u{0.215}   % cm per month; 66 months in total
+  % month index: 0 = Feb 2011, 47 = Jan 2015, 59 = Jan 2016, 65 = Jul 2016
+
+  % bars
+  \fill[ManGreyLight,draw=ManGrey] (0,0) rectangle (47*\u,0.9);
+  \fill[AppTest,draw=ManOrange]    (47*\u,0) rectangle (59*\u,0.9);
+  \fill[AppLive,draw=ManGreen]     (59*\u,0) rectangle (66*\u,0.9);
+  \node[font=\sffamily\small\bfseries] at (23.5*\u,0.45) {Train \; (47 months)};
+  \node[font=\sffamily\small\bfseries] at (53*\u,0.45) {Test \; (12)};
+  \node[font=\sffamily\scriptsize\bfseries] at (62.5*\u,0.45) {Live (7)};
+
+  % year ticks
+  \draw[ManGrey] (0,0) -- (66*\u,0);
+  \foreach \m/\y in {0/{Feb 2011},11/2012,23/2013,35/2014,47/2015,59/2016}{
+     \draw[ManGrey] (\m*\u,0) -- ++(0,-0.15);
+     \node[below,font=\sffamily\scriptsize,text=ManGrey!80!black] at (\m*\u,-0.15) {\y};
+  }
+  \draw[ManGrey] (66*\u,0) -- ++(0,-0.15)
+      node[below,font=\sffamily\scriptsize,text=ManGrey!80!black] {Jul 2016};
+
+  % what each window is used for
+  \node[man/label,text width=4.4cm,anchor=north] at (23.5*\u,-0.8)
+       {models learn from these months;\\actual line is drawn};
+  \node[man/label,text width=3.6cm,anchor=north] at (53*\u,-0.8)
+       {forecasts vs.\ real sales --\\this is where accuracy is judged};
+
+  % live explanation above
+  \draw[ManGreen,thick,-{Stealth}] (62.5*\u,1.9) -- (62.5*\u,0.95);
+  \node[man/label,anchor=south,text width=4.2cm] at (60*\u,1.9)
+       {forecast only -- no actual line\\(the data set ends in April 2016)};
+
+  % refits
+  \draw[decorate,decoration={brace,amplitude=5pt},ManBlue,thick] (0,1.05) -- (46.9*\u,1.05)
+       node[midway,above=5pt,font=\sffamily\scriptsize,text=ManBlue] {fit for the \textbf{test} forecast};
+  \draw[decorate,decoration={brace,amplitude=5pt,mirror},ManBlue,thick] (0,-2.3) -- (58.9*\u,-2.3)
+       node[midway,below=5pt,font=\sffamily\scriptsize,text=ManBlue] {re-fit on train + test for the \textbf{live} forecast};
+\end{tikzpicture}

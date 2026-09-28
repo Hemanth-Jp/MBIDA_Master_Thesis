@@ -1,0 +1,27 @@
+\acswitchoff 
+\babel@toc {english}{}\relax 
+\babel@toc {ngerman}{}\relax 
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Summary of the pipeline's built-in validation checks.}}{52}{table.caption.21}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {9.1}{\ignorespaces sMAPE (\%) by hierarchy level, base forecasts, test period.}}{70}{table.caption.26}%
+\contentsline {table}{\numberline {9.2}{\ignorespaces Reconciled sMAPE (\%) by hierarchy level, ETS and Theta, test period.}}{71}{table.caption.27}%
+\contentsline {table}{\numberline {9.3}{\ignorespaces Volume-bucket sizes, ranked on training-period volume.}}{72}{table.caption.29}%
+\contentsline {table}{\numberline {9.4}{\ignorespaces sMAPE (\%) by volume segment, base forecasts, test period.}}{73}{table.caption.30}%
+\contentsline {table}{\numberline {9.5}{\ignorespaces Reconciled sMAPE (\%) by volume segment: Bottom-Up vs.\ Top-Down.}}{74}{table.caption.31}%
+\contentsline {table}{\numberline {9.6}{\ignorespaces Testing and validation results, against the protocol defined in Section~\ref {sec:testingValidation}.}}{76}{table.caption.33}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {10.1}{\ignorespaces sMAPE (\%) by hierarchy level -- HistoricAverage}}{83}{table.caption.34}%
+\contentsline {table}{\numberline {10.2}{\ignorespaces sMAPE (\%) by hierarchy level -- AutoETS}}{84}{table.caption.35}%
+\contentsline {table}{\numberline {10.3}{\ignorespaces sMAPE (\%) by hierarchy level -- Theta}}{84}{table.caption.36}%
+\contentsline {table}{\numberline {10.4}{\ignorespaces sMAPE (\%) by volume segment -- HistoricAverage}}{84}{table.caption.37}%
+\contentsline {table}{\numberline {10.5}{\ignorespaces sMAPE (\%) by volume segment -- AutoETS}}{85}{table.caption.38}%
+\contentsline {table}{\numberline {10.6}{\ignorespaces sMAPE (\%) by volume segment -- Theta}}{85}{table.caption.39}%

@@ -1,0 +1,163 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/03FirstSteps.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{First Steps}
+\label{chap:firstSteps}
+
+This chapter is a guided first session of about 15 minutes. It walks through the eight steps in Figure~\ref{fig:firstSteps}: first navigating from the grand total down to a single product, then comparing forecasts for it. No previous knowledge is needed; every control used here is explained in detail in Chapters~\ref{chap:ui} and~\ref{chap:functions}.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/03FirstSteps/firstStepsWorkflow.tikz}}
+  \caption{The eight steps of the first session}
+  \label{fig:firstSteps}
+\end{figure}
+
+\section{Step 1 -- Open the Dashboard}
+\label{sec:fsOpen}
+
+Open \AppLink{} in the browser, or start your local installation (Chapter~\ref{chap:install}). If the ``gone to sleep'' page appears, wake the app up as described in Section~\ref{sec:instWake}.
+
+When the dashboard is ready, all five hierarchy dropdowns show \VAL{(All)}, the base model is \VAL{histavg} and the reconciliation method is \VAL{MinTrace (wls\_struct)}. This is the starting position used in the rest of this chapter.
+
+\section{Step 2 -- Read the Total Chart}
+\label{sec:fsTotal}
+
+The first chart (Figure~\ref{fig:fsTotal}) shows the grand total: the monthly sales of all 3,024 products in all ten stores added together. Take a moment to read it from left to right:
+
+\begin{enumerate}
+  \item The \textbf{grey region (Train)}, February 2011 to December 2014, shows the history the models learned from. The black line with dots is the actual sales.
+  \item The \textbf{orange region (Test)}, the year 2015, is the most important part. Here the forecasts (coloured lines) can be compared with what was really sold (black line). The closer they are, the better the forecast.
+  \item The \textbf{green region (Live)}, January to July 2016, shows forecasts only. There is no black line here: the live window is kept forecast-only, so the real sales for January to April 2016 are not drawn, and from May 2016 the data set contains no sales at all (Section~\ref{sec:specTime}).
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/03FirstSteps/FirstViewTotal.png}
+  \caption{The grand total with the default settings}
+  \label{fig:fsTotal}
+\end{figure}
+
+\begin{TipBox}
+Move the mouse over any point of a line. A small box shows the date and the exact value of every line at that month.
+\end{TipBox}
+
+\section{Step 3 -- Drill Down to a State and a Store}
+\label{sec:fsDrill}
+
+\begin{enumerate}
+  \item In the sidebar, click the \UI{State} dropdown and choose \VAL{CA} (California). The chart now shows all Californian stores together, and the line above the chart reads \UI{Selected node: Total/CA (level = 2)}.
+  \item The \UI{Store} dropdown, which was locked before, now lists the four Californian stores. Choose \VAL{CA\_1}. The node line changes to \VAL{Total/CA/CA\_1 (level = 3)} (Figure~\ref{fig:fsStore}).
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/03FirstSteps/FirstDrillStore.png}
+  \caption{Store \VAL{CA\_1} selected; category, department and item are still \VAL{(All)}}
+  \label{fig:fsStore}
+\end{figure}
+
+Notice that the numbers on the vertical axis are smaller now -- one store sells only a part of the total -- and that the lines are more irregular. The further down the hierarchy, the more ``noisy'' sales become, and the harder they are to forecast.
+
+\section{Step 4 -- Continue to a Single Item}
+\label{sec:fsItem}
+
+\begin{enumerate}
+  \item Set \UI{Category} to \VAL{FOODS}.
+  \item Set \UI{Department} to \VAL{FOODS\_3}.
+  \item Click the \UI{Item} dropdown and \emph{type} \VAL{090} instead of scrolling. The list shrinks to the matching item; choose \VAL{FOODS\_3\_090}.
+\end{enumerate}
+
+The chart now shows one product in one store (level~6, Figure~\ref{fig:fsItem}). This is the finest level of detail in the dashboard.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/03FirstSteps/FirstItemLevel.png}
+  \caption{A single item, \VAL{FOODS\_3\_090} in store \VAL{CA\_1}}
+  \label{fig:fsItem}
+\end{figure}
+
+\section{Step 5 -- Switch the Base Model}
+\label{sec:fsModel}
+
+Under \UI{Forecast} in the sidebar, the \UI{Base model} buttons select which of the three models provides the dotted line. Click \VAL{ets}, then \VAL{theta}, and watch how the dotted line changes in the test and live regions. The historical average (\VAL{histavg}) is a flat line by nature; \VAL{ets} and \VAL{theta} follow the yearly pattern.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/03FirstSteps/FirstModelSwitch.png}
+  \caption{The same node with the base model \VAL{theta}}
+  \label{fig:fsModel}
+\end{figure}
+
+\begin{NoteBox}
+The reconciled line changes too, because every reconciled forecast is an adjusted version of the selected base model.
+\end{NoteBox}
+
+\section{Step 6 -- Add a Second Reconciliation Method}
+\label{sec:fsRec}
+
+\begin{enumerate}
+  \item Click into the \UI{Reconciliation method(s)} box. A list with the methods that are not selected yet opens.
+  \item Choose \VAL{Bottom-Up}. A second solid line appears, and the legend above the chart names it.
+  \item Add \VAL{Top-Down} as well, so that all three methods are compared in one chart (Figure~\ref{fig:fsRec}).
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/03FirstSteps/FirstMultiReconciler.png}
+  \caption{All three reconciliation methods compared for one node}
+  \label{fig:fsRec}
+\end{figure}
+
+To remove a method again, click the small $\times$ on its tag in the box.
+
+\section{Step 7 -- Explore the Chart}
+\label{sec:fsExplore}
+
+\begin{itemize}
+  \item \textbf{Zoom:} drag a rectangle over the test region to enlarge it. Double-click the chart to zoom back out.
+  \item \textbf{Hide a line:} click an entry in the legend. Click it again to show it.
+  \item \textbf{Save the chart:} move the mouse over the chart, then click the camera symbol in the small toolbar at the top right. The chart is saved as a \ac{png} file in your download folder.
+\end{itemize}
+
+\section{Step 8 -- Reset to the Total}
+\label{sec:fsReset}
+
+Set \UI{State} back to \VAL{(All)}. All dropdowns below it return to \VAL{(All)} automatically and the grand total is shown again. Reloading the browser page (\keys{F5}) resets every control to its default.
+
+%\section{Practice Exercises}
+%\label{sec:fsExercises}
+%
+%The following exercises use only what was shown above. Suggested answers are in Section~\ref{sec:helpAnswers}.
+%
+%\begin{ExerciseBox}{Which state sells most?}
+%Look at the three states \VAL{CA}, \VAL{TX} and \VAL{WI} one after the other. Which one has the highest sales in December 2015?
+%\end{ExerciseBox}
+%
+%\begin{ExerciseBox}{A difficult item}
+%Choose store \VAL{WI\_2}, category \VAL{HOBBIES}, department \VAL{HOBBIES\_2} and any item. How does the actual line look compared with the store total, and what does the flat \VAL{histavg} forecast do with it?
+%\end{ExerciseBox}
+%
+%\begin{ExerciseBox}{Which reconciler is closest?}
+%For store \VAL{TX\_1} and base model \VAL{ets}, select all three reconciliation methods. Hover over the test region: which method is closest to the actual line most of the time?
+%\end{ExerciseBox}
+
+\section{Summary}
+
+After this session you can
+\begin{itemize}
+  \item open the dashboard and recognise the three time regions,
+  \item move to any node of the hierarchy with the five dropdowns and the search,
+  \item compare base models and reconciliation methods for that node, and
+  \item zoom, hide lines and save the chart.
+\end{itemize}
+This covers the whole everyday use of the dashboard. The following chapters describe each element and function in more depth.

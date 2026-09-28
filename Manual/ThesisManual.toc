@@ -1,0 +1,126 @@
+\acswitchoff 
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{ List of figures}{v}{chapter*.1}%
+\contentsline {chapter}{ List of tables}{vii}{chapter*.2}%
+\contentsline {chapter}{ Acronyms}{ix}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Introduction and Main Function}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Main Function}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Key Terms in Plain Words}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Primary Capabilities}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}System Overview}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.5}The Dashboard at a Glance}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Target Users}{5}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Structure of this Manual}{5}{section.1.7}%
+\contentsline {paragraph}{\nonumberline Conventions.}{5}{paragraph*.10}%
+\contentsline {chapter}{\numberline {2}Installation}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Option A: Cloud Access (Recommended)}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Requirements}{8}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Opening the Dashboard}{8}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Waking the App Up}{8}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Option B: Local Installation}{9}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Requirements}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Step 1 -- Download the Repository}{10}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Step 2 -- Create a Virtual Environment}{10}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Step 3 -- Install the Packages}{10}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Step 4 -- Check the Result Files}{11}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Step 5 -- Start the Dashboard}{11}{subsection.2.2.6}%
+\contentsline {section}{\numberline {2.3}Verifying the Installation}{13}{section.2.3}%
+\contentsline {chapter}{\numberline {3}First Steps}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Step 1 -- Open the Dashboard}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Step 2 -- Read the Total Chart}{15}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Step 3 -- Drill Down to a State and a Store}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Step 4 -- Continue to a Single Item}{17}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Step 5 -- Switch the Base Model}{18}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Step 6 -- Add a Second Reconciliation Method}{19}{section.3.6}%
+\contentsline {section}{\numberline {3.7}Step 7 -- Explore the Chart}{20}{section.3.7}%
+\contentsline {section}{\numberline {3.8}Step 8 -- Reset to the Total}{20}{section.3.8}%
+\contentsline {section}{\numberline {3.9}Summary}{20}{section.3.9}%
+\contentsline {chapter}{\numberline {4}User Interface}{23}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Sketch of the User Interface}{23}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Layout Principles}{24}{section.4.2}%
+\contentsline {section}{\numberline {4.3}The Sidebar}{25}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Hierarchy Section}{25}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Forecast Section}{26}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Collapsing the Sidebar}{26}{subsection.4.3.3}%
+\contentsline {section}{\numberline {4.4}The Main Area}{26}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Title, Instructions and Node Line}{26}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}The Forecast Chart}{27}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.3}Chart Toolbar}{28}{subsection.4.4.3}%
+\contentsline {section}{\numberline {4.5}Page Menu and Theme}{28}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Messages}{29}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Functions}{31}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The Sales Hierarchy}{31}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Navigating with the Cascading Dropdowns}{32}{section.5.2}%
+\contentsline {paragraph}{\nonumberline What it does.}{32}{paragraph*.39}%
+\contentsline {paragraph}{\nonumberline How to use it.}{33}{paragraph*.42}%
+\contentsline {paragraph}{\nonumberline Locked dropdowns.}{34}{paragraph*.44}%
+\contentsline {section}{\numberline {5.3}Searching in a Dropdown}{34}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Choosing the Base Model}{35}{section.5.4}%
+\contentsline {paragraph}{\nonumberline What it does.}{35}{paragraph*.48}%
+\contentsline {paragraph}{\nonumberline What to look out for.}{36}{paragraph*.51}%
+\contentsline {section}{\numberline {5.5}Choosing Reconciliation Methods}{36}{section.5.5}%
+\contentsline {paragraph}{\nonumberline What it does.}{36}{paragraph*.53}%
+\contentsline {paragraph}{\nonumberline How to use it.}{36}{paragraph*.56}%
+\contentsline {paragraph}{\nonumberline Reading the effect by level.}{36}{paragraph*.58}%
+\contentsline {section}{\numberline {5.6}Exploring the Chart}{37}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Light and Dark Mode}{37}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Typical Analysis Tasks}{38}{section.5.8}%
+\contentsline {chapter}{\numberline {6}Specifications}{39}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Overview}{39}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Software and Runtime}{39}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Client Requirements}{40}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Data}{41}{section.6.4}%
+\contentsline {subsection}{\numberline {6.4.1}Source}{41}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {6.4.2}Result Files}{41}{subsection.6.4.2}%
+\contentsline {section}{\numberline {6.5}Time Windows}{42}{section.6.5}%
+\contentsline {section}{\numberline {6.6}Models and Methods}{43}{section.6.6}%
+\contentsline {section}{\numberline {6.7}Forecast Accuracy (Reference)}{43}{section.6.7}%
+\contentsline {section}{\numberline {6.8}Performance}{44}{section.6.8}%
+\contentsline {section}{\numberline {6.9}Limitations}{44}{section.6.9}%
+\contentsline {chapter}{\numberline {7}Maintenance}{45}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Maintenance Cycle}{45}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Routine Tasks}{46}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Managing the Online App}{46}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Updating Packages}{47}{section.7.4}%
+\contentsline {section}{\numberline {7.5}Changing Settings}{48}{section.7.5}%
+\contentsline {section}{\numberline {7.6}Verification Checklist}{48}{section.7.6}%
+\contentsline {section}{\numberline {7.7}Regenerating the Result Files}{49}{section.7.7}%
+\contentsline {section}{\numberline {7.8}Backup and Rollback}{49}{section.7.8}%
+\contentsline {section}{\numberline {7.9}Resetting a Local Installation}{50}{section.7.9}%
+\contentsline {chapter}{\numberline {8}Troubleshooting}{51}{chapter.8}%
+\contentsline {section}{\numberline {8.1}The Page Does Not Load}{51}{section.8.1}%
+\contentsline {subsection}{\numberline {8.1.1}``This app has gone to sleep''}{51}{subsection.8.1.1}%
+\contentsline {subsection}{\numberline {8.1.2}The Page Stays Blank or Shows ``Oh no''}{52}{subsection.8.1.2}%
+\contentsline {subsection}{\numberline {8.1.3}\texttt {streamlit: command not found}}{52}{subsection.8.1.3}%
+\contentsline {subsection}{\numberline {8.1.4}\texttt {ModuleNotFoundError}}{52}{subsection.8.1.4}%
+\contentsline {subsection}{\numberline {8.1.5}Port 8501 Already in Use}{53}{subsection.8.1.5}%
+\contentsline {section}{\numberline {8.2}Error and Warning Messages}{53}{section.8.2}%
+\contentsline {subsection}{\numberline {8.2.1}``Couldn't find one of the required parquet files''}{53}{subsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.2.2}``No data found for \dots ''}{54}{subsection.8.2.2}%
+\contentsline {subsection}{\numberline {8.2.3}``No column found for \dots ''}{54}{subsection.8.2.3}%
+\contentsline {section}{\numberline {8.3}The Chart Looks Wrong}{54}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}No Reconciled Line}{54}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}A Reconciled Line Hides Another Line}{55}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Colours Hard to Read}{55}{subsection.8.3.3}%
+\contentsline {subsection}{\numberline {8.3.4}A Dropdown Offers Only ``(All)''}{55}{subsection.8.3.4}%
+\contentsline {subsection}{\numberline {8.3.5}Forecast Looks Flat, or Is Zero}{56}{subsection.8.3.5}%
+\contentsline {section}{\numberline {8.4}General Procedure}{56}{section.8.4}%
+\contentsline {chapter}{\numberline {9}Help}{57}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Frequently Asked Questions}{57}{section.9.1}%
+\contentsline {paragraph}{\nonumberline Do I need an account or a password?}{57}{paragraph*.79}%
+\contentsline {paragraph}{\nonumberline Can I use my own sales data?}{57}{paragraph*.81}%
+\contentsline {paragraph}{\nonumberline Why does the black line stop at the end of 2015?}{57}{paragraph*.83}%
+\contentsline {paragraph}{\nonumberline Why are some lines identical?}{57}{paragraph*.85}%
+\contentsline {paragraph}{\nonumberline Which forecast is the best?}{57}{paragraph*.87}%
+\contentsline {paragraph}{\nonumberline Why are forecasts for single items so poor?}{57}{paragraph*.89}%
+\contentsline {paragraph}{\nonumberline Can I compare two stores in one chart?}{57}{paragraph*.91}%
+\contentsline {paragraph}{\nonumberline Can I download the numbers?}{57}{paragraph*.93}%
+\contentsline {paragraph}{\nonumberline Does the dashboard work on a phone?}{58}{paragraph*.95}%
+\contentsline {paragraph}{\nonumberline The app says it is asleep -- is something broken?}{58}{paragraph*.97}%
+\contentsline {paragraph}{\nonumberline Do my selections affect other users?}{58}{paragraph*.99}%
+\contentsline {section}{\numberline {9.2}Glossary}{58}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Quick Reference}{59}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Reporting a Problem}{59}{section.9.4}%
+\contentsline {section}{\numberline {9.5}Further Information}{60}{section.9.5}%
+\contentsline {chapter}{ Bibliography}{61}{section.9.5}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

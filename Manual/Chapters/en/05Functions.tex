@@ -1,0 +1,217 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/05Functions.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Functions}
+\label{chap:functions}
+
+This chapter describes each function of the dashboard: what it does, how it is used and what to look out for. The functions fall into three groups -- \emph{choosing what to look at} (Sections~\ref{sec:fnHierarchy}--\ref{sec:fnSearch}), \emph{choosing which forecasts to compare} (Sections~\ref{sec:fnBase}--\ref{sec:fnRec}) and \emph{exploring the chart} (Sections~\ref{sec:fnChart}--\ref{sec:fnTheme}). Section~\ref{sec:fnTasks} closes with typical analysis tasks that combine them.
+
+\section{The Sales Hierarchy}
+\label{sec:fnHierarchy}
+
+All navigation in the dashboard follows the six-level hierarchy in Figure~\ref{fig:hierarchyTree}. Every node is the sum of the nodes directly below it: the three states add up to the total, the four Californian stores add up to \VAL{CA}, and so on down to the 30,240 single products-in-a-store at the bottom.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/05Functions/hierarchyTree.tikz}}
+  \caption{The six-level sales hierarchy with the example path used in this manual}
+  \label{fig:hierarchyTree}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Levels of the hierarchy}
+\label{tab:fnLevels}
+\small
+\begin{tabularx}{\linewidth}{@{}clrX@{}}
+\toprule
+\textbf{Level} & \textbf{Name} & \textbf{Nodes} & \textbf{Example} \\
+\midrule
+1 & Total      & 1      & all sales \\
+2 & State      & 3      & \VAL{CA} (California), \VAL{TX} (Texas), \VAL{WI} (Wisconsin) \\
+3 & Store      & 10     & \VAL{CA\_1} \dots\ \VAL{CA\_4}, \VAL{TX\_1} \dots\ \VAL{TX\_3}, \VAL{WI\_1} \dots\ \VAL{WI\_3} \\
+4 & Category   & 30     & \VAL{FOODS} in store \VAL{CA\_1} \\
+5 & Department & 70     & \VAL{FOODS\_3} in store \VAL{CA\_1} \\
+6 & Item       & 30,240 & product \VAL{FOODS\_3\_090} in store \VAL{CA\_1} \\
+\midrule
+  & \textbf{Sum} & \textbf{30,354} & \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{NoteBox}[Categories are always inside a store]
+The hierarchy is strictly \emph{store first, then category}. The dashboard therefore shows ``\VAL{FOODS} in store \VAL{CA\_1}'', but not ``\VAL{FOODS} in all stores together''. Such a cross-store view is not one of the 30,354 nodes (Section~\ref{sec:specLimits}).
+\end{NoteBox}
+
+\section{Navigating with the Cascading Dropdowns}
+\label{sec:fnNavigate}
+
+\paragraph{What it does.} The five dropdowns \Callout{2} select the node. The dashboard reads them from top to bottom and stops at the first one that is left on \VAL{(All)}; the node is everything chosen above that point (Figure~\ref{fig:cascadeLogic}).
+
+\begin{figure}[H]
+  \centering
+  \input{tikz/05Functions/cascadeLogic.tikz}
+  \caption{How the five dropdowns determine the node that is shown}
+  \label{fig:cascadeLogic}
+\end{figure}
+
+\paragraph{How to use it.}
+\begin{itemize}
+  \item \textbf{Going down:} choose values from top to bottom. Each choice unlocks the next dropdown and restricts it to what exists below.
+  \item \textbf{Going up one level:} set the lowest chosen dropdown back to \VAL{(All)}.
+  \item \textbf{Going back to the total:} set \UI{State} to \VAL{(All)}; everything below follows.
+  \item \textbf{Going sideways:} change a dropdown to a sibling, e.g.\ \UI{Store} from \VAL{CA\_1} to \VAL{CA\_2}. The dropdowns below it are usually reset to \VAL{(All)}, because their lists of values change with the new store.
+\end{itemize}
+
+\paragraph{Locked dropdowns.} A dropdown below an \VAL{(All)} offers only \VAL{(All)} (Figure~\ref{fig:fnLocked}). This is intended: without a store, for example, ``department \VAL{FOODS\_3}'' would be ambiguous.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.45\linewidth]{Images/05Functions/LockedDropdowns.png}
+  \caption{With \UI{State} on \VAL{(All)}, all lower dropdowns are locked to \VAL{(All)}}
+  \label{fig:fnLocked}
+\end{figure}
+
+\section{Searching in a Dropdown}
+\label{sec:fnSearch}
+
+Every dropdown can be searched. Click it and start typing; the list is filtered to entries containing the typed text anywhere in the name (Figure~\ref{fig:fnSearch}). Press \keys{Enter} to take the first match or click the wanted entry. This is the fastest way to reach an item: a department contains up to several hundred items per store, which is too many to scroll through.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.5\linewidth]{Images/05Functions/DropdownSearch.png}
+  \caption{Typing \VAL{090} in the \UI{Item} dropdown}
+  \label{fig:fnSearch}
+\end{figure}
+
+\begin{TipBox}
+Item names follow the pattern \texttt{CATEGORY\_DEPARTMENT\_NUMBER}, e.g.\ \VAL{HOUSEHOLD\_1\_118}. Typing just the number is usually enough, because the department is already fixed by the dropdown above.
+\end{TipBox}
+
+\section{Choosing the Base Model}
+\label{sec:fnBase}
+
+\paragraph{What it does.} The \UI{Base model} buttons \Callout{3} select which of three forecasting models draws the dotted line -- and which model the reconciled lines are based on. All three were calculated in advance for every node, so switching is instant.
+
+\begin{table}[H]
+\centering
+\caption{The three base models}
+\label{tab:fnModels}
+\small
+\begin{tabularx}{\linewidth}{@{}lXX@{}}
+\toprule
+\textbf{Button} & \textbf{Idea in one sentence} & \textbf{Typical look in the chart} \\
+\midrule
+\VAL{histavg} & The forecast is the average of all past months. & A flat line; serves as the simple benchmark every other model must beat. \\
+\VAL{ets} & Exponential smoothing: recent months count more, and trend and yearly season are modelled \cite{Hyndman:2021}. & Follows level, trend and the December peak. \\
+\VAL{theta} & Combines a long-term trend line with a short-term smoothed view \cite{Hyndman:2021}. & Similar to \VAL{ets}, often slightly smoother. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{What to look out for.} For nodes with too little history to fit \VAL{ets} or \VAL{theta} -- mostly single items that rarely sell -- the forecast falls back to the historical average. Such a node shows the same flat line for all three buttons. This is expected and is not an error.
+
+\section{Choosing Reconciliation Methods}
+\label{sec:fnRec}
+
+\paragraph{What it does.} Base forecasts are made for each node separately, so the forecasts of the parts do not add up to the forecast of the whole. Reconciliation corrects this. The \UI{Reconciliation method(s)} box \Callout{4} adds one solid line per selected method.
+
+\begin{table}[H]
+\centering
+\caption{The three reconciliation methods}
+\label{tab:fnRec}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Method} & \textbf{Idea in plain words} \\
+\midrule
+\VAL{Bottom-Up} & Trust the item forecasts and add them up to every higher level. \\
+\VAL{Top-Down} & Trust the total forecast and split it downwards according to each node's historical share of sales. \\
+\VAL{MinTrace (wls\_struct)} & A compromise: adjust the forecasts on all levels at once, as little as possible, so that they add up; nodes that consist of many items get more weight \cite{Wickramasuriya:2019}. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{How to use it.} Any combination is possible: none (only actual and base line), one, two or all three methods. Comparing all three at once is the main use. Because each reconciled line is the \emph{base forecast after adjustment}, the gap between the dotted line and a solid line shows how much the method changed the forecast for this node.
+
+\paragraph{Reading the effect by level.}
+\begin{itemize}
+  \item At the \textbf{Total} (level~1), \VAL{Top-Down} is identical to the base forecast, because it starts from the total.
+  \item At the \textbf{Item} level (level~6), \VAL{Bottom-Up} is identical to the base forecast, because it starts from the items.
+  \item \VAL{MinTrace} changes every level a little.
+\end{itemize}
+
+\section{Exploring the Chart}
+\label{sec:fnChart}
+
+The chart is interactive \cite{Plotly:2026}. Table~\ref{tab:fnChart} lists all interactions.
+
+\begin{table}[H]
+\centering
+\caption{Chart interactions}
+\label{tab:fnChart}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Action} & \textbf{Result} \\
+\midrule
+Mouse over a line & Box with month and value of that point \\
+Drag a rectangle  & Zoom into this area \\
+Drag along an axis & Zoom or move only this axis \\
+Double-click      & Back to the full view \\
+Click a legend entry & Hide or show this line \\
+Double-click a legend entry & Show only this line; double-click again shows all \\
+Camera button \Callout{10} & Save the current view as \ac{png} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \Screenshot[0.49\linewidth]{Images/05Functions/HoverTooltip.png}
+  \hfill
+  \Screenshot[0.49\linewidth]{Images/05Functions/ZoomedTestPeriod.png}
+  \caption{Hover information (left) and the test period after zooming in (right)}
+  \label{fig:fnChart}
+\end{figure}
+
+\begin{NoteBox}
+Zoom and hidden lines are reset whenever another node, model or method is selected, because the chart is drawn anew. Save an image first if the view is needed later.
+\end{NoteBox}
+
+\section{Light and Dark Mode}
+\label{sec:fnTheme}
+
+The dashboard follows the theme chosen in the page menu \Callout{11} (Section~\ref{sec:uiMenu}). The chart detects the active theme and switches its colours for lines, grid, text and shading, so it stays readable in both modes. With \VAL{Use system setting}, the theme changes together with the operating system's light/dark setting. No separate switch inside the dashboard is needed.
+
+\section{Typical Analysis Tasks}
+\label{sec:fnTasks}
+
+\begin{table}[H]
+\centering
+\caption{Typical tasks and how to do them}
+\label{tab:fnTasks}
+\small
+\begin{tabularx}{\linewidth}{@{}p{4.3cm}X@{}}
+\toprule
+\textbf{Task} & \textbf{Procedure} \\
+\midrule
+How good is the forecast for my store? & Select the store, keep \VAL{MinTrace}, try all three base models; compare with the black line in the \UI{Test} region. \\
+Which reconciler suits a department? & Select the department, one base model, all three methods; hover along the test year. \\
+How much does reconciliation change a forecast? & Compare the dotted base line with the solid lines; the larger the gap, the stronger the adjustment. \\
+Why are item forecasts worse than totals? & Compare the total (level~1) with any item (level~6): item sales are small and irregular, totals are smooth. \\
+Put a chart into a report & Set up the view, zoom if needed, click the camera button; switch to light mode first for printing. \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The dashboard shows forecasts visually. The measured accuracy of all models and methods over the test year, per level, is summarised in Section~\ref{sec:specAccuracy}.

@@ -1,0 +1,30 @@
+\acswitchoff 
+\babel@toc {english}{}\relax 
+\babel@toc {ngerman}{}\relax 
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces The six-level hierarchy used in this thesis, with series counts at each level.}}{4}{figure.caption.11}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Information flow between hierarchy levels under each reconciliation strategy.}}{19}{figure.caption.12}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Data objects passed between the three Nixtla libraries used in this thesis's forecasting pipeline.}}{27}{figure.caption.13}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces The five KDD process stages mapped to this thesis's own pipeline steps.}}{35}{figure.caption.14}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Total training-period sales by product category and by state. Source: \texttt {01\_eda.ipynb}.}}{36}{figure.caption.15}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The training, test, and live time windows (schematic, not to scale). The live window is trained on training and test data combined and extends three months past where real sales data actually ends.}}{37}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Distribution across items of the percentage of days with zero sales, at the daily item-store level. Source: \texttt {01\_eda.ipynb}.}}{38}{figure.caption.17}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces The $3 \times 3$ base-model / reconciler grid; every cell is further evaluated across 6 hierarchy levels and 6 volume-percentile bands.}}{40}{figure.caption.18}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Total monthly sales across all items and stores, 2011--2016, showing a recurring annual pattern.}}{41}{figure.caption.19}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The full pipeline, from loading the raw M5 data to exporting the dashboard's Parquet files.}}{50}{figure.caption.20}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {7.1}{\ignorespaces \texttt {Code/config.py} as the single configuration module feeding both notebooks and the Streamlit app.}}{55}{figure.caption.22}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {8.1}{\ignorespaces The sidebar's cascading dropdown controls, partway through drilling down the hierarchy.}}{63}{figure.caption.23}%
+\contentsline {figure}{\numberline {8.2}{\ignorespaces The forecast chart in light mode (left) and dark mode (right), showing the shaded train/test/live regions.}}{64}{figure.caption.24}%
+\contentsline {figure}{\numberline {8.3}{\ignorespaces The deployment flow from a local pipeline run to the served dashboard.}}{66}{figure.caption.25}%
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Pareto curve of training-period sales volume: cumulative share of volume against cumulative share of bottom-level series, ranked from the largest seller. Source: \texttt {01\_eda.ipynb}.}}{72}{figure.caption.28}%
+\contentsline {figure}{\numberline {9.2}{\ignorespaces Reconciled sMAPE by volume segment for ETS and Theta, Bottom-Up (solid) vs. Top-Down (dashed).}}{74}{figure.caption.32}%
+\addvspace {10\p@ }

@@ -1,0 +1,144 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/09Help.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Help}
+\label{chap:help}
+
+This chapter collects quick answers: frequently asked questions, a glossary, a one-page quick reference, and how to get further help.
+
+\section{Frequently Asked Questions}
+\label{sec:helpFAQ}
+
+\paragraph{Do I need an account or a password?}
+No. Anybody with the link can use the dashboard.
+
+\paragraph{Can I use my own sales data?}
+No. The dashboard shows the pre-computed thesis results for the \ac{m5} data only (Section~\ref{sec:specLimits}).
+
+\paragraph{Why does the black line stop at the end of 2015?}
+From January 2016 onwards the chart is in the live window, which is kept forecast-only. The data set does contain real sales up to April 2016, but they are not drawn, so the live window always shows forecasts without a comparison line. From May 2016 there is no real sales data at all (Section~\ref{sec:specTime}).
+
+\paragraph{Why are some lines identical?}
+Some methods leave certain levels unchanged by design: Top-Down keeps the total, Bottom-Up keeps the items. At those levels the reconciled line lies exactly on the base line (Section~\ref{sec:fnRec}).
+
+\paragraph{Which forecast is the best?}
+It depends on the level and the node. Averaged over the test year, Bottom-Up with \VAL{theta} or \VAL{ets} had the lowest error on most levels (Table~\ref{tab:specAccuracy}). The dashboard lets you check this for a single node.
+
+\paragraph{Why are forecasts for single items so poor?}
+Single products in single stores often sell only a few pieces per month, with many months at zero. Such irregular sales are hard to predict for any method; the errors at item level are around 36--42\,\% compared with 4--7\,\% at the total.
+
+\paragraph{Can I compare two stores in one chart?}
+No, the chart shows one node at a time. Save both charts as images (camera button) or open the dashboard in two browser tabs side by side.
+
+\paragraph{Can I download the numbers?}
+Not from the dashboard. Hovering shows exact values; the complete result files are in the repository (\texttt{Code/artifacts/dashboard\_data/}).
+
+\paragraph{Does the dashboard work on a phone?}
+Yes. The sidebar is hidden at first; open it with the arrow at the top left. A larger screen is more comfortable.
+
+\paragraph{The app says it is asleep -- is something broken?}
+No. Click the button to wake it up and wait up to a minute (Section~\ref{sec:instWake}).
+
+\paragraph{Do my selections affect other users?}
+No. Each browser tab has its own selections; nothing is saved or shared.
+
+\section{Glossary}
+\label{sec:helpGlossary}
+
+\begin{description}[leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Actual] Units really sold in a month.
+  \item[Aggregate node] A node above item level, i.e.\ a sum of several items.
+  \item[Base forecast] Forecast of a node made independently of all other nodes.
+  \item[Bottom-Up] Reconciliation that adds up item forecasts.
+  \item[Coherent] Forecasts are coherent when the parts add up to the whole on every level.
+  \item[Exponential smoothing (ETS)] Forecasting model that weights recent months more strongly and models trend and season.
+  \item[Hierarchy] The Total--State--Store--Category--Department--Item structure of the sales.
+  \item[Historical average] Forecasting model that predicts the average of all past months.
+  \item[Level] Depth of a node in the hierarchy, from 1 (Total) to 6 (Item).
+  \item[Live] Forecast-only window, January--July 2016.
+  \item[MinTrace] Reconciliation that adjusts all levels at once, as little as possible.
+  \item[Node] One point of the hierarchy; the chart always shows one node.
+  \item[Parquet] Compact file format in which the results are stored.
+  \item[Reconciliation] Adjusting base forecasts so that they become coherent.
+  \item[sMAPE] Average relative forecast error in percent; lower is better.
+  \item[Streamlit] Python framework in which the dashboard is written; also the hosting service.
+  \item[Test] Comparison window, the year 2015.
+  \item[Theta] Forecasting model combining a long-term trend line with a short-term smoothed view.
+  \item[Top-Down] Reconciliation that splits the total forecast by historical shares.
+  \item[Train] Learning window, February 2011 -- December 2014.
+\end{description}
+
+\section{Quick Reference}
+\label{sec:helpQuickRef}
+
+\begin{tcolorbox}[enhanced,colback=white,colframe=ManBlue,boxrule=0.8pt,arc=2pt,
+  title={\AppName{} -- Quick Reference},fonttitle=\sffamily\bfseries]
+\small
+\textbf{Open:} \AppLink \hfill \textbf{Local:} \texttt{streamlit run Code/app/streamlit\_app.py}
+
+\medskip
+\begin{tabularx}{\linewidth}{@{}p{4.6cm}X@{}}
+\toprule
+\textbf{I want to \dots} & \textbf{Do this} \\
+\midrule
+see the grand total        & \UI{State} = \VAL{(All)} \\
+see one state / store      & choose \UI{State}, then \UI{Store} \\
+see one item               & choose all five dropdowns; type the item number to search \\
+go up one level            & set the lowest chosen dropdown to \VAL{(All)} \\
+change the dotted line     & \UI{Base model}: \VAL{histavg} / \VAL{ets} / \VAL{theta} \\
+compare reconcilers        & add methods in \UI{Reconciliation method(s)}; $\times$ removes \\
+read a value               & hover over the line \\
+zoom / reset               & drag a rectangle / double-click \\
+hide a line                & click its legend entry \\
+save the chart             & camera button (top right of chart) \\
+switch light / dark        & page menu $\cdots$ $\rightarrow$ \UI{Settings} \\
+wake a sleeping app        & \UI{Yes, get this app back up!} \\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\textbf{Chart:} black = actual \,$\cdot$\, dotted = base \,$\cdot$\, solid coloured = reconciled \,$\cdot$\,
+\colorbox{AppTrain}{Train 2011--14} \colorbox{AppTest}{Test 2015} \colorbox{AppLive}{Live 2016}
+\end{tcolorbox}
+
+%\section{Answers to the Practice Exercises}
+%\label{sec:helpAnswers}
+%
+%\paragraph{Exercise 3.1 -- Which state sells most?}
+%California (\VAL{CA}) has clearly the highest sales. It has four stores, Texas and Wisconsin three each. All three states show the December peak.
+%
+%\paragraph{Exercise 3.2 -- A difficult item.}
+%The item's actual line is low and jumpy, with many months at or near zero, while the store total is smooth. The flat \VAL{histavg} forecast lies at the average level and misses every peak and every zero month -- typical for items at level~6 and the reason for the high item-level errors in Table~\ref{tab:specAccuracy}.
+%
+%\paragraph{Exercise 3.3 -- Which reconciler is closest?}
+%The answer depends on the store and month, which is exactly what the exercise shows. Averaged over all ten stores, Bottom-Up had the lowest error at store level (Table~\ref{tab:specAccuracy}), and Top-Down the highest.
+
+\section{Reporting a Problem}
+\label{sec:helpReport}
+
+If a problem cannot be solved with Chapter~\ref{chap:troubleshooting}, report it as an issue in the GitHub repository (\RepoLink, tab \UI{Issues}) or directly to the author. Please include:
+\begin{itemize}
+  \item online or local use; for local use the operating system and Python version,
+  \item the selected node (copy the node line) and the model and method settings,
+  \item the exact message text, or a screenshot,
+  \item what you did just before the problem occurred.
+\end{itemize}
+
+\section{Further Information}
+\label{sec:helpFurther}
+
+\begin{itemize}
+  \item The master's thesis \emph{Hierarchical Time Series Forecasting in Retail Demand} describes the data preparation, the models, the reconciliation methods and the results in full.
+  \item \emph{Forecasting: Principles and Practice} \cite{Hyndman:2021} is a free, readable introduction to forecasting and to hierarchical reconciliation.
+  \item The \ac{m5} competition and its data are described in \cite{Makridakis:2022}.
+  \item Streamlit and Streamlit Community Cloud documentation: \cite{Streamlit:2026,StreamlitCloud:2026}.
+\end{itemize}

@@ -1,0 +1,1340 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\datalist[entry]{anyt/global//global/global/global}
+  \entry{Assimakopoulos:2000}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=AV}{%
+         family={Assimakopoulos},
+         familyi={A\bibinitperiod},
+         given={Vassilis},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=NK}{%
+         family={Nikolopoulos},
+         familyi={N\bibinitperiod},
+         given={Konstantinos},
+         giveni={K\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{AVNK1}
+    \strng{fullhash}{AVNK1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{AN00}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \verb{doi}
+    \verb 10.1016/S0169-2070(00)00066-2
+    \endverb
+    \field{number}{4}
+    \field{pages}{521\bibrangedash 530}
+    \field{title}{The theta model: a decomposition approach to forecasting}
+    \verb{url}
+    \verb https://doi.org/10.1016/S0169-2070(00)00066-2
+    \endverb
+    \field{volume}{16}
+    \field{journaltitle}{International Journal of Forecasting}
+    \field{year}{2000}
+  \endentry
+
+  \entry{ApacheArrow:2026}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=A}{%
+         family={{Apache Software Foundation}},
+         familyi={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{A1}
+    \strng{fullhash}{A1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{{Apa}26}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{note}{Accessed: 18 September 2026}
+    \field{title}{Apache Arrow: A Cross-Language Development Platform for
+  In-Memory Data}
+    \verb{url}
+    \verb https://arrow.apache.org/docs/python/
+    \endverb
+    \field{year}{2026}
+  \endentry
+
+  \entry{Athanasopoulos:2017}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=AG}{%
+         family={Athanasopoulos},
+         familyi={A\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=KN}{%
+         family={Kourentzes},
+         familyi={K\bibinitperiod},
+         given={Nikolaos},
+         giveni={N\bibinitperiod},
+      }}%
+      {{hash=PF}{%
+         family={Petropoulos},
+         familyi={P\bibinitperiod},
+         given={Fotios},
+         giveni={F\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{AG+1}
+    \strng{fullhash}{AGHRJKNPF1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Ath+17}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{number}{1}
+    \field{pages}{60\bibrangedash 74}
+    \field{title}{Forecasting with Temporal Hierarchies}
+    \field{volume}{262}
+    \field{journaltitle}{European Journal of Operational Research}
+    \field{year}{2017}
+  \endentry
+
+  \entry{Chopra:2015}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=CS}{%
+         family={Chopra},
+         familyi={C\bibinitperiod},
+         given={Sunil},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=MP}{%
+         family={Meindl},
+         familyi={M\bibinitperiod},
+         given={Peter},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Pearson Education Limited}%
+    }
+    \strng{namehash}{CSMP1}
+    \strng{fullhash}{CSMP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{CM15}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \field{edition}{6th, Global}
+    \field{isbn}{9781292093574}
+    \field{title}{Supply Chain Management: Strategy, Planning, and Operation}
+    \list{location}{1}{%
+      {Harlow, UK}%
+    }
+    \field{year}{2015}
+  \endentry
+
+  \entry{Croston:1972}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=CJD}{%
+         family={Croston},
+         familyi={C\bibinitperiod},
+         given={J.\bibnamedelima D.},
+         giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CJD1}
+    \strng{fullhash}{CJD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Cro72}
+    \field{sortinit}{C}
+    \field{sortinithash}{C}
+    \verb{doi}
+    \verb 10.2307/3007885
+    \endverb
+    \field{number}{3}
+    \field{pages}{289\bibrangedash 303}
+    \field{title}{Forecasting and stock control for intermittent demands}
+    \field{volume}{23}
+    \field{journaltitle}{Operational Research Quarterly}
+    \field{year}{1972}
+  \endentry
+
+  \entry{Dunn:1976}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=DDM}{%
+         family={Dunn},
+         familyi={D\bibinitperiod},
+         given={D.\bibnamedelima M.},
+         giveni={D\bibinitperiod\bibinitdelim M\bibinitperiod},
+      }}%
+      {{hash=WWH}{%
+         family={Williams},
+         familyi={W\bibinitperiod},
+         given={W.\bibnamedelima H.},
+         giveni={W\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=DTL}{%
+         family={Dechaine},
+         familyi={D\bibinitperiod},
+         given={T.\bibnamedelima L.},
+         giveni={T\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{DDMWWHDTL1}
+    \strng{fullhash}{DDMWWHDTL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{DWD76}
+    \field{sortinit}{D}
+    \field{sortinithash}{D}
+    \field{number}{353}
+    \field{pages}{68\bibrangedash 71}
+    \field{title}{Aggregate versus subaggregate models in local area
+  forecasting}
+    \field{volume}{71}
+    \field{journaltitle}{Journal of the American Statistical Association}
+    \field{year}{1976}
+  \endentry
+
+  \entry{Fayyad:1996}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=FU}{%
+         family={Fayyad},
+         familyi={F\bibinitperiod},
+         given={Usama},
+         giveni={U\bibinitperiod},
+      }}%
+      {{hash=PSG}{%
+         family={Piatetsky-Shapiro},
+         familyi={P\bibinithyphendelim S\bibinitperiod},
+         given={Gregory},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SP}{%
+         family={Smyth},
+         familyi={S\bibinitperiod},
+         given={Padhraic},
+         giveni={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{FUPSGSP1}
+    \strng{fullhash}{FUPSGSP1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{FPSS96}
+    \field{sortinit}{F}
+    \field{sortinithash}{F}
+    \verb{doi}
+    \verb 10.1609/aimag.v17i3.1230
+    \endverb
+    \field{number}{3}
+    \field{pages}{37\bibrangedash 54}
+    \field{title}{From data mining to knowledge discovery in databases}
+    \verb{url}
+    \verb https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/123
+    \verb 0
+    \endverb
+    \field{volume}{17}
+    \field{journaltitle}{AI Magazine}
+    \field{year}{1996}
+  \endentry
+
+  \entry{StTheme:2026}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=g}{%
+         family={{gabrieltempass}},
+         familyi={g\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{g1}
+    \strng{fullhash}{g1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{{gab}26}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{note}{Accessed: 19 September 2026}
+    \field{title}{st-theme: A Streamlit Component that Returns the Active Theme
+  of a Streamlit App}
+    \verb{url}
+    \verb https://pypi.org/project/st-theme/
+    \endverb
+    \field{year}{2026}
+  \endentry
+
+  \entry{Garza:2022}{misc}{}{}
+    \name{author}{4}{}{%
+      {{hash=GA}{%
+         family={Garza},
+         familyi={G\bibinitperiod},
+         given={Azul},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=MCM}{%
+         family={Mergenthaler\bibnamedelima Canseco},
+         familyi={M\bibinitperiod\bibinitdelim C\bibinitperiod},
+         given={Max},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Chall{\'u}},
+         familyi={C\bibinitperiod},
+         given={Cristian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=OKG}{%
+         family={Olivares},
+         familyi={O\bibinitperiod},
+         given={Kin\bibnamedelima G.},
+         giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GA+1}
+    \strng{fullhash}{GAMCMCCOKG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Gar+22}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{howpublished}{PyCon Salt Lake City, Utah, US 2022}
+    \field{title}{{StatsForecast}: Lightning fast forecasting with statistical
+  and econometric models}
+    \verb{url}
+    \verb https://github.com/Nixtla/statsforecast
+    \endverb
+    \field{year}{2022}
+  \endentry
+
+  \entry{Gross:1990}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=GCW}{%
+         family={Gross},
+         familyi={G\bibinitperiod},
+         given={Charles\bibnamedelima W.},
+         giveni={C\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=SJE}{%
+         family={Sohl},
+         familyi={S\bibinitperiod},
+         given={Jeffrey\bibnamedelima E.},
+         giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GCWSJE1}
+    \strng{fullhash}{GCWSJE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{GS90}
+    \field{sortinit}{G}
+    \field{sortinithash}{G}
+    \field{number}{3}
+    \field{pages}{233\bibrangedash 254}
+    \field{title}{Disaggregation methods to expedite product line forecasting}
+    \field{volume}{9}
+    \field{journaltitle}{Journal of Forecasting}
+    \field{year}{1990}
+  \endentry
+
+  \entry{Hyndman:2018}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=AG}{%
+         family={Athanasopoulos},
+         familyi={A\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {OTexts}%
+    }
+    \strng{namehash}{HRJAG1}
+    \strng{fullhash}{HRJAG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{HA18}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{edition}{2nd}
+    \field{title}{Forecasting: Principles and Practice}
+    \verb{url}
+    \verb https://otexts.com/fpp2/
+    \endverb
+    \list{location}{1}{%
+      {Melbourne, Australia}%
+    }
+    \field{year}{2018}
+  \endentry
+
+  \entry{Harris:2020}{article}{}{}
+    \name{author}{26}{}{%
+      {{hash=HCR}{%
+         family={Harris},
+         familyi={H\bibinitperiod},
+         given={Charles\bibnamedelima R.},
+         giveni={C\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=MKJ}{%
+         family={Millman},
+         familyi={M\bibinitperiod},
+         given={K.\bibnamedelima Jarrod},
+         giveni={K\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=vdWSJ}{%
+         prefix={van\bibnamedelima der},
+         prefixi={v\bibinitperiod\bibinitdelim d\bibinitperiod},
+         family={Walt},
+         familyi={W\bibinitperiod},
+         given={St{\'e}fan\bibnamedelima J.},
+         giveni={S\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=GR}{%
+         family={Gommers},
+         familyi={G\bibinitperiod},
+         given={Ralf},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=VP}{%
+         family={Virtanen},
+         familyi={V\bibinitperiod},
+         given={Pauli},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=CD}{%
+         family={Cournapeau},
+         familyi={C\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=WE}{%
+         family={Wieser},
+         familyi={W\bibinitperiod},
+         given={Eric},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=TJ}{%
+         family={Taylor},
+         familyi={T\bibinitperiod},
+         given={Julian},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=BS}{%
+         family={Berg},
+         familyi={B\bibinitperiod},
+         given={Sebastian},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SNJ}{%
+         family={Smith},
+         familyi={S\bibinitperiod},
+         given={Nathaniel\bibnamedelima J.},
+         giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=KR}{%
+         family={Kern},
+         familyi={K\bibinitperiod},
+         given={Robert},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=PM}{%
+         family={Picus},
+         familyi={P\bibinitperiod},
+         given={Matti},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HS}{%
+         family={Hoyer},
+         familyi={H\bibinitperiod},
+         given={Stephan},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=vKMH}{%
+         prefix={van},
+         prefixi={v\bibinitperiod},
+         family={Kerkwijk},
+         familyi={K\bibinitperiod},
+         given={Marten\bibnamedelima H.},
+         giveni={M\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=BM}{%
+         family={Brett},
+         familyi={B\bibinitperiod},
+         given={Matthew},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HA}{%
+         family={Haldane},
+         familyi={H\bibinitperiod},
+         given={Allan},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=FdRJ}{%
+         prefix={Fern{\'a}ndez\bibnamedelima del},
+         prefixi={F\bibinitperiod\bibinitdelim d\bibinitperiod},
+         family={R{\'i}o},
+         familyi={R\bibinitperiod},
+         given={Jaime},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=WM}{%
+         family={Wiebe},
+         familyi={W\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=PP}{%
+         family={Peterson},
+         familyi={P\bibinitperiod},
+         given={Pearu},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=GMP}{%
+         family={G{\'e}rard-Marchant},
+         familyi={G\bibinithyphendelim M\bibinitperiod},
+         given={Pierre},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=SK}{%
+         family={Sheppard},
+         familyi={S\bibinitperiod},
+         given={Kevin},
+         giveni={K\bibinitperiod},
+      }}%
+      {{hash=RT}{%
+         family={Reddy},
+         familyi={R\bibinitperiod},
+         given={Tyler},
+         giveni={T\bibinitperiod},
+      }}%
+      {{hash=WW}{%
+         family={Weckesser},
+         familyi={W\bibinitperiod},
+         given={Warren},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=AH}{%
+         family={Abbasi},
+         familyi={A\bibinitperiod},
+         given={Hameer},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=GC}{%
+         family={Gohlke},
+         familyi={G\bibinitperiod},
+         given={Christoph},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=OTE}{%
+         family={Oliphant},
+         familyi={O\bibinitperiod},
+         given={Travis\bibnamedelima E.},
+         giveni={T\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HCR+1}
+  \strng{fullhash}{HCRMKJvdWSJGRVPCDWETJBSSNJKRPMHSvKMHBMHAFdRJWMPPGMPSKRTWWAHGCOTE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Har+20}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \verb{doi}
+    \verb 10.1038/s41586-020-2649-2
+    \endverb
+    \field{number}{7825}
+    \field{pages}{357\bibrangedash 362}
+    \field{title}{Array programming with {NumPy}}
+    \field{volume}{585}
+    \field{journaltitle}{Nature}
+    \field{year}{2020}
+  \endentry
+
+  \entry{Hewamalage:2021}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=HH}{%
+         family={Hewamalage},
+         familyi={H\bibinitperiod},
+         given={Hansika},
+         giveni={H\bibinitperiod},
+      }}%
+      {{hash=MMP}{%
+         family={Montero-Manso},
+         familyi={M\bibinithyphendelim M\bibinitperiod},
+         given={Pablo},
+         giveni={P\bibinitperiod},
+      }}%
+      {{hash=BC}{%
+         family={Bergmeir},
+         familyi={B\bibinitperiod},
+         given={Christoph},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HH+1}
+    \strng{fullhash}{HHMMPBCHRJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Hew+21}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{title}{A look at the evaluation setup of the M5 forecasting
+  competition}
+    \verb{url}
+    \verb https://arxiv.org/abs/2108.03588
+    \endverb
+    \field{journaltitle}{arXiv preprint arXiv:2108.03588}
+    \field{year}{2021}
+  \endentry
+
+  \entry{Hunt:1999}{book}{}{}
+    \name{author}{2}{}{%
+      {{hash=HA}{%
+         family={Hunt},
+         familyi={H\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=TD}{%
+         family={Thomas},
+         familyi={T\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Addison-Wesley}%
+    }
+    \strng{namehash}{HATD1}
+    \strng{fullhash}{HATD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{HT99}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{isbn}{0201616224}
+    \field{title}{The Pragmatic Programmer: From Journeyman to Master}
+    \list{location}{1}{%
+      {Boston, MA}%
+    }
+    \field{year}{1999}
+  \endentry
+
+  \entry{Hunter:2007}{article}{}{}
+    \name{author}{1}{}{%
+      {{hash=HJD}{%
+         family={Hunter},
+         familyi={H\bibinitperiod},
+         given={John\bibnamedelima D.},
+         giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{HJD1}
+    \strng{fullhash}{HJD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Hun07}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \verb{doi}
+    \verb 10.1109/MCSE.2007.55
+    \endverb
+    \field{note}{Accessed: 18 September 2026}
+    \field{number}{3}
+    \field{pages}{90\bibrangedash 95}
+    \field{title}{Matplotlib: A 2D graphics environment}
+    \verb{url}
+    \verb https://matplotlib.org/stable/
+    \endverb
+    \field{volume}{9}
+    \field{journaltitle}{Computing in Science \& Engineering}
+    \field{year}{2007}
+  \endentry
+
+  \entry{Hyndman:2008}{book}{}{}
+    \name{author}{4}{}{%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=KAB}{%
+         family={Koehler},
+         familyi={K\bibinitperiod},
+         given={Anne\bibnamedelima B.},
+         giveni={A\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+      {{hash=OJK}{%
+         family={Ord},
+         familyi={O\bibinitperiod},
+         given={J.\bibnamedelima Keith},
+         giveni={J\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+      {{hash=SRD}{%
+         family={Snyder},
+         familyi={S\bibinitperiod},
+         given={Ralph\bibnamedelima D.},
+         giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{HRJ+1}
+    \strng{fullhash}{HRJKABOJKSRD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Hyn+08}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \verb{doi}
+    \verb 10.1007/978-3-540-71918-2
+    \endverb
+    \field{series}{Springer Series in Statistics}
+    \field{title}{Forecasting with Exponential Smoothing: The State Space
+  Approach}
+    \verb{url}
+    \verb https://doi.org/10.1007/978-3-540-71918-2
+    \endverb
+    \list{location}{1}{%
+      {Berlin, Germany}%
+    }
+    \field{year}{2008}
+  \endentry
+
+  \entry{Hyndman:2011}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+      {{hash=ARA}{%
+         family={Ahmed},
+         familyi={A\bibinitperiod},
+         given={Roman\bibnamedelima A.},
+         giveni={R\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=AG}{%
+         family={Athanasopoulos},
+         familyi={A\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=SHL}{%
+         family={Shang},
+         familyi={S\bibinitperiod},
+         given={Han\bibnamedelima Lin},
+         giveni={H\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{HRJ+1}
+    \strng{fullhash}{HRJARAAGSHL1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Hyn+11}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \verb{doi}
+    \verb 10.1016/j.csda.2011.03.006
+    \endverb
+    \field{number}{9}
+    \field{pages}{2579\bibrangedash 2589}
+    \field{title}{Optimal combination forecasts for hierarchical time series}
+    \field{volume}{55}
+    \field{journaltitle}{Computational Statistics \& Data Analysis}
+    \field{year}{2011}
+  \endentry
+
+  \entry{McKinney:2010}{inproceedings}{}{}
+    \name{author}{1}{}{%
+      {{hash=MW}{%
+         family={McKinney},
+         familyi={M\bibinitperiod},
+         given={Wes},
+         giveni={W\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MW1}
+    \strng{fullhash}{MW1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{McK10}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{booktitle}{Proceedings of the 9th Python in Science Conference}
+    \verb{doi}
+    \verb 10.25080/Majora-92bf1922-00a
+    \endverb
+    \field{pages}{56\bibrangedash 61}
+    \field{title}{Data Structures for Statistical Computing in Python}
+    \field{year}{2010}
+  \endentry
+
+  \entry{MakridakisHibon:2000}{article}{}{}
+    \name{author}{2}{}{%
+      {{hash=MS}{%
+         family={Makridakis},
+         familyi={M\bibinitperiod},
+         given={Spyros},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=HM}{%
+         family={Hibon},
+         familyi={H\bibinitperiod},
+         given={Michele},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{MSHM1}
+    \strng{fullhash}{MSHM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{MH00}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \verb{doi}
+    \verb 10.1016/S0169-2070(00)00057-1
+    \endverb
+    \field{number}{4}
+    \field{pages}{451\bibrangedash 476}
+    \field{title}{The M3-Competition: Results, Conclusions and Implications}
+    \field{volume}{16}
+    \field{journaltitle}{International Journal of Forecasting}
+    \field{year}{2000}
+  \endentry
+
+  \entry{Montgomery:2004}{book}{}{}
+    \name{author}{1}{}{%
+      {{hash=MDC}{%
+         family={Montgomery},
+         familyi={M\bibinitperiod},
+         given={Douglas\bibnamedelima C.},
+         giveni={D\bibinitperiod\bibinitdelim C\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {John Wiley \& Sons}%
+    }
+    \strng{namehash}{MDC1}
+    \strng{fullhash}{MDC1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Mon04}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{edition}{6th}
+    \field{isbn}{9780471487357}
+    \field{title}{Design and Analysis of Experiments}
+    \list{location}{1}{%
+      {New York}%
+    }
+    \field{year}{2004}
+  \endentry
+
+  \entry{Makridakis:2022}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=MS}{%
+         family={Makridakis},
+         familyi={M\bibinitperiod},
+         given={Spyros},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=SE}{%
+         family={Spiliotis},
+         familyi={S\bibinitperiod},
+         given={Evangelos},
+         giveni={E\bibinitperiod},
+      }}%
+      {{hash=AV}{%
+         family={Assimakopoulos},
+         familyi={A\bibinitperiod},
+         given={Vassilios},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Elsevier}%
+    }
+    \strng{namehash}{MSSEAV1}
+    \strng{fullhash}{MSSEAV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{MSA22}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \verb{doi}
+    \verb 10.1016/j.ijforecast.2021.11.013
+    \endverb
+    \field{number}{4}
+    \field{pages}{1346\bibrangedash 1364}
+    \field{title}{M5 accuracy competition: Results, findings, and conclusions}
+    \verb{url}
+    \verb https://doi.org/10.1016/j.ijforecast.2021.11.013
+    \endverb
+    \field{volume}{38}
+    \field{journaltitle}{International Journal of Forecasting}
+    \field{year}{2022}
+  \endentry
+
+  \entry{UtilsForecast:2026}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=N}{%
+         family={{Nixtla}},
+         familyi={N\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{N1}
+    \strng{fullhash}{N1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{{Nix}26}
+    \field{sortinit}{N}
+    \field{sortinithash}{N}
+    \field{note}{Accessed: 18 September 2026}
+    \field{title}{utilsforecast: Forecasting Utilities}
+    \verb{url}
+    \verb https://github.com/Nixtla/utilsforecast
+    \endverb
+    \field{year}{2026}
+  \endentry
+
+  \entry{Olivares:2023}{misc}{}{}
+    \name{author}{8}{}{%
+      {{hash=OKG}{%
+         family={Olivares},
+         familyi={O\bibinitperiod},
+         given={Kin\bibnamedelima G.},
+         giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod},
+      }}%
+      {{hash=GF}{%
+         family={Garza},
+         familyi={G\bibinitperiod},
+         given={Federico},
+         giveni={F\bibinitperiod},
+      }}%
+      {{hash=LD}{%
+         family={Luo},
+         familyi={L\bibinitperiod},
+         given={David},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=CC}{%
+         family={Chall{\'u}},
+         familyi={C\bibinitperiod},
+         given={Cristian},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=MCM}{%
+         family={Mergenthaler-Canseco},
+         familyi={M\bibinithyphendelim C\bibinitperiod},
+         given={Max},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=BTS}{%
+         family={Ben\bibnamedelima Taieb},
+         familyi={B\bibinitperiod\bibinitdelim T\bibinitperiod},
+         given={Souhaib},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=WSL}{%
+         family={Wickramasuriya},
+         familyi={W\bibinitperiod},
+         given={Shanika\bibnamedelima L.},
+         giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=DA}{%
+         family={Dubrawski},
+         familyi={D\bibinitperiod},
+         given={Artur},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OKG+1}
+    \strng{fullhash}{OKGGFLDCCMCMBTSWSLDA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Oli+22}
+    \field{sortinit}{O}
+    \field{sortinithash}{O}
+    \verb{eprint}
+    \verb 2207.03517
+    \endverb
+    \field{note}{Work in progress paper, submitted to the Journal of Machine
+  Learning Research}
+    \field{title}{{HierarchicalForecast}: A Reference Framework for
+  Hierarchical Forecasting in Python}
+    \verb{url}
+    \verb https://arxiv.org/abs/2207.03517
+    \endverb
+    \field{eprinttype}{arXiv}
+    \field{eprintclass}{stat.ML}
+    \field{year}{2022}
+  \endentry
+
+  \entry{Orcutt:1968}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=OGH}{%
+         family={Orcutt},
+         familyi={O\bibinitperiod},
+         given={Guy\bibnamedelima H.},
+         giveni={G\bibinitperiod\bibinitdelim H\bibinitperiod},
+      }}%
+      {{hash=WHW}{%
+         family={Watts},
+         familyi={W\bibinitperiod},
+         given={Harold\bibnamedelima W.},
+         giveni={H\bibinitperiod\bibinitdelim W\bibinitperiod},
+      }}%
+      {{hash=EJB}{%
+         family={Edwards},
+         familyi={E\bibinitperiod},
+         given={John\bibnamedelima B.},
+         giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{OGHWHWEJB1}
+    \strng{fullhash}{OGHWHWEJB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{OWE68}
+    \field{sortinit}{O}
+    \field{sortinithash}{O}
+    \field{number}{4}
+    \field{pages}{773\bibrangedash 787}
+    \field{title}{Data aggregation and information loss}
+    \field{volume}{58}
+    \field{journaltitle}{The American Economic Review}
+    \field{year}{1968}
+  \endentry
+
+  \entry{Pareto:1896}{book}{}{}
+    \name{author}{1}{}{%
+      {{hash=PV}{%
+         family={Pareto},
+         familyi={P\bibinitperiod},
+         given={Vilfredo},
+         giveni={V\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {F. Rouge}%
+    }
+    \strng{namehash}{PV1}
+    \strng{fullhash}{PV1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{Par96}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{title}{Cours d'{\'e}conomie politique}
+    \verb{url}
+    \verb https://archive.org/details/fp-0148-1
+    \endverb
+    \field{volume}{1}
+    \list{location}{1}{%
+      {Lausanne}%
+    }
+    \field{year}{1896}
+  \endentry
+
+  \entry{Plotly:2026}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=P}{%
+         family={{Plotly Technologies Inc.}},
+         familyi={P\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{P1}
+    \strng{fullhash}{P1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{{Plo}26}
+    \field{sortinit}{P}
+    \field{sortinithash}{P}
+    \field{note}{Accessed: 18 September 2026}
+    \field{title}{Plotly Python Open Source Graphing Library}
+    \verb{url}
+    \verb https://plotly.com/python/
+    \endverb
+    \field{year}{2026}
+  \endentry
+
+  \entry{Sandve:2013}{article}{}{}
+    \name{author}{4}{}{%
+      {{hash=SGK}{%
+         family={Sandve},
+         familyi={S\bibinitperiod},
+         given={Geir\bibnamedelima Kjetil},
+         giveni={G\bibinitperiod\bibinitdelim K\bibinitperiod},
+      }}%
+      {{hash=NA}{%
+         family={Nekrutenko},
+         familyi={N\bibinitperiod},
+         given={Anton},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=TJ}{%
+         family={Taylor},
+         familyi={T\bibinitperiod},
+         given={James},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=HE}{%
+         family={Hovig},
+         familyi={H\bibinitperiod},
+         given={Eivind},
+         giveni={E\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{SGK+1}
+    \strng{fullhash}{SGKNATJHE1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{San+13}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \verb{doi}
+    \verb 10.1371/journal.pcbi.1003285
+    \endverb
+    \field{number}{10}
+    \field{pages}{e1003285}
+    \field{title}{Ten Simple Rules for Reproducible Computational Research}
+    \field{volume}{9}
+    \field{journaltitle}{PLoS Computational Biology}
+    \field{year}{2013}
+  \endentry
+
+  \entry{Syntetos:2005}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=SAA}{%
+         family={Syntetos},
+         familyi={S\bibinitperiod},
+         given={Aris\bibnamedelima A.},
+         giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=BJE}{%
+         family={Boylan},
+         familyi={B\bibinitperiod},
+         given={John\bibnamedelima E.},
+         giveni={J\bibinitperiod\bibinitdelim E\bibinitperiod},
+      }}%
+      {{hash=CJD}{%
+         family={Croston},
+         familyi={C\bibinitperiod},
+         given={John\bibnamedelima D.},
+         giveni={J\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {Taylor}%
+      {Francis}%
+    }
+    \strng{namehash}{SAABJECJD1}
+    \strng{fullhash}{SAABJECJD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{SBC05}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \verb{doi}
+    \verb 10.1057/palgrave.jors.2601841
+    \endverb
+    \field{number}{5}
+    \field{pages}{495\bibrangedash 503}
+    \field{title}{On the categorization of demand patterns}
+    \verb{url}
+    \verb https://doi.org/10.1057/palgrave.jors.2601841
+    \endverb
+    \field{volume}{56}
+    \field{journaltitle}{Journal of the Operational Research Society}
+    \field{year}{2005}
+  \endentry
+
+  \entry{Silver:1998}{book}{}{}
+    \name{author}{3}{}{%
+      {{hash=SEA}{%
+         family={Silver},
+         familyi={S\bibinitperiod},
+         given={Edward\bibnamedelima A.},
+         giveni={E\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=PDF}{%
+         family={Pyke},
+         familyi={P\bibinitperiod},
+         given={David\bibnamedelima F.},
+         giveni={D\bibinitperiod\bibinitdelim F\bibinitperiod},
+      }}%
+      {{hash=PR}{%
+         family={Peterson},
+         familyi={P\bibinitperiod},
+         given={Rein},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {John Wiley \& Sons}%
+    }
+    \strng{namehash}{SEAPDFPR1}
+    \strng{fullhash}{SEAPDFPR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{SPP98}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{edition}{3rd}
+    \field{isbn}{0471119474}
+    \field{title}{Inventory Management and Production Planning and Scheduling}
+    \list{location}{1}{%
+      {New York}%
+    }
+    \field{year}{1998}
+  \endentry
+
+  \entry{Streamlit:2026}{misc}{}{}
+    \name{author}{1}{}{%
+      {{hash=S}{%
+         family={{Streamlit Inc.}},
+         familyi={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{S1}
+    \strng{fullhash}{S1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{{Str}26}
+    \field{sortinit}{S}
+    \field{sortinithash}{S}
+    \field{note}{Accessed: 18 September 2026}
+    \field{title}{Streamlit Documentation}
+    \verb{url}
+    \verb https://docs.streamlit.io
+    \endverb
+    \field{year}{2026}
+  \endentry
+
+  \entry{Wickramasuriya:2019}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=WSL}{%
+         family={Wickramasuriya},
+         familyi={W\bibinitperiod},
+         given={Shanika\bibnamedelima L.},
+         giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=AG}{%
+         family={Athanasopoulos},
+         familyi={A\bibinitperiod},
+         given={George},
+         giveni={G\bibinitperiod},
+      }}%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{2}{%
+      {Taylor}%
+      {Francis}%
+    }
+    \strng{namehash}{WSLAGHRJ1}
+    \strng{fullhash}{WSLAGHRJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{WAH19}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \verb{doi}
+    \verb 10.1080/01621459.2018.1448825
+    \endverb
+    \field{number}{526}
+    \field{pages}{804\bibrangedash 819}
+    \field{title}{Optimal forecast reconciliation for hierarchical and grouped
+  time series through trace minimization}
+    \verb{url}
+    \verb https://doi.org/10.1080/01621459.2018.1448825
+    \endverb
+    \field{volume}{114}
+    \field{journaltitle}{Journal of the American Statistical Association}
+    \field{year}{2019}
+  \endentry
+
+  \entry{Wickramasuriya:2020}{article}{}{}
+    \name{author}{3}{}{%
+      {{hash=WSL}{%
+         family={Wickramasuriya},
+         familyi={W\bibinitperiod},
+         given={Shanika\bibnamedelima L.},
+         giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod},
+      }}%
+      {{hash=TBA}{%
+         family={Turlach},
+         familyi={T\bibinitperiod},
+         given={Berwin\bibnamedelima A.},
+         giveni={B\bibinitperiod\bibinitdelim A\bibinitperiod},
+      }}%
+      {{hash=HRJ}{%
+         family={Hyndman},
+         familyi={H\bibinitperiod},
+         given={Rob\bibnamedelima J.},
+         giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{WSLTBAHRJ1}
+    \strng{fullhash}{WSLTBAHRJ1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{labelalpha}{WTH20}
+    \field{sortinit}{W}
+    \field{sortinithash}{W}
+    \verb{doi}
+    \verb 10.1007/s11222-020-09930-0
+    \endverb
+    \field{number}{5}
+    \field{pages}{1167\bibrangedash 1182}
+    \field{title}{Optimal non-negative forecast reconciliation}
+    \field{volume}{30}
+    \field{journaltitle}{Statistics and Computing}
+    \field{year}{2020}
+  \endentry
+\enddatalist
+\endinput

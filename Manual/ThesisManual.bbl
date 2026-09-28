@@ -1,0 +1,353 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{anyt/global//global/global/global}
+    \entry{Hyndman:2021}{book}{}{}
+      \name{author}{2}{}{%
+        {{hash=2f709db8a046ae1d056e75c1f3aad31c}{%
+           family={Hyndman},
+           familyi={H\bibinitperiod},
+           given={Rob\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=95cfbf5a8396e08b434cc6f7f5b18dc8}{%
+           family={Athanasopoulos},
+           familyi={A\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Melbourne, Australia}%
+      }
+      \list{publisher}{1}{%
+        {OTexts}%
+      }
+      \strng{namehash}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{fullhash}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{fullhashraw}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{bibnamehash}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{authorbibnamehash}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{authornamehash}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{authorfullhash}{f5d192acd9066e5facaab32c8173f6d0}
+      \strng{authorfullhashraw}{f5d192acd9066e5facaab32c8173f6d0}
+      \field{labelalpha}{HA21}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{3}
+      \field{title}{Forecasting: Principles and Practice}
+      \field{year}{2021}
+      \verb{urlraw}
+      \verb https://otexts.com/fpp3/
+      \endverb
+      \verb{url}
+      \verb https://otexts.com/fpp3/
+      \endverb
+    \endentry
+    \entry{Kaggle:M5}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=8fec9765921cfa63cb331e42a924c27c}{%
+           family={{Kaggle}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{fullhash}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{fullhashraw}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{bibnamehash}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{authorbibnamehash}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{authornamehash}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{authorfullhash}{8fec9765921cfa63cb331e42a924c27c}
+      \strng{authorfullhashraw}{8fec9765921cfa63cb331e42a924c27c}
+      \field{labelalpha}{Kag20}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Online competition}
+      \field{title}{{M5} Forecasting -- Accuracy}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2020}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.kaggle.com/competitions/m5-forecasting-accuracy
+      \endverb
+      \verb{url}
+      \verb https://www.kaggle.com/competitions/m5-forecasting-accuracy
+      \endverb
+    \endentry
+    \entry{Makridakis:2022}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=ba8241955b5282793fdcf2d43c398cc6}{%
+           family={Makridakis},
+           familyi={M\bibinitperiod},
+           given={Spyros},
+           giveni={S\bibinitperiod}}}%
+        {{hash=1bbd058009b400578fd6334102fc8dec}{%
+           family={Spiliotis},
+           familyi={S\bibinitperiod},
+           given={Evangelos},
+           giveni={E\bibinitperiod}}}%
+        {{hash=c84a88720d8401a0259918f2eb3bec78}{%
+           family={Assimakopoulos},
+           familyi={A\bibinitperiod},
+           given={Vassilios},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{79b1cdab2388adc969bf628908c61838}
+      \strng{fullhash}{79b1cdab2388adc969bf628908c61838}
+      \strng{fullhashraw}{79b1cdab2388adc969bf628908c61838}
+      \strng{bibnamehash}{79b1cdab2388adc969bf628908c61838}
+      \strng{authorbibnamehash}{79b1cdab2388adc969bf628908c61838}
+      \strng{authornamehash}{79b1cdab2388adc969bf628908c61838}
+      \strng{authorfullhash}{79b1cdab2388adc969bf628908c61838}
+      \strng{authorfullhashraw}{79b1cdab2388adc969bf628908c61838}
+      \field{labelalpha}{MSA22}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{International Journal of Forecasting}
+      \field{number}{4}
+      \field{title}{{M5} accuracy competition: Results, findings, and conclusions}
+      \field{volume}{38}
+      \field{year}{2022}
+      \field{pages}{1346\bibrangedash 1364}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1016/j.ijforecast.2021.11.013
+      \endverb
+    \endentry
+    \entry{Olivares:2022}{misc}{}{}
+      \name{author}{8}{}{%
+        {{hash=ee88da26b37ef56e671ac99c84299117}{%
+           family={Olivares},
+           familyi={O\bibinitperiod},
+           given={Kin\bibnamedelima G.},
+           giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=ccf75e9afa6f21b469a06540f14d8c0b}{%
+           family={Garza},
+           familyi={G\bibinitperiod},
+           given={Federico},
+           giveni={F\bibinitperiod}}}%
+        {{hash=c07b81056ee65b0639072fb1fd01a47e}{%
+           family={Luo},
+           familyi={L\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=b24b46be5d0e91bd40eb4cc4bb329471}{%
+           family={Challu},
+           familyi={C\bibinitperiod},
+           given={Cristian},
+           giveni={C\bibinitperiod}}}%
+        {{hash=c44d2be8c16f04ac4ce58dd1c37660b6}{%
+           family={Mergenthaler},
+           familyi={M\bibinitperiod},
+           given={Max},
+           giveni={M\bibinitperiod}}}%
+        {{hash=43eddde3c0f7ec0931021909de0cfd24}{%
+           family={Ben\bibnamedelima Taieb},
+           familyi={B\bibinitperiod\bibinitdelim T\bibinitperiod},
+           given={Souhaib},
+           giveni={S\bibinitperiod}}}%
+        {{hash=f99a0a002e19a6fea83a1ca47c9852ad}{%
+           family={Wickramasuriya},
+           familyi={W\bibinitperiod},
+           given={Shanika\bibnamedelima L.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=b9bf2f57175122ccd8ede698750624e9}{%
+           family={Dubrawski},
+           familyi={D\bibinitperiod},
+           given={Artur},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{da10f8f88972ae5d0c58f54a4047aad0}
+      \strng{fullhash}{ab64f3740a0c3318cef62a547136af64}
+      \strng{fullhashraw}{ab64f3740a0c3318cef62a547136af64}
+      \strng{bibnamehash}{da10f8f88972ae5d0c58f54a4047aad0}
+      \strng{authorbibnamehash}{da10f8f88972ae5d0c58f54a4047aad0}
+      \strng{authornamehash}{da10f8f88972ae5d0c58f54a4047aad0}
+      \strng{authorfullhash}{ab64f3740a0c3318cef62a547136af64}
+      \strng{authorfullhashraw}{ab64f3740a0c3318cef62a547136af64}
+      \field{labelalpha}{OGL+22}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{arXiv preprint arXiv:2207.03517}
+      \field{title}{{HierarchicalForecast}: A Reference Framework for Hierarchical Forecasting in Python}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2207.03517
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2207.03517
+      \endverb
+    \endentry
+    \entry{Plotly:2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=f2e0fb4ad1c7b77b8dd7ad6ebee99279}{%
+           family={{Plotly Technologies Inc.}},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{fullhash}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{fullhashraw}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{bibnamehash}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{authorbibnamehash}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{authornamehash}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{authorfullhash}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \strng{authorfullhashraw}{f2e0fb4ad1c7b77b8dd7ad6ebee99279}
+      \field{labelalpha}{Plo26}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Online}
+      \field{title}{Plotly Python Graphing Library}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://plotly.com/python/
+      \endverb
+      \verb{url}
+      \verb https://plotly.com/python/
+      \endverb
+    \endentry
+    \entry{StreamlitCloud:2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e15ed7c9be906b7971c87f3bbc4b72bb}{%
+           family={{Snowflake Inc.}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{fullhash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{fullhashraw}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{bibnamehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authorbibnamehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authornamehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authorfullhash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authorfullhashraw}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \field{extraname}{1}
+      \field{labelalpha}{Sno26}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extraalpha}{1}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Online}
+      \field{title}{Streamlit Community Cloud Documentation}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.streamlit.io/deploy/streamlit-community-cloud
+      \endverb
+      \verb{url}
+      \verb https://docs.streamlit.io/deploy/streamlit-community-cloud
+      \endverb
+    \endentry
+    \entry{Streamlit:2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=e15ed7c9be906b7971c87f3bbc4b72bb}{%
+           family={{Snowflake Inc.}},
+           familyi={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{fullhash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{fullhashraw}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{bibnamehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authorbibnamehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authornamehash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authorfullhash}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \strng{authorfullhashraw}{e15ed7c9be906b7971c87f3bbc4b72bb}
+      \field{extraname}{2}
+      \field{labelalpha}{Sno26}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{extraalpha}{2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Online}
+      \field{title}{Streamlit Documentation}
+      \field{urlday}{25}
+      \field{urlmonth}{9}
+      \field{urlyear}{2026}
+      \field{year}{2026}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://docs.streamlit.io
+      \endverb
+      \verb{url}
+      \verb https://docs.streamlit.io
+      \endverb
+    \endentry
+    \entry{Wickramasuriya:2019}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=f99a0a002e19a6fea83a1ca47c9852ad}{%
+           family={Wickramasuriya},
+           familyi={W\bibinitperiod},
+           given={Shanika\bibnamedelima L.},
+           giveni={S\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=95cfbf5a8396e08b434cc6f7f5b18dc8}{%
+           family={Athanasopoulos},
+           familyi={A\bibinitperiod},
+           given={George},
+           giveni={G\bibinitperiod}}}%
+        {{hash=2f709db8a046ae1d056e75c1f3aad31c}{%
+           family={Hyndman},
+           familyi={H\bibinitperiod},
+           given={Rob\bibnamedelima J.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bcd294307986857c3216cfd2e34221a}
+      \strng{fullhash}{8bcd294307986857c3216cfd2e34221a}
+      \strng{fullhashraw}{8bcd294307986857c3216cfd2e34221a}
+      \strng{bibnamehash}{8bcd294307986857c3216cfd2e34221a}
+      \strng{authorbibnamehash}{8bcd294307986857c3216cfd2e34221a}
+      \strng{authornamehash}{8bcd294307986857c3216cfd2e34221a}
+      \strng{authorfullhash}{8bcd294307986857c3216cfd2e34221a}
+      \strng{authorfullhashraw}{8bcd294307986857c3216cfd2e34221a}
+      \field{labelalpha}{WAH19}
+      \field{sortinit}{W}
+      \field{sortinithash}{4315d78024d0cea9b57a0c6f0e35ed0d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the American Statistical Association}
+      \field{number}{526}
+      \field{title}{Optimal Forecast Reconciliation for Hierarchical and Grouped Time Series Through Trace Minimization}
+      \field{volume}{114}
+      \field{year}{2019}
+      \field{pages}{804\bibrangedash 818}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1080/01621459.2018.1448825
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

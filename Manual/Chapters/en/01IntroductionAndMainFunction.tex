@@ -1,0 +1,151 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/01IntroductionAndMainFunction.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Introduction and Main Function}
+\label{chap:intro}
+
+The \emph{\AppName} is a web dashboard for looking at monthly sales forecasts of Walmart products at any level of detail -- from the grand total of all stores down to a single product in a single store. It was built as the application part of the master's thesis \emph{Hierarchical Time Series Forecasting (A Business - Focused Evaluation of Foundational Reconciliation Methods in Retail Demand)} and shows the thesis results in a form that can be explored without any programming.
+
+This manual explains how to open or install the dashboard, how to use every control on the screen, and how to keep it running. It is written for users of the dashboard. No knowledge of the program code, of Python or of the forecasting methods is needed to follow Chapters~\ref{chap:install} to~\ref{chap:functions}. Chapters~\ref{chap:maintenance} and~\ref{chap:troubleshooting} address the person who looks after the installation and assume only that they can use a terminal.
+
+\section{Main Function}
+\label{sec:mainFunction}
+
+The dashboard answers one question:
+
+\begin{center}
+\begin{minipage}{0.85\linewidth}
+\itshape
+``For any part of the Walmart sales hierarchy, how did the forecasts compare with what was actually sold -- and how do the different forecasting and reconciliation methods differ from each other?''
+\end{minipage}
+\end{center}
+
+To answer it, the user picks a point in the hierarchy in the sidebar on the left, and the main area shows a single interactive chart for that point containing
+\begin{itemize}
+  \item the \textbf{actual} monthly sales,
+  \item one \textbf{base forecast}, chosen from three forecasting models, and
+  \item one or more \textbf{reconciled forecasts}, chosen from three reconciliation methods.
+\end{itemize}
+
+Everything else in the dashboard -- the dropdowns, the model selector, the shaded time regions, the zoom and export tools -- serves this one comparison. The dashboard is \emph{read-only}: it does not accept uploads, does not compute new forecasts and does not change any data. All numbers it shows were calculated beforehand and are loaded from four result files (Section~\ref{sec:specData}).
+
+\section{Key Terms in Plain Words}
+\label{sec:keyTerms}
+
+The following terms appear on the screen and throughout this manual. They are explained here only as far as needed to use the dashboard; the thesis contains the full background, and \cite{Hyndman:2021} offers a readable general introduction to forecasting.
+
+\begin{description}[style=nextline,leftmargin=0.5cm,font=\normalfont\bfseries]
+  \item[Hierarchy] Walmart's sales are organised in six levels: \textbf{Total} $\rightarrow$ \textbf{State} $\rightarrow$ \textbf{Store} $\rightarrow$ \textbf{Category} $\rightarrow$ \textbf{Department} $\rightarrow$ \textbf{Item}. Each level is the sum of the level below it. Section~\ref{sec:fnHierarchy} shows the complete structure.
+  \item[Node] One single point in the hierarchy, for example ``all sales of store \VAL{CA\_1}''. The chart always shows exactly one node.
+  \item[Actual sales] The number of units that were really sold per month, taken from the \ac{m5} data set \cite{Makridakis:2022,Kaggle:M5}.
+  \item[Base forecast] A forecast made for each node on its own, by one of three models: \VAL{histavg} (the historical average), \VAL{ets} (exponential smoothing) or \VAL{theta} (the Theta method). Base forecasts of different levels usually do not add up -- the forecasts for the three states do not sum to the forecast for the total.
+  \item[Reconciled forecast] A base forecast that has been adjusted so that all levels add up again. The dashboard offers three methods: \textbf{Bottom-Up}, \textbf{Top-Down} and \textbf{MinTrace (wls\_struct)} \cite{Wickramasuriya:2019}.
+  \item[Train / Test / Live] Three time windows, shaded in the chart. Models learned from the \emph{train} months, were checked against real sales in the \emph{test} months, and look ahead into the \emph{live} months (Section~\ref{sec:specTime}).
+\end{description}
+
+\section{Primary Capabilities}
+\label{sec:capabilities}
+
+\begin{table}[H]
+\centering
+\caption{What the dashboard can and cannot do}
+\label{tab:capabilities}
+\small
+\begin{tabularx}{\linewidth}{@{}p{5.4cm}X@{}}
+\toprule
+\textbf{Capability} & \textbf{Details} \\
+\midrule
+Navigate the hierarchy & 30,354 nodes on six levels, reached with five linked dropdowns (Section~\ref{sec:fnNavigate}) \\
+Search inside a dropdown & Type part of a name, e.g.\ \VAL{090}, to jump to an item (Section~\ref{sec:fnSearch}) \\
+Choose the base model & \VAL{histavg}, \VAL{ets} or \VAL{theta} (Section~\ref{sec:fnBase}) \\
+Compare reconciliation methods & Any combination of the three methods in the same chart (Section~\ref{sec:fnRec}) \\
+Explore the chart & Hover values, zoom, pan, hide lines, save as \ac{png} (Section~\ref{sec:fnChart}) \\
+Light and dark mode & The chart follows the dashboard's theme automatically (Section~\ref{sec:fnTheme}) \\
+\midrule
+\multicolumn{2}{@{}l}{\textit{Not included (by design)}} \\
+\midrule
+Uploading own data & The dashboard only shows the thesis results \\
+Re-training models & Forecasts are pre-computed; see Section~\ref{sec:mtRegenerate} \\
+Downloading tables & Only the chart image can be saved \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{System Overview}
+\label{sec:systemOverview}
+
+Figure~\ref{fig:systemOverview} shows the parts involved when the dashboard is used. The forecasts were produced once, offline, by the thesis' forecasting pipeline and stored as four result files in the project's GitHub repository together with the dashboard program. From there, the dashboard can be run in two ways:
+\begin{enumerate}[label=\Alph*)]
+  \item \textbf{Online} on Streamlit Community Cloud \cite{StreamlitCloud:2026}. Anybody with the link can use it in a browser; nothing has to be installed. This is the normal way.
+  \item \textbf{Locally} on your own computer, for offline use or for checking and changing the installation.
+\end{enumerate}
+Both ways show exactly the same dashboard with exactly the same numbers.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/01IntroductionAndMainFunction/systemOverview.tikz}}
+  \caption{System overview: the grey part was done once for the thesis; the blue part is what this manual covers.}
+  \label{fig:systemOverview}
+\end{figure}
+
+\begin{NoteBox}[Where is the dashboard?]
+Online: \AppLink\\
+Source code and result files: \RepoLink
+\end{NoteBox}
+
+\section{The Dashboard at a Glance}
+\label{sec:atAGlance}
+
+Figure~\ref{fig:dashboardOverview} shows the dashboard right after opening. The sidebar on the left holds all controls, the main area on the right holds the chart. Chapter~\ref{chap:ui} explains every element in detail.
+
+\begin{figure}[H]
+  \centering
+  \Screenshot{Images/01IntroductionAndMainFunction/DashboardOverview.png}
+  \caption{The dashboard directly after opening, showing the grand total}
+  \label{fig:dashboardOverview}
+\end{figure}
+
+\section{Target Users}
+\label{sec:targetUsers}
+
+\begin{itemize}
+  \item \textbf{Examiners and readers of the thesis}, who want to check the reported results for themselves at any level of the hierarchy.
+  \item \textbf{Business users} such as category or store managers, who want to see how reliable forecasts are for their part of the business and which reconciliation method suits it.
+  \item \textbf{Students and analysts}, who want an intuitive picture of what hierarchical reconciliation does to a forecast.
+  \item \textbf{The operator} (the author or a successor), who keeps the online installation running (Chapter~\ref{chap:maintenance}).
+\end{itemize}
+
+\section{Structure of this Manual}
+\label{sec:manualStructure}
+
+\begin{table}[H]
+\centering
+\caption{Chapters of this manual and who needs them}
+\label{tab:manualStructure}
+\small
+\begin{tabularx}{\linewidth}{@{}lXl@{}}
+\toprule
+\textbf{Chapter} & \textbf{Content} & \textbf{Reader} \\
+\midrule
+\ref{chap:install}  Installation     & Open online or install locally          & everyone \\
+\ref{chap:firstSteps} First Steps    & A guided first session of 15 minutes   & everyone \\
+\ref{chap:ui}   User Interface       & Sketch and description of every element & everyone \\
+\ref{chap:functions} Functions       & Each function in detail, with examples  & everyone \\
+\ref{chap:specs} Specifications      & Requirements, data, models, limits      & everyone \\
+\ref{chap:maintenance} Maintenance   & Updating and redeploying                & operator \\
+\ref{chap:troubleshooting} Troubleshooting & Symptoms, causes and fixes        & everyone / operator \\
+\ref{chap:help} Help                 & \ac{faq}, glossary, quick reference     & everyone \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\paragraph{Conventions.} Labels exactly as they appear on the screen are written as \UI{Base model}; values that are selected or typed are written as \VAL{CA\_1}; terminal commands are shown in grey boxes. Numbers in red circles such as \Callout{3} refer to the \ac{gui} sketch in Figure~\ref{fig:uiWireframe}. Boxes marked \emph{Note}, \emph{Tip} and \emph{Caution} give additional information, shortcuts and warnings.

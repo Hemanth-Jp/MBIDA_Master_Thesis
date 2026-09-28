@@ -1,0 +1,14 @@
+# Requirements for the deployed Streamlit dashboard ONLY.
+# Streamlit Community Cloud installs from this file (Cloud looks for a
+# requirements file at the repo root OR next to the entrypoint - this one
+# lives next to streamlit_app.py). Versions pinned to what's proven to work
+# in the m5_forecast conda env.
+#
+# NOTE: the installed package is `st-theme` (imported as `streamlit_theme`),
+# not `streamlit-theme` - confirmed against the working environment's freeze.
+
+streamlit==1.61.1
+st-theme==1.2.3
+plotly==6.9.0
+pandas==2.3.3
+pyarrow==24.0.0

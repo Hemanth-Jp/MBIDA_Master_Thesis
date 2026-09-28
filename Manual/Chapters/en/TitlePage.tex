@@ -1,0 +1,72 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/TitlePage.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{titlepage}
+
+    \begin{flushleft}
+        \includegraphics[width=4.5cm]{General/HSEmdenLeerLogo.png}
+    \end{flushleft}
+
+    \begin{flushright}
+        \vspace{0.2cm}
+        \LARGE \textsl{Manual}\\
+        \rule{0.6\textwidth}{0.4pt} ~\\
+        \vspace{0.4cm}
+        \textsf{\LARGE \textbf{M5 Hierarchical Forecast Explorer}}\\[0.2cm]
+        \textsf{\large \textit{Interactive dashboard for hierarchical sales forecasts}}\\[0.1cm]
+
+    \end{flushright}
+
+    \vspace{0.3cm}
+    % Photo of the running system, framed as a browser window
+    \begin{center}
+    \begin{tikzpicture}
+        \node[inner sep=0pt] (shot) {\Screenshot[0.92\textwidth]{Images/Title/RunningSystem.png}};
+        % browser chrome drawn above the screenshot
+        \node[anchor=south west,minimum width=0.92\textwidth,minimum height=0.55cm,
+              fill=ManGreyLight,draw=ManGrey!50,inner sep=0pt] (bar)
+              at (shot.north west) {};
+        \foreach \c/\x in {ManRed/0.25,ManOrange/0.55,ManGreen/0.85}
+            \fill[\c] ($(bar.west)+(\x,0)$) circle (0.09);
+        \node[anchor=west,draw=ManGrey!40,fill=white,rounded corners=2pt,
+              minimum height=0.36cm,minimum width=0.62\textwidth,inner sep=2pt,
+              font=\ttfamily\scriptsize,text=ManGrey!80!black]
+               at ($(bar.west)+(1.25,0)$) {\AppURL};
+    \end{tikzpicture}
+    \end{center}
+    
+
+    \vspace{0.3cm}
+    \small
+    \begin{tabbing}
+        xxxxxxxxxxxxxxxx \= \kill
+        Author: \> Hemanth Jadiswami Prabhakaran \\
+        Matriculation No.: \> 7026000 \\
+        \\
+        Course of Studies: \> Business Intelligence and Data Analytics \\ [0.3cm]
+        First examiner: \> Prof. Dr. Joachim Schwarz \\
+        Second examiner: \> Prof. Dr.-Ing. Armando Walter Colombo \\ [0.3cm]
+        Submission date: \> \today \\
+    \end{tabbing}
+
+    \vfill
+    \small
+    \begin{center}
+        University of Applied Sciences Emden/Leer $\cdot$
+        Faculty of Technology $\cdot$
+        Mechanical Engineering Department \\
+        Constantiaplatz 4 $\cdot$
+        26723 Emden $\cdot$
+        \url{http://www.hs-emden-leer.de}
+    \end{center}
+
+\end{titlepage}

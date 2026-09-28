@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-28 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/report/Contents/en/Abstract.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\chapter*{Abstract}
+
+Hierarchical forecasting requires forecasts that remain coherent across every level of aggregation, from a company-wide total down to individual products. Reconciliation methods that enforce this coherence are usually compared with uniform accuracy measures that treat every series as equally important, although in business practice a small share of products drives most of the demand. This thesis evaluates three foundational reconciliation methods -- Bottom-Up, Top-Down with historical proportions, and MinTrace with structural scaling -- in combination with three base forecasting models (HistoricAverage, AutoETS and Theta) on the M5 Walmart dataset. The daily sales data is aggregated to monthly frequency and organised as a six-level hierarchy (Total, State, Store, Category, Department, Item) of 30,354 series. Following the Knowledge Discovery in Databases process, all nine model/reconciler combinations are evaluated with sMAPE on a twelve-month hold-out period, both by hierarchy level and by cumulative volume segments ranked on training-period sales.
+
+At the hierarchy-level view, Bottom-Up is the most accurate reconciler at every aggregate level, and structurally scaled MinTrace does not realise its theoretical advantage. The volume view reverses this picture: on the 29 item-store series that carry the top 5\% of sales volume, the flat HistoricAverage baseline (16.61\% sMAPE) and Top-Down-reconciled forecasts (16.98\% for ETS) clearly outperform Bottom-Up-reconciled ETS and Theta (22.97\%), whereas across all bottom-level series Bottom-Up-reconciled Theta performs best (36.32\% against 40.54\% for Top-Down). No single combination dominates; the choice of method should therefore be matched to the business question and the volume segment it concerns. The study is implemented as a reproducible Python pipeline based on \texttt{statsforecast} and \texttt{hierarchicalforecast}, and its results are made explorable through an interactive Streamlit dashboard.
+
+\vspace{0.5cm}
+\noindent\textbf{Keywords:} hierarchical forecasting, forecast reconciliation, MinTrace, retail demand, M5 competition, volume segmentation, sMAPE
+
+\cleardoublepage
+
+\begin{otherlanguage}{ngerman}
+\chapter*{Kurzfassung}
+
+Hierarchische Prognosen müssen über alle Aggregationsebenen hinweg kohärent sein, von der unternehmensweiten Gesamtsumme bis hinunter zu einzelnen Produkten. Abstimmungsverfahren (Reconciliation), die diese Kohärenz herstellen, werden üblicherweise mit einheitlichen Genauigkeitsmaßen verglichen, die jede Zeitreihe als gleich wichtig behandeln, obwohl in der betrieblichen Praxis ein kleiner Teil der Produkte den Großteil der Nachfrage verursacht. Diese Arbeit untersucht drei grundlegende Abstimmungsverfahren -- Bottom-Up, Top-Down mit historischen Anteilen und MinTrace mit struktureller Gewichtung -- in Kombination mit drei Basisprognosemodellen (HistoricAverage, AutoETS und Theta) anhand des M5-Datensatzes von Walmart. Die täglichen Verkaufsdaten werden auf Monatsebene aggregiert und in einer sechsstufigen Hierarchie (Gesamt, Bundesstaat, Filiale, Kategorie, Abteilung, Artikel) mit 30.354 Zeitreihen organisiert. Dem Prozess der Knowledge Discovery in Databases folgend werden alle neun Kombinationen aus Modell und Abstimmungsverfahren mit dem sMAPE über einen zwölfmonatigen Testzeitraum bewertet, sowohl je Hierarchieebene als auch nach kumulativen Absatzsegmenten, die anhand der Verkäufe im Trainingszeitraum gebildet werden.
+
+Auf Ebene der Hierarchie ist Bottom-Up auf allen aggregierten Ebenen das genaueste Verfahren, und das strukturell gewichtete MinTrace kann seinen theoretischen Vorteil nicht ausspielen. Die Betrachtung nach Absatzvolumen kehrt dieses Bild um: Bei den 29 Artikel-Filial-Zeitreihen, die die obersten 5\,\% des Absatzvolumens ausmachen, übertreffen der konstante HistoricAverage (16,61\,\% sMAPE) und Top-Down-abgestimmte Prognosen (16,98\,\% für ETS) die Bottom-Up-abgestimmten ETS- und Theta-Prognosen (22,97\,\%) deutlich, während über alle Zeitreihen der untersten Ebene Bottom-Up-abgestimmtes Theta am besten abschneidet (36,32\,\% gegenüber 40,54\,\% für Top-Down). Keine einzelne Kombination ist durchgängig überlegen; die Wahl des Verfahrens sollte sich daher an der betrieblichen Fragestellung und dem jeweiligen Absatzsegment orientieren. Die Untersuchung ist als reproduzierbare Python-Pipeline auf Basis von \texttt{statsforecast} und \texttt{hierarchicalforecast} umgesetzt, und die Ergebnisse lassen sich über ein interaktives Streamlit-Dashboard erkunden.
+
+\vspace{0.5cm}
+\noindent\textbf{Schlagwörter:} hierarchische Prognose, Prognoseabstimmung, MinTrace, Einzelhandelsnachfrage, M5-Wettbewerb, Volumensegmentierung, sMAPE
+\end{otherlanguage}

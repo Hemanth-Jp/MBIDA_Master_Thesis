@@ -1,0 +1,36 @@
+\acswitchoff 
+\babel@toc {english}{}\relax 
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {1.1}{\ignorespaces What the dashboard can and cannot do}}{3}{table.caption.5}%
+\contentsline {table}{\numberline {1.2}{\ignorespaces Chapters of this manual and who needs them}}{5}{table.caption.8}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {2.1}{\ignorespaces Requirements for a local installation}}{9}{table.caption.14}%
+\contentsline {table}{\numberline {2.2}{\ignorespaces Installation check}}{13}{table.caption.18}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {4.1}{\ignorespaces Elements of the user interface (numbers as in Figure~\ref {fig:uiWireframe})}}{24}{table.caption.26}%
+\contentsline {table}{\numberline {4.2}{\ignorespaces Hierarchy dropdowns}}{26}{table.caption.29}%
+\contentsline {table}{\numberline {4.3}{\ignorespaces Lines and regions of the chart (letters as in Figure~\ref {fig:chartAnatomy})}}{27}{table.caption.31}%
+\contentsline {table}{\numberline {4.4}{\ignorespaces Chart toolbar buttons}}{28}{table.caption.33}%
+\contentsline {table}{\numberline {4.5}{\ignorespaces Messages the dashboard can show}}{29}{table.caption.35}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {5.1}{\ignorespaces Levels of the hierarchy}}{32}{table.caption.37}%
+\contentsline {table}{\numberline {5.2}{\ignorespaces The three base models}}{36}{table.caption.49}%
+\contentsline {table}{\numberline {5.3}{\ignorespaces The three reconciliation methods}}{36}{table.caption.54}%
+\contentsline {table}{\numberline {5.4}{\ignorespaces Chart interactions}}{37}{table.caption.59}%
+\contentsline {table}{\numberline {5.5}{\ignorespaces Typical tasks and how to do them}}{38}{table.caption.61}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Key facts}}{39}{table.caption.62}%
+\contentsline {table}{\numberline {6.2}{\ignorespaces Software components (pinned versions from \texttt {Code/app/requirements.txt})}}{40}{table.caption.64}%
+\contentsline {table}{\numberline {6.3}{\ignorespaces Result files read by the dashboard}}{41}{table.caption.65}%
+\contentsline {table}{\numberline {6.4}{\ignorespaces Time windows}}{42}{table.caption.67}%
+\contentsline {table}{\numberline {6.5}{\ignorespaces Forecasting settings}}{43}{table.caption.68}%
+\contentsline {table}{\numberline {6.6}{\ignorespaces Average \ac {smape} in \% over the test year, by level (\texttt {ets} and \texttt {theta})}}{43}{table.caption.69}%
+\contentsline {table}{\numberline {6.7}{\ignorespaces Typical response times}}{44}{table.caption.70}%
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {7.1}{\ignorespaces Routine maintenance tasks}}{46}{table.caption.72}%
+\contentsline {table}{\numberline {7.2}{\ignorespaces Actions in the Streamlit Community Cloud workspace}}{46}{table.caption.73}%
+\contentsline {table}{\numberline {7.3}{\ignorespaces Deployment settings of the online app}}{47}{table.caption.75}%
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

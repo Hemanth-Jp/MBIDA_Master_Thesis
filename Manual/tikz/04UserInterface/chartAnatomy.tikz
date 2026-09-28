@@ -1,0 +1,46 @@
+% Anatomy of the forecast chart - illustrative data, not real results.
+% x = month index, 0 = Feb 2011, 47 = Jan 2015 (test starts), 59 = Jan 2016 (live starts).
+\begin{tikzpicture}
+  \begin{axis}[
+      width=\linewidth, height=7.2cm,
+      xmin=0, xmax=65, ymin=60, ymax=175,
+      xtick={11,23,35,47,59}, xticklabels={2012,2013,2014,2015,2016},
+      ytick=\empty,
+      xlabel={Date}, ylabel={Sales},
+      axis lines*=left,
+      tick label style={font=\sffamily\scriptsize},
+      label style={font=\sffamily\small},
+      clip=false,
+      declare function={
+        season(\x)=12*sin(30*\x)+22*exp(-((mod(\x,12)-10)^2));
+        act(\x)=95+0.55*\x+season(\x);
+        base(\x)=90+0.55*\x+0.7*season(\x);
+        rec(\x)=94+0.55*\x+0.9*season(\x);
+      },
+    ]
+    % shaded phases
+    \fill[AppTrain] (axis cs:0,60)  rectangle (axis cs:47,175);
+    \fill[AppTest]  (axis cs:47,60) rectangle (axis cs:59,175);
+    \fill[AppLive]  (axis cs:59,60) rectangle (axis cs:65,175);
+    \node[anchor=north west,font=\sffamily\scriptsize,text=ManGrey] at (axis cs:0,175)  {Train};
+    \node[anchor=north west,font=\sffamily\scriptsize,text=ManGrey] at (axis cs:47,175) {Test};
+    \node[anchor=north west,font=\sffamily\scriptsize,text=ManGrey] at (axis cs:59,175) {Live};
+
+    % traces
+    \addplot[AppActual,thick,mark=*,mark size=1pt,domain=0:58,samples=59] {act(x)};
+    \addplot[AppBase,very thick,dotted,mark=*,mark size=1pt,mark options={solid},domain=47:65,samples=19] {base(x)};
+    \addplot[AppRecA,thick,mark=*,mark size=1pt,domain=47:65,samples=19] {rec(x)};
+
+    % annotations
+    \node[man/callout] (a) at (axis cs:20,160) {A};
+    \draw[man/arrow,thin] (a) -- (axis cs:22,{act(22)+3});
+    \node[man/callout] (b) at (axis cs:44,70) {B};
+    \draw[man/arrow,thin] (b) -- (axis cs:50,{base(50)-3});
+    \node[man/callout] (c) at (axis cs:54,168) {C};
+    \draw[man/arrow,thin] (c) -- (axis cs:57,{rec(57)+3});
+    \node[man/callout] (d) at (axis cs:62,82) {D};
+    \draw[man/arrow,thin] (d) -- (axis cs:62,100);
+    \node[man/callout] (e) at (axis cs:4,140) {E};
+    \draw[man/arrow,thin] (e) -- (axis cs:9,{act(9)+2});
+  \end{axis}
+\end{tikzpicture}

@@ -1,0 +1,37 @@
+# --- M5 project (Code/) ------------------------------------------------
+
+# Raw data - never commit (large + Kaggle redistribution terms)
+Code/data/m5/
+
+# Pipeline caches - regenerated locally, large
+Code/artifacts/raw_cache/
+
+# NOTE: Code/artifacts/dashboard_data/ is intentionally NOT ignored -
+# the deployed Streamlit app reads directly from those small parquet files.
+
+# --- General Python ------------------------------------------------------
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# --- Jupyter --------------------------------------------------------------
+.ipynb_checkpoints/
+
+# --- OS / editor ------------------------------------------------------------
+.DS_Store
+.vscode/
+.idea/
+
+# --- LaTeX build artifacts (report/) --------------------------------------
+report/**/*.aux
+report/**/*.log
+report/**/*.out
+report/**/*.toc
+report/**/*.bbl
+report/**/*.blg
+report/**/*.synctex.gz
+
+# --- Private documents (not published) ------------------------------------
+Documents/Plagiarism*.pdf

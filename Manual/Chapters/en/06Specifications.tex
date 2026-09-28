@@ -1,0 +1,234 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% $Autor: Hemanth Jadiswami Prabhakaran $
+% $Datum: 2026-09-25 $
+% $Pfad: GitHub/MBIDA_Master_Thesis/Manual/Chapters/en/06Specifications.tex $
+% $Version: 1 $
+%
+% $Project: MBIDA Thesis - Manual $
+%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\chapter{Specifications}
+\label{chap:specs}
+
+This chapter collects the technical facts about the dashboard in one place: what it runs on, which data it shows, which time windows, models and methods it covers, how accurate the forecasts were, and where its limits are.
+
+\section{Overview}
+\label{sec:specOverview}
+
+\begin{table}[H]
+\centering
+\caption{Key facts}
+\label{tab:specKeyFacts}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+Name & \AppName \\
+Type & Read-only web dashboard (single page) \\
+Online address & \AppLink \\
+Hosting & Streamlit Community Cloud (free tier) \\
+Data source & \ac{m5} competition data, Walmart unit sales 2011--2016 \cite{Kaggle:M5} \\
+Time resolution & Monthly \\
+Hierarchy & 6 levels, 30,354 nodes (Table~\ref{tab:fnLevels}) \\
+Base models & 3 -- \VAL{histavg}, \VAL{ets}, \VAL{theta} \\
+Reconciliation methods & 3 -- Bottom-Up, Top-Down, MinTrace (wls\_struct) \\
+Forecast periods & Test: 12 months (2015); Live: 7 months (Jan--Jul 2016) \\
+User accounts & none; the dashboard asks for no personal data \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Software and Runtime}
+\label{sec:specSoftware}
+
+Figure~\ref{fig:runtimeArchitecture} shows the three layers involved at run time: the browser, the server that runs the dashboard program, and the result files it reads.
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/06Specifications/runtimeArchitecture.tikz}}
+  \caption{Runtime layers of the dashboard}
+  \label{fig:runtimeArchitecture}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Software components (pinned versions from \texttt{Code/app/requirements.txt})}
+\label{tab:specPackages}
+\small
+\begin{tabularx}{\linewidth}{@{}llX@{}}
+\toprule
+\textbf{Component} & \textbf{Version} & \textbf{Role} \\
+\midrule
+Python      & $\geq$ 3.10 & Programming language the dashboard is written in \\
+streamlit   & 1.61.1 & Web framework: page, sidebar, dropdowns, hosting \cite{Streamlit:2026} \\
+plotly      & 6.9.0  & Interactive chart \cite{Plotly:2026} \\
+pandas      & 2.3.3  & Filtering the data for the selected node \\
+pyarrow     & 24.0.0 & Reading the Parquet result files \\
+st-theme    & 1.2.3  & Detecting the active light/dark theme \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The dashboard itself consists of two program files: \texttt{Code/app/streamlit\_app.py} (the page) and \texttt{Code/config.py} (shared settings such as names of models, methods and time windows). None of the forecasting libraries is needed to run it.
+
+\section{Client Requirements}
+\label{sec:specClient}
+
+\begin{itemize}
+  \item Browser: current Chrome, Firefox, Edge or Safari; JavaScript and cookies for the site enabled.
+  \item Screen: works from phone size upwards; a width of at least 1280 pixels is recommended to see sidebar and chart side by side.
+  \item Input: mouse or touchpad for hover and zoom; on touch screens, tap shows values and pinch zooms.
+\end{itemize}
+
+\section{Data}
+\label{sec:specData}
+
+\subsection{Source}
+
+The data comes from the \ac{m5} forecasting competition \cite{Makridakis:2022,Kaggle:M5}: daily unit sales of 3,049 Walmart products in ten stores in California, Texas and Wisconsin, from 29 January 2011 to 24 April 2016. For the dashboard, the thesis pipeline prepared it once as follows:
+\begin{itemize}
+  \item daily sales were added up to \textbf{monthly} sales;
+  \item the incomplete first month (January 2011) was removed, so the history starts in \textbf{February 2011};
+  \item 25 products that were not sold at all before 2015 were removed, leaving \textbf{3,024 products} and \textbf{30,240} product-store combinations;
+  \item months without sales were filled with zero.
+\end{itemize}
+Sales are counted in \textbf{units} (pieces sold), not in currency.
+
+\subsection{Result Files}
+
+The dashboard reads four result files from \texttt{Code/artifacts/dashboard\_data/}. They are in the Parquet format, a compact table format, and are stored in the repository.
+
+\begin{table}[H]
+\centering
+\caption{Result files read by the dashboard}
+\label{tab:specFiles}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{File} & \textbf{Content (user view)} \\
+\midrule
+\texttt{hierarchy.parquet}     & The list of all state/store/category/department/item combinations -- fills the dropdowns \\
+\texttt{actuals.parquet}       & Monthly actual sales for every node, with its time window (train/test/live) \\
+\texttt{pred\_with\_gt.parquet} & The three base forecasts for every node over the test and live periods \\
+\texttt{rec\_with\_gt.parquet}  & The nine reconciled forecasts (3 models $\times$ 3 methods) for every node and the same periods \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{NoteBox}[The data is static]
+The result files do not change while the dashboard is running, and the dashboard never writes to them. Every user sees the same numbers. New numbers would require running the thesis pipeline again (Section~\ref{sec:mtRegenerate}).
+\end{NoteBox}
+
+\section{Time Windows}
+\label{sec:specTime}
+
+\begin{figure}[H]
+  \centering
+  \resizebox{\linewidth}{!}{\input{tikz/06Specifications/timeWindows.tikz}}
+  \caption{The three time windows on a monthly scale}
+  \label{fig:timeWindows}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Time windows}
+\label{tab:specTime}
+\small
+\begin{tabularx}{\linewidth}{@{}llcX@{}}
+\toprule
+\textbf{Window} & \textbf{Months} & \textbf{Count} & \textbf{Use in the chart} \\
+\midrule
+Train & Feb 2011 -- Dec 2014 & 47 & Actual line only; models learned from these months \\
+Test  & Jan 2015 -- Dec 2015 & 12 & Actual line and all forecasts -- the comparison period \\
+Live  & Jan 2016 -- Jul 2016 & 7  & Forecasts only \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The test forecasts were made using the train months only, as if 2015/16 were still unknown. The live forecasts were made using train and test months together. The live window reaches beyond the end of the data set (April 2016).
+
+\section{Models and Methods}
+\label{sec:specModels}
+
+\begin{table}[H]
+\centering
+\caption{Forecasting settings}
+\label{tab:specModels}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Setting} & \textbf{Value} \\
+\midrule
+Base models & HistoricAverage (\VAL{histavg}), AutoETS (\VAL{ets}), Theta (\VAL{theta}) \\
+Season length & 12 months (yearly pattern) \\
+Fallback & HistoricAverage, for series where AutoETS or Theta cannot be fitted \\
+Negative forecasts & set to zero before reconciliation (unit sales cannot be negative) \\
+Reconciliation & Bottom-Up; Top-Down with average historical proportions; MinTrace with \ac{wls} structural weights and non-negativity \cite{Wickramasuriya:2019,Olivares:2022} \\
+Forecasts per node & 3 base + 9 reconciled = 12 lines available, of which up to 4 are shown at once \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Forecast Accuracy (Reference)}
+\label{sec:specAccuracy}
+
+To help interpret what the chart shows, Table~\ref{tab:specAccuracy} gives the average error of each combination over the test year 2015, measured with the \ac{smape}. Lower is better; 0\,\% would be a perfect forecast. For each level, the best value is printed in bold.
+
+\begin{table}[H]
+\centering
+\caption{Average \ac{smape} in \% over the test year, by level (\VAL{ets} and \VAL{theta})}
+\label{tab:specAccuracy}
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}l rrrr rrrr@{}}
+\toprule
+& \multicolumn{4}{c}{\textbf{ets}} & \multicolumn{4}{c}{\textbf{theta}} \\
+\cmidrule(lr){2-5}\cmidrule(l){6-9}
+\textbf{Level} & Base & BU & MinT & TD & Base & BU & MinT & TD \\
+\midrule
+1 Total      & 5.53 & 3.94 & 5.19 & 5.53 & 4.24 & \textbf{3.78} & 4.36 & 4.24 \\
+2 State      & 4.88 & 3.97 & 5.11 & 5.88 & 4.32 & \textbf{3.76} & 4.36 & 4.77 \\
+3 Store      & 5.95 & \textbf{4.77} & 5.58 & 7.60 & 5.35 & 4.86 & 5.25 & 6.97 \\
+4 Category   & 7.31 & 6.22 & 7.19 & 10.63 & 6.73 & \textbf{6.18} & 6.52 & 9.75 \\
+5 Department & 7.88 & 7.91 & 8.00 & 12.38 & 8.26 & \textbf{7.60} & 7.98 & 11.49 \\
+6 Item       & 37.72 & 37.72 & 40.62 & 40.74 & \textbf{36.32} & \textbf{36.32} & 39.24 & 40.54 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+For \VAL{histavg}, the error is 6.58\,\% at the total, rising to 40.91\,\% at item level, and Bottom-Up and Top-Down leave it unchanged. MinTrace leaves it practically unchanged on levels 1 to 5 as well; only at item level does it raise the error, from 40.91\,\% to 41.76\,\%. In short: the higher the level, the more accurate the forecast; for this data, Bottom-Up gave the lowest error on most levels. The thesis discusses these results in detail.
+
+\section{Performance}
+\label{sec:specPerformance}
+
+\begin{table}[H]
+\centering
+\caption{Typical response times}
+\label{tab:specPerformance}
+\small
+\begin{tabularx}{\linewidth}{@{}lX@{}}
+\toprule
+\textbf{Situation} & \textbf{Typical time} \\
+\midrule
+Opening the running online app & a few seconds (the four files are loaded once) \\
+Waking a sleeping online app & about half a minute to a minute \\
+Changing any control & well under a second (data is kept in memory) \\
+Local start (\texttt{streamlit run}) & a few seconds until the browser opens \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\section{Limitations}
+\label{sec:specLimits}
+
+\begin{itemize}
+  \item \textbf{Fixed results.} The dashboard shows pre-computed forecasts; it cannot forecast new periods or new data.
+  \item \textbf{Monthly only.} Daily or weekly patterns are not visible.
+  \item \textbf{Strict hierarchy.} Categories and departments exist only inside a store. Cross-store views such as ``all \VAL{FOODS} in Texas'' are not available.
+  \item \textbf{No live ground truth.} The live window has no actual line, so forecasts there cannot be judged in the dashboard.
+  \item \textbf{No prediction intervals.} Forecasts are single values without an uncertainty band.
+  \item \textbf{No table export.} Only the chart image can be downloaded.
+  \item \textbf{Free hosting.} The online app may go to sleep (Section~\ref{sec:instWake}) and has limited resources shared by all visitors.
+\end{itemize}

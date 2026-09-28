@@ -1,0 +1,78 @@
+<svg id="pipeline-svg" viewBox="0 0 680 940" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <style>
+            .stage-card { rx: 14px; ry: 14px; }
+            .badge-box { rx: 8px; ry: 8px; stroke-width: 2.2px; }
+            .header-label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700; }
+            .badge-text { font-family: 'Inter', sans-serif; font-size: 17px; font-weight: 700; text-anchor: middle; dominant-baseline: central; }
+            .detail-text { font-family: 'Inter', sans-serif; font-size: 12.5px; fill: #1e293b; text-anchor: middle; }
+            .flow-line { stroke: #1e293b; stroke-width: 2.4px; }
+          </style>
+
+          <!-- High-visibility barbed arrow -->
+          <marker id="arrowhead" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="11" markerHeight="11" orient="auto">
+            <path d="M 0 1 L 11 6 L 0 11 L 3 6 Z" fill="#1e293b"/>
+          </marker>
+        </defs>
+
+        <!-- ================= STAGE 1: SELECTION ================= -->
+        <g id="stage-1" transform="translate(40, 15)">
+          <rect class="stage-card" x="0" y="0" width="600" height="135" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.2"/>
+          <text class="header-label" x="22" y="26" fill="#1d4ed8">STAGE 1: INPUT</text>
+          <rect class="badge-box" x="140" y="36" width="320" height="46" fill="#dbeafe" stroke="#1d4ed8"/>
+          <text class="badge-text" x="300" y="59" fill="#0f172a">Selection</text>
+          <text class="detail-text" x="300" y="108">Raw M5 sales and calendar files; hierarchy columns identified</text>
+        </g>
+
+        <!-- Connector 1 -> 2 -->
+        <line class="flow-line" x1="340" y1="150" x2="340" y2="198" marker-end="url(#arrowhead)"/>
+
+        <!-- ================= STAGE 2: PREPROCESSING ================= -->
+        <g id="stage-2" transform="translate(40, 200)">
+          <rect class="stage-card" x="0" y="0" width="600" height="135" fill="#f0fdfa" stroke="#99f6e4" stroke-width="1.2"/>
+          <text class="header-label" x="22" y="26" fill="#0f766e">STAGE 2: PREPARATION</text>
+          <rect class="badge-box" x="140" y="36" width="320" height="46" fill="#ccfbf1" stroke="#0f766e"/>
+          <text class="badge-text" x="300" y="59" fill="#0f172a">Preprocessing</text>
+          <text class="detail-text" x="300" y="102">Daily → monthly aggregation; partial first month dropped;</text>
+          <text class="detail-text" x="300" y="120">item universe fixed on training data</text>
+        </g>
+
+        <!-- Connector 2 -> 3 -->
+        <line class="flow-line" x1="340" y1="335" x2="340" y2="383" marker-end="url(#arrowhead)"/>
+
+        <!-- ================= STAGE 3: TRANSFORMATION ================= -->
+        <g id="stage-3" transform="translate(40, 385)">
+          <rect class="stage-card" x="0" y="0" width="600" height="135" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1.2"/>
+          <text class="header-label" x="22" y="26" fill="#15803d">STAGE 3: FEATURE ENGINEERING</text>
+          <rect class="badge-box" x="140" y="36" width="320" height="46" fill="#dcfce7" stroke="#15803d"/>
+          <text class="badge-text" x="300" y="59" fill="#0f172a">Transformation</text>
+          <text class="detail-text" x="300" y="102">Full item–store–month grid built; hierarchy aggregated</text>
+          <text class="detail-text" x="300" y="120">with an explicit Total root</text>
+        </g>
+
+        <!-- Connector 3 -> 4 -->
+        <line class="flow-line" x1="340" y1="520" x2="340" y2="568" marker-end="url(#arrowhead)"/>
+
+        <!-- ================= STAGE 4: DATA MINING ================= -->
+        <g id="stage-4" transform="translate(40, 570)">
+          <rect class="stage-card" x="0" y="0" width="600" height="135" fill="#faf5ff" stroke="#e9d5ff" stroke-width="1.2"/>
+          <text class="header-label" x="22" y="26" fill="#7e22ce">STAGE 4: MODELING</text>
+          <rect class="badge-box" x="140" y="36" width="320" height="46" fill="#f3e8ff" stroke="#7e22ce"/>
+          <text class="badge-text" x="300" y="59" fill="#0f172a">Data Mining</text>
+          <text class="detail-text" x="300" y="102">HistoricAverage, ETS, Theta fitted; Bottom-Up,</text>
+          <text class="detail-text" x="300" y="120">MinTrace, Top-Down reconciliation applied</text>
+        </g>
+
+        <!-- Connector 4 -> 5 -->
+        <line class="flow-line" x1="340" y1="705" x2="340" y2="753" marker-end="url(#arrowhead)"/>
+
+        <!-- ================= STAGE 5: INTERPRETATION / EVALUATION ================= -->
+        <g id="stage-5" transform="translate(40, 755)">
+          <rect class="stage-card" x="0" y="0" width="600" height="135" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2"/>
+          <text class="header-label" x="22" y="26" fill="#c2410c">STAGE 5: ASSESSMENT</text>
+          <rect class="badge-box" x="110" y="36" width="380" height="46" fill="#ffedd5" stroke="#c2410c"/>
+          <text class="badge-text" x="300" y="59" fill="#0f172a">Interpretation / Evaluation</text>
+          <text class="detail-text" x="300" y="102">sMAPE by hierarchy level and by volume segment;</text>
+          <text class="detail-text" x="300" y="120">results interpreted against SQ1–SQ3</text>
+        </g>
+      </svg>

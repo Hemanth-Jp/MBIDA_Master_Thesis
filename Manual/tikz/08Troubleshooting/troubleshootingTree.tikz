@@ -1,0 +1,42 @@
+% Requires: \usetikzlibrary{positioning}
+\begin{tikzpicture}[
+	node distance=1cm and 1cm, % vertical distance = 1cm
+	sym/.style={man/boxorange, text width=4.1cm, font=\sffamily\scriptsize, align=left,
+		minimum height=1.05cm, fill=white},
+	grp/.style={man/decision, text width=2.0cm, font=\sffamily\scriptsize, align=center},
+	]
+	\node[man/terminal, font=\sffamily\small] (root) at (0,0) {What do you see?};
+	
+	% Group headers (1cm vertical gap below root level)
+	\node[grp] (g2) [below=1cm of root] {An error or\\warning box};
+	\node[grp] (g1) [left=3cm of g2]     {The page does\\not load};
+	\node[grp] (g3) [right=3cm of g2]    {The chart looks\\wrong};
+	
+	\foreach \g in {g1,g2,g3} \draw[man/arrow] (root) -- (\g);
+	
+	% Column 1 (each node 1cm below previous border)
+	\node[sym] (a1) [below=1cm of g1] {``This app has gone to sleep''\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsSleep}}};
+	\node[sym] (a2) [below=1cm of a1] {Local: \texttt{streamlit: command not found}\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsCommand}}};
+	\node[sym] (a3) [below=1cm of a2] {Local: \texttt{ModuleNotFoundError}\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsModule}}};
+	\node[sym] (a4) [below=1cm of a3] {Local: port 8501 already in use\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsPort}}};
+	
+	% Column 2
+	\node[sym] (b1) [below=1cm of g2] {Red box: ``Couldn't find one of the required parquet files''\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsParquet}}};
+	\node[sym] (b2) [below=1cm of b1] {Yellow box: ``No data found for \dots''\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsNoData}}};
+	\node[sym] (b3) [below=1cm of b2] {Node line ends with ``No column found for \dots''\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsNoColumn}}};
+	
+	% Column 3
+	\node[sym] (c1) [below=1cm of g3] {No reconciled line, only actual + base\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsNoRecLine}}};
+	\node[sym] (c2) [below=1cm of c1] {Colours hard to read / theme not followed\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsTheme}}};
+	\node[sym] (c3) [below=1cm of c2] {A dropdown offers only ``(All)''\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsLocked}}};
+	\node[sym] (c4) [below=1cm of c3] {Forecast line stops, or looks flat\\[1pt]\textbf{$\rightarrow$ Section~\ref{sec:tsFlat}}};
+	
+	% Downward arrows (all exactly 1cm)
+	\draw[man/arrow] (g1) -- (a1); \draw[man/arrow] (a1) -- (a2);
+	\draw[man/arrow] (a2) -- (a3); \draw[man/arrow] (a3) -- (a4);
+	\draw[man/arrow] (g2) -- (b1); \draw[man/arrow] (b1) -- (b2); \draw[man/arrow] (b2) -- (b3);
+	\draw[man/arrow] (g3) -- (c1); \draw[man/arrow] (c1) -- (c2);
+	\draw[man/arrow] (c2) -- (c3); \draw[man/arrow] (c3) -- (c4);
+	
+	\node[man/label, below=1cm of b3] {If nothing matches:\\Section~\ref{sec:tsGeneral}};
+\end{tikzpicture}

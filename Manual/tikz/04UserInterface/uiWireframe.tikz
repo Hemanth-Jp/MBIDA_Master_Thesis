@@ -1,0 +1,114 @@
+% GUI sketch of the dashboard with numbered callouts.
+% The numbers are explained in Table "tab:uiCallouts" (Chapter 4).
+\begin{tikzpicture}[
+    font=\sffamily,
+    lbl/.style={anchor=west,font=\sffamily\scriptsize,text=AppText},
+    hdr/.style={anchor=west,font=\sffamily\small\bfseries,text=AppText},
+    sel/.style={draw=ManGrey!60,fill=white,rounded corners=2pt,minimum width=3.7cm,
+                minimum height=0.48cm,anchor=west,font=\ttfamily\scriptsize,text=AppText,
+                inner sep=3pt,text width=3.3cm},
+  ]
+
+  % ------------------------------------------------ page + sidebar
+  \draw[ManGrey!70,fill=white,rounded corners=3pt] (0,0) rectangle (16,11);
+  \fill[AppSidebar,rounded corners=3pt] (0,0) rectangle (4.3,11);
+  \fill[AppSidebar] (3.0,0) rectangle (4.3,11);
+
+  % collapse chevron + page menu
+  \node[font=\sffamily\small,text=ManGrey] at (4.0,10.6) {\guillemotleft};
+  \node[font=\sffamily\bfseries,text=ManGrey,rotate=90] at (15.6,10.6) {\textbf{$\cdots$}};
+
+  % ------------------------------------------------ sidebar: hierarchy
+  \node[hdr] at (0.25,10.05) {Hierarchy};
+  \foreach \name/\val/\y in {State/CA/9.35, Store/CA\_1/8.3, Category/(All)/7.25,
+                             Department/(All)/6.2, Item/(All)/5.15}{
+     \node[lbl] at (0.25,\y) {\name};
+     \node[sel] (s\name) at (0.3,\y-0.43) {\val};
+     \node[font=\tiny,text=ManGrey] at (3.8,\y-0.43) {$\blacktriangledown$};
+  }
+
+  % ------------------------------------------------ sidebar: forecast
+  \node[hdr] at (0.25,4.05) {Forecast};
+  \node[lbl] at (0.25,3.5) {Base model};
+  \foreach \x/\m/\on in {0.45/histavg/0, 1.75/ets/1, 2.75/theta/0}{
+     \ifnum\on=1
+       \draw[AppRed,fill=AppRed] (\x,3.05) circle (0.1);
+       \fill[white] (\x,3.05) circle (0.04);
+     \else
+       \draw[ManGrey] (\x,3.05) circle (0.1);
+     \fi
+     \node[lbl] at (\x+0.1,3.05) {\m};
+  }
+  \node[lbl] at (0.25,2.5) {Reconciliation method(s)};
+  \node[sel,minimum height=0.62cm] at (0.3,1.95) {};
+  \node[anchor=west,fill=AppRed,text=white,rounded corners=2pt,font=\sffamily\tiny,
+        inner sep=2.5pt] at (0.4,1.95) {MinTrace (wls\_struct) \,$\times$};
+
+  % ------------------------------------------------ main area: header
+  \node[anchor=west,font=\sffamily\large\bfseries,text=AppText] at (4.8,10.1)
+       {M5 Hierarchical Forecast Explorer};
+  \node[anchor=west,font=\sffamily\tiny,text=ManGrey,text width=10.4cm] at (4.8,9.45)
+       {Drill down Total $\rightarrow$ State $\rightarrow$ Store $\rightarrow$ Category
+        $\rightarrow$ Department $\rightarrow$ Item. Leave a level on ``(All)'' to view
+        that aggregate node instead of a single item. Click a dropdown and type to search.};
+  \node[anchor=west,font=\sffamily\scriptsize,text=AppText] at (4.8,8.8)
+       {Selected node: \textbf{Total/CA/CA\_1} \ (level = 3)};
+
+  % ------------------------------------------------ chart
+  \pgfmathsetmacro{\xa}{5.3}\pgfmathsetmacro{\xb}{15.5}
+  \pgfmathsetmacro{\ya}{1.0}\pgfmathsetmacro{\yb}{7.55}
+  \pgfmathsetmacro{\sx}{(\xb-\xa)/66}
+  \pgfmathsetmacro{\xtest}{\xa+47*\sx}
+  \pgfmathsetmacro{\xlive}{\xa+59*\sx}
+
+  \fill[AppTrain] (\xa,\ya) rectangle (\xtest,\yb);
+  \fill[AppTest]  (\xtest,\ya) rectangle (\xlive,\yb);
+  \fill[AppLive]  (\xlive,\ya) rectangle (\xb,\yb);
+  \foreach \x/\t in {\xa/Train,\xtest/Test,\xlive/Live}
+     \node[anchor=north west,font=\sffamily\tiny,text=ManGrey] at (\x,\yb) {\t};
+
+  % grid + axes
+  \foreach \k in {1,...,4}
+     \draw[ManGrey!25] (\xa,{\ya+\k*1.3}) -- (\xb,{\ya+\k*1.3});
+  \draw[ManGrey!60] (\xa,\ya) -- (\xb,\ya);
+  \foreach \m/\t in {11/2012,23/2013,35/2014,47/2015,59/2016}
+     \node[font=\sffamily\tiny,text=ManGrey,below] at ({\xa+\m*\sx},\ya) {\t};
+  \node[font=\sffamily\tiny,text=AppText] at ({(\xa+\xb)/2},0.35) {Date};
+  \node[font=\sffamily\tiny,text=AppText,rotate=90] at (5.0,{(\ya+\yb)/2}) {Sales};
+
+  % traces (illustrative shapes)
+  \draw[AppActual,thick] plot[domain=0:58,samples=59,mark=*,mark size=0.5pt]
+       ({\xa+\x*\sx},{3.0+0.028*\x+0.55*sin(30*\x)+0.9*exp(-((mod(\x,12)-10)^2))});
+  \draw[AppBase,thick,dotted] plot[domain=47:65,samples=19]
+       ({\xa+\x*\sx},{2.75+0.028*\x+0.45*sin(30*\x)+0.6*exp(-((mod(\x,12)-10)^2))});
+  \draw[AppRecA,thick] plot[domain=47:65,samples=19]
+       ({\xa+\x*\sx},{2.95+0.028*\x+0.5*sin(30*\x)+0.8*exp(-((mod(\x,12)-10)^2))});
+
+  % legend (horizontal, above the plot, right aligned)
+  \draw[AppActual,thick] (8.3,8.3) -- (8.7,8.3);  \fill (8.5,8.3) circle (0.04);
+  \node[lbl,font=\sffamily\tiny] at (8.72,8.3) {Actual};
+  \draw[AppBase,thick,dotted] (9.75,8.3) -- (10.15,8.3);
+  \node[lbl,font=\sffamily\tiny] at (10.17,8.3) {Base: ets};
+  \draw[AppRecA,thick] (11.45,8.3) -- (11.85,8.3);
+  \node[lbl,font=\sffamily\tiny] at (11.87,8.3) {Reconciled: MinTrace (wls\_struct)};
+
+  % Plotly toolbar (appears on hover)
+  \foreach \k in {0,...,6}
+     \draw[ManGrey!70,fill=white,rounded corners=1pt] ({14.0+\k*0.22},7.8) rectangle ++(0.17,0.17);
+
+  % ------------------------------------------------ callouts
+  \node[man/callout] at (3.55,10.6) {1};
+  \draw[ManRed!70,decorate,decoration={brace,amplitude=4pt,mirror}] (-0.15,9.55) -- (-0.15,4.45);
+  \node[man/callout] at (-0.55,7.0) {2};
+  \node[man/callout] at (-0.35,3.05) {3};
+  \node[man/callout] at (-0.35,1.95) {4};
+  \node[man/callout] at (4.55,9.8) {5};
+  \node[man/callout] at (4.55,8.8) {6};
+  \node[man/callout] at (8.0,8.3) {7};
+  \node[man/callout] at (\xtest,6.9) {8};
+  \node[man/callout] at (7.5,5.6) {9};
+  \node[man/callout] at (13.7,7.88) {10};
+  \node[man/callout] at (15.05,10.6) {11};
+  \node[man/callout] at ({(\xa+\xb)/2+0.6},0.35) {12};
+
+\end{tikzpicture}

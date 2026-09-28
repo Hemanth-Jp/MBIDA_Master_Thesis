@@ -1,0 +1,72 @@
+% The six-level sales hierarchy. The highlighted path is the example used
+% throughout the manual; grey nodes stand for siblings that are not expanded.
+\begin{tikzpicture}[
+    n/.style={draw=ManBlue,fill=ManBlueLight,rounded corners=2pt,font=\ttfamily\scriptsize,
+              minimum height=0.55cm,inner sep=3pt},
+    on/.style={n,draw=AppRed,fill=AppRed!12,very thick},
+    off/.style={n,draw=ManGrey!60,fill=ManGreyLight,text=ManGrey},
+    e/.style={draw=ManGrey!70,thin},
+    eon/.style={draw=AppRed,thick},
+    lvl/.style={anchor=east,font=\sffamily\small\bfseries,text=ManBlue},
+    cnt/.style={anchor=west,font=\sffamily\small,text=ManGrey!70!black},
+  ]
+  \def\dy{1.35}
+
+  % level labels (left) and node counts (right)
+  \foreach \i/\L/\c in {0/Total/1, 1/State/3, 2/Store/10, 3/Category/30,
+                        4/Department/70, 5/Item/{30,240}}{
+     \pgfmathtruncatemacro{\lv}{\i+1}\node[lvl] at (-0.6,-\i*\dy) {\lv\ \ \L};
+     \node[cnt] at (12.4,-\i*\dy) {\c\ series};
+  }
+  \draw[ManGrey!40] (12.3,0.4) -- (12.3,-5.4*\dy);
+
+  % level 1
+  \node[on] (T) at (5.8,0) {Total};
+  % level 2
+  \node[on]  (CA) at (2.8,-\dy) {CA};
+  \node[off] (TX) at (5.8,-\dy) {TX};
+  \node[off] (WI) at (8.8,-\dy) {WI};
+  % level 3
+  \node[on]  (C1) at (0.6,-2*\dy) {CA\_1};
+  \node[off] (C2) at (2.0,-2*\dy) {CA\_2};
+  \node[off] (C3) at (3.4,-2*\dy) {CA\_3};
+  \node[off] (C4) at (4.8,-2*\dy) {CA\_4};
+  \node[off] (TXs) at (6.6,-2*\dy) {TX\_1..3};
+  \node[off] (WIs) at (9.2,-2*\dy) {WI\_1..3};
+  % level 4
+  \node[on]  (F)  at (0.6,-3*\dy) {FOODS};
+  \node[off] (HB) at (2.5,-3*\dy) {HOBBIES};
+  \node[off] (HH) at (4.6,-3*\dy) {HOUSEHOLD};
+  % level 5
+  \node[off] (F1) at (0.1,-4*\dy) {FOODS\_1};
+  \node[off] (F2) at (1.85,-4*\dy) {FOODS\_2};
+  \node[on]  (F3) at (3.6,-4*\dy) {FOODS\_3};
+  % level 6
+  \node[off] (I1) at (1.6,-5*\dy) {FOODS\_3\_001};
+  \node[font=\sffamily\small,text=ManGrey] (dots) at (3.35,-5*\dy) {\dots};
+  \node[on]  (I2) at (5.1,-5*\dy) {FOODS\_3\_090};
+  \node[font=\sffamily\small,text=ManGrey] (dots2) at (6.8,-5*\dy) {\dots};
+
+  % edges
+  \draw[eon] (T.south) -- (CA.north);
+  \draw[e] (T.south) -- (TX.north);  \draw[e] (T.south) -- (WI.north);
+  \draw[eon] (CA.south) -- (C1.north);
+  \foreach \c in {C2,C3,C4} \draw[e] (CA.south) -- (\c.north);
+  \draw[e] (TX.south) -- (TXs.north); \draw[e] (WI.south) -- (WIs.north);
+  \draw[eon] (C1.south) -- (F.north);
+  \draw[e] (C1.south) -- (HB.north); \draw[e] (C1.south) -- (HH.north);
+  \draw[e] (F.south) -- (F1.north); \draw[e] (F.south) -- (F2.north);
+  \draw[eon] (F.south) -- (F3.north);
+  \draw[e] (F3.south) -- (I1.north);
+  \draw[eon] (F3.south) -- (I2.north);
+
+  % node label of the highlighted path
+  \node[anchor=west,draw=AppRed,fill=white,rounded corners=2pt,font=\ttfamily\scriptsize,
+        align=left,inner sep=4pt] at (6.9,-3.55*\dy)
+        {\sffamily\bfseries Node label shown in the app:\\[1pt]
+         Total/CA/CA\_1/FOODS/FOODS\_3/\\FOODS\_3\_090 \ (level = 6)};
+
+  % "sums up" arrow
+  \draw[-{Stealth[length=2.5mm]},very thick,ManGreen] (11.5,-5*\dy) -- (11.5,0)
+       node[midway,right,font=\sffamily\scriptsize,text=ManGreen,align=left,xshift=1pt]{sums\\up};
+\end{tikzpicture}
